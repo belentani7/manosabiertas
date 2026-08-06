@@ -274,7 +274,7 @@ function CurrencyConverter() {
 
           {/* Swap button */}
           <div className="flex justify-center">
-            <Button variant="outline" size="icon" onClick={swap} className="rounded-full">
+            <Button variant="outline" size="icon" onClick={swap} className="rounded-full" aria-label="Intercambiar ciudades">
               <ArrowRightLeft className="h-4 w-4" />
             </Button>
           </div>

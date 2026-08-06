@@ -1,21 +1,17 @@
-'use client';
+import { Metadata } from 'next';
+import { StaticHomeFallback } from '@/components/seo/static-home-fallback';
+import { ManosAbiertasClient } from '@/components/manos-abiertas/manos-abiertas-client';
 
-import dynamic from 'next/dynamic';
-
-const ManosAbiertasApp = dynamic(
-  () => import('@/components/manos-abiertas/manos-abiertas-app').then((m) => m.ManosAbiertasApp),
-  { ssr: false, loading: () => (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="text-center">
-        <div className="w-12 h-12 rounded-xl gradient-brand flex items-center justify-center mx-auto mb-3 animate-pulse">
-          <span className="text-2xl">🤝</span>
-        </div>
-        <p className="text-sm text-muted-foreground">Cargando Manos Abiertas...</p>
-      </div>
-    </div>
-  )}
-);
+export const metadata: Metadata = {
+  title: 'Manos Abiertas · IA, CV y Derechos para personas inmigrantes en España',
+  description: 'Plataforma gratuita multilingüe para personas inmigrantes en España. Aprende inteligencia artificial (ChatGPT, Gemini, Copilot, DeepSeek), crea tu currículum con IA, curso completo de Office y 3000+ recursos verificados.',
+};
 
 export default function Home() {
-  return <ManosAbiertasApp />;
+  return (
+    <>
+      <StaticHomeFallback />
+      <ManosAbiertasClient />
+    </>
+  );
 }

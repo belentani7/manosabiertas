@@ -1,30 +1,50 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { useAppStore } from '@/stores/app-store';
+import dynamic from 'next/dynamic';
 import { NavBar } from './nav-bar';
 import { Footer } from './footer';
 import { HomeSection } from './home-section';
 import { LearnAISection } from './learn-ai-section';
-import { CVSection } from './cv-section';
-import { OfficeSection } from './office-section';
-import { ResourcesSection } from './resources-section';
-import { RightsSection } from './rights-section';
-import { ContactsSection } from './contacts-section';
 import { AIAssistant } from './ai-assistant';
 import { OnboardingWizard } from './onboarding-wizard';
-import { ToolsSection } from './tools-section';
-import { EventsSection } from './events-section';
-import { CoursesLibrarySection } from './courses-library-section';
-import { CommunitySection } from './community-section';
 import { Button } from '@/components/ui/button';
 import { ArrowUp } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { PWAStatus } from './pwa-status';
+import { useAppStore, sectionFromHash, type SectionId } from '@/stores/app-store';
+
+// Heavy/later sections are lazy-loaded to shrink the initial bundle.
+const CVSection = dynamic(() => import('./cv-section').then((m) => m.CVSection));
+const OfficeSection = dynamic(() => import('./office-section').then((m) => m.OfficeSection));
+const ResourcesSection = dynamic(() => import('./resources-section').then((m) => m.ResourcesSection));
+const RightsSection = dynamic(() => import('./rights-section').then((m) => m.RightsSection));
+const ContactsSection = dynamic(() => import('./contacts-section').then((m) => m.ContactsSection));
+const ToolsSection = dynamic(() => import('./tools-section').then((m) => m.ToolsSection));
+const EventsSection = dynamic(() => import('./events-section').then((m) => m.EventsSection));
+const CoursesLibrarySection = dynamic(() => import('./courses-library-section').then((m) => m.CoursesLibrarySection));
+const CommunitySection = dynamic(() => import('./community-section').then((m) => m.CommunitySection));
 
 export function ManosAbiertasApp() {
-  const { activeSection, readingMode } = useAppStore();
+  const { activeSection, setActiveSection, readingMode } = useAppStore();
   const [showTop, setShowTop] = useState(false);
+
+  // Hash-based routing: read the initial hash and stay in sync with it.
+  useEffect(() => {
+    const initial = sectionFromHash(window.location.hash);
+    if (initial) {
+      setActiveSection(initial);
+    }
+
+    const onHashChange = () => {
+      const next = sectionFromHash(window.location.hash);
+      if (next) {
+        useAppStore.setState({ activeSection: next });
+      }
+    };
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, [setActiveSection]);
 
   useEffect(() => {
     const onScroll = () => setShowTop(window.scrollY > 400);

@@ -1,10 +1,13 @@
-// Manos Abiertas - Service Worker v1.0
-const CACHE_NAME = 'manos-abiertas-v2';
+// Manos Abiertas - Service Worker v2.1
+const CACHE_NAME = 'manos-abiertas-v3';
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
   '/icon-192.png',
   '/icon-512.png',
+  '/og.png',
+  '/screenshot-home.png',
+  '/screenshot-home-mobile.png',
 ];
 
 // Install - cache essential assets

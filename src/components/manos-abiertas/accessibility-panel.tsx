@@ -173,7 +173,7 @@ export function AccessibilityPanel() {
                     <p className="text-[10px] text-muted-foreground">Personaliza tu experiencia</p>
                   </div>
                 </div>
-                <Button size="icon" variant="ghost" className="h-8 w-8" onClick={() => setIsOpen(false)}>
+                <Button size="icon" variant="ghost" className="h-8 w-8" onClick={() => setIsOpen(false)} aria-label="Cerrar panel de accesibilidad">
                   <X className="h-4 w-4" />
                 </Button>
               </div>
@@ -190,6 +190,7 @@ export function AccessibilityPanel() {
                         className="h-7 w-7"
                         onClick={() => updateSetting('fontSize', Math.max(80, settings.fontSize - 5))}
                         disabled={settings.fontSize <= 80}
+                        aria-label="Reducir tamaño de texto"
                       >
                         <Minus className="h-3 w-3" />
                       </Button>
@@ -207,6 +208,7 @@ export function AccessibilityPanel() {
                         className="h-7 w-7"
                         onClick={() => updateSetting('fontSize', Math.min(150, settings.fontSize + 5))}
                         disabled={settings.fontSize >= 150}
+                        aria-label="Aumentar tamaño de texto"
                       >
                         <Plus className="h-3 w-3" />
                       </Button>

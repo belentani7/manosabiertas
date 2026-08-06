@@ -81,6 +81,7 @@ export function NavBar() {
           {/* Logo */}
           <button
             onClick={() => setActiveSection('home')}
+            aria-label="Manos Abiertas — Inicio"
             className="flex items-center gap-2.5 flex-shrink-0 group"
           >
             <div className="relative">
@@ -104,6 +105,7 @@ export function NavBar() {
                 <button
                   key={item.id}
                   onClick={() => setActiveSection(item.id)}
+                  aria-current={active ? 'page' : undefined}
                   className={cn(
                     'relative px-3 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-1.5',
                     active ? 'text-primary' : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
@@ -157,6 +159,7 @@ export function NavBar() {
                 return (
                   <button
                     key={item.id}
+                    aria-current={active ? 'page' : undefined}
                     onClick={() => {
                       setActiveSection(item.id);
                       setMobileOpen(false);

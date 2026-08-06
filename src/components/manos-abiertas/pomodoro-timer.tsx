@@ -176,10 +176,10 @@ export function PomodoroTimer() {
                 {isRunning ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
                 {isRunning ? 'Pausar' : 'Iniciar'}
               </Button>
-              <Button size="sm" variant="outline" onClick={skipPhase} className="px-2" title="Saltar fase">
+              <Button size="sm" variant="outline" onClick={skipPhase} className="px-2" aria-label="Saltar fase">
                 ⏭
               </Button>
-              <Button size="sm" variant="outline" onClick={resetTimer} className="px-2" title="Reiniciar">
+              <Button size="sm" variant="outline" onClick={resetTimer} className="px-2" aria-label="Reiniciar temporizador">
                 <RotateCcw className="h-3.5 w-3.5" />
               </Button>
             </div>

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import ZAI from 'z-ai-web-dev-sdk';
+import { invokeAIText } from '@/lib/ai-provider';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
@@ -23,7 +23,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const zai = await ZAI.create();
     const content = body.content.slice(0, 5000); // Limit to 5000 chars
 
     let systemPrompt = '';
@@ -60,17 +59,28 @@ ${content}
 Formato: lista numerada, cada punto en una línea, máximo 15 palabras por punto.`;
     }
 
-    const completion = await zai.chat.completions.create({
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: userPrompt },
-      ],
-      thinking: { type: 'disabled' },
+    const result = await invokeAIText(systemPrompt, userPrompt, {
+      offline: () => {
+        const sentences = content.split(/(?<=[.!?])\s+/).filter((s) => s.trim().length > 20);
+        if (body.tool === 'questions') {
+          const qs = (sentences.slice(0, 3).map((s, i) => ({
+            question: `¿Qué se dice sobre "${s.trim().slice(0, 60)}..."?`,
+            hint: 'Repasa el texto y busca la idea principal.',
+          })));
+          return JSON.stringify({ questions: qs });
+        }
+        return sentences.slice(0, 5).map((s, i) => `${i + 1}. ${s.trim().slice(0, 120)}`).join('\n');
+      },
     });
 
-    const text = completion.choices[0]?.message?.content?.trim() || '';
+    if (!result.text) {
+      return NextResponse.json(
+        { ok: false, error: 'No hay proveedor de IA configurado (GROQ_API_KEY o .z-ai-config).', text: '' },
+        { status: 500 }
+      );
+    }
 
-    return NextResponse.json({ text, ok: true, tool: body.tool });
+    return NextResponse.json({ text: result.text, ok: true, tool: body.tool, provider: result.provider });
   } catch (error: unknown) {
     console.error('Study tools API error:', error);
     const message = error instanceof Error ? error.message : 'Unknown error';

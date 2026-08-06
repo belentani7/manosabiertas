@@ -4,11 +4,39 @@
   "description": "Plataforma gratuita multilingüe para personas latinoamericanas y comunidades migrantes en España. Aprende IA, crea tu CV y conoce tus derechos.",
   "start_url": "/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
   "background_color": "#FBF8F4",
   "theme_color": "#A0522D",
   "orientation": "any",
   "lang": "es",
+  "dir": "ltr",
   "categories": ["education", "social"],
+  "shortcuts": [
+    {
+      "name": "Crear mi CV",
+      "short_name": "CV",
+      "url": "/#/cv",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Aprende IA",
+      "short_name": "IA",
+      "url": "/#/learn-ai",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Derechos y Ayudas",
+      "short_name": "Derechos",
+      "url": "/#/rights",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Recursos",
+      "short_name": "Recursos",
+      "url": "/#/resources",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ],
   "icons": [
     {
       "src": "/icon-192.png",
@@ -23,7 +51,22 @@
       "purpose": "any maskable"
     }
   ],
-  "screenshots": [],
+  "screenshots": [
+    {
+      "src": "/screenshot-home.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Vista principal de Manos Abiertas"
+    },
+    {
+      "src": "/screenshot-home-mobile.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Manos Abiertas en el móvil"
+    }
+  ],
   "related_applications": [],
   "prefer_related_applications": false
 }

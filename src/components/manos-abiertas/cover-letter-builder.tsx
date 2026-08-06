@@ -221,8 +221,8 @@ export function CoverLetterBuilder() {
                     placeholder="Ej: Empatía"
                     className="text-sm h-9"
                   />
-                  <Button size="icon" onClick={addSkill} className="h-9 w-9">
-                    <Sparkles className="h-3.5 w-3.5" />
+                <Button size="icon" onClick={addSkill} className="h-9 w-9" aria-label="Añadir habilidad">
+                  <Sparkles className="h-3.5 w-3.5" />
                   </Button>
                 </div>
                 {skills.length > 0 && (

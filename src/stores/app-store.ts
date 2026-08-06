@@ -43,6 +43,21 @@ interface AppState {
   setFocusMode: (active: boolean) => void;
 }
 
+// Map a hash fragment to a section id. Returns undefined for unknown/empty hashes.
+export function sectionFromHash(hash: string): SectionId | undefined {
+  const clean = hash.replace(/^#\/?/, '');
+  const valid: SectionId[] = [
+    'home', 'learn-ai', 'cv', 'office', 'resources', 'rights',
+    'contacts', 'tools', 'events', 'courses', 'community',
+  ];
+  return (valid as string[]).includes(clean) ? (clean as SectionId) : undefined;
+}
+
+// Map a section id to its hash fragment.
+export function hashFromSection(section: SectionId): string {
+  return `#/${section}`;
+}
+
 export const useAppStore = create<AppState>()(
   persist(
     (set) => ({
@@ -52,6 +67,11 @@ export const useAppStore = create<AppState>()(
       setActiveSection: (section) => {
         set({ activeSection: section });
         if (typeof window !== 'undefined') {
+          // Keep the URL in sync for deep-linking (ignore the home default).
+          const target = hashFromSection(section);
+          if (window.location.hash !== target) {
+            window.history.replaceState(null, '', target);
+          }
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }
       },

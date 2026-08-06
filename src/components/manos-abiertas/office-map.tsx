@@ -289,11 +289,12 @@ export function OfficeMap() {
                         <span className="text-xs text-muted-foreground">{selectedCity.community}</span>
                       </div>
                       <Button
-                        size="icon"
-                        variant="ghost"
-                        className="h-7 w-7"
-                        onClick={() => setSelectedCity(null)}
-                      >
+              size="icon"
+              variant="ghost"
+              className="h-7 w-7"
+              onClick={() => setSelectedCity(null)}
+              aria-label="Cerrar detalles de ciudad"
+            >
                         <X className="h-4 w-4" />
                       </Button>
                     </div>

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FileText, Plus, Trash2, Sparkles, Download, Printer, Eye, User, Briefcase, GraduationCap, Award, Languages, Palette, Loader2, Check, Lightbulb, Save, RotateCcw, Mail } from 'lucide-react';
+import { FileText, Plus, Trash2, Sparkles, Download, Printer, Eye, User, Briefcase, GraduationCap, Award, Languages, Palette, Loader2, Check, Lightbulb, Save, RotateCcw, Mail, Target } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -15,6 +15,7 @@ import { toast } from 'sonner';
 import { CV_TEMPLATES, CV_GUIDES, ACTION_VERBS, SKILL_SUGGESTIONS } from '@/data/cv-templates';
 import { TemplatePreview } from './template-preview';
 import { CoverLetterBuilder } from './cover-letter-builder';
+import { ATSAnalyzer } from './ats-analyzer';
 import { useAppStore } from '@/stores/app-store';
 import { getTranslation } from '@/i18n/translations';
 import { cn } from '@/lib/utils';
@@ -54,7 +55,7 @@ export function CVSection() {
   const [showPreview, setShowPreview] = useState(false);
   const [aiLoading, setAiLoading] = useState<'summary' | 'experience' | null>(null);
   const [savedAt, setSavedAt] = useState<Date | null>(null);
-  const [activeTool, setActiveTool] = useState<'cv' | 'letter'>('cv');
+  const [activeTool, setActiveTool] = useState<'cv' | 'letter' | 'ats'>('cv');
 
   // Autosave to localStorage (debounced via effect)
   useEffect(() => {
@@ -191,6 +192,17 @@ export function CVSection() {
             Carta de presentación
             <Badge variant="secondary" className="text-[9px] py-0 h-4">Nuevo</Badge>
           </button>
+          <button
+            onClick={() => setActiveTool('ats')}
+            className={cn(
+              'px-4 py-1.5 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5',
+              activeTool === 'ats' ? 'bg-card shadow-sm text-primary' : 'text-muted-foreground hover:text-foreground'
+            )}
+          >
+            <Target className="h-3.5 w-3.5" />
+            Análisis ATS
+            <Badge variant="secondary" className="text-[9px] py-0 h-4">Nuevo</Badge>
+          </button>
         </div>
       </div>
 
@@ -198,6 +210,13 @@ export function CVSection() {
       {activeTool === 'letter' && (
         <div className="max-w-3xl mx-auto">
           <CoverLetterBuilder />
+        </div>
+      )}
+
+      {/* ATS Analyzer */}
+      {activeTool === 'ats' && (
+        <div className="max-w-3xl mx-auto">
+          <ATSAnalyzer />
         </div>
       )}
 
@@ -314,8 +333,8 @@ export function CVSection() {
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-medium text-muted-foreground">Experiencia {i + 1}</span>
                       {experiences.length > 1 && (
-                        <Button size="icon" variant="ghost" onClick={() => removeExperience(exp.id)} className="h-7 w-7">
-                          <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                    <Button size="icon" variant="ghost" onClick={() => removeExperience(exp.id)} className="h-7 w-7" aria-label="Eliminar experiencia">
+                      <Trash2 className="h-3.5 w-3.5 text-destructive" />
                         </Button>
                       )}
                     </div>
@@ -354,7 +373,7 @@ export function CVSection() {
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-medium text-muted-foreground">Educación {i + 1}</span>
                       {education.length > 1 && (
-                        <Button size="icon" variant="ghost" onClick={() => removeEducation(ed.id)} className="h-7 w-7">
+                        <Button size="icon" variant="ghost" onClick={() => removeEducation(ed.id)} className="h-7 w-7" aria-label="Eliminar formación">
                           <Trash2 className="h-3.5 w-3.5 text-destructive" />
                         </Button>
                       )}
@@ -380,7 +399,7 @@ export function CVSection() {
                     <Label className="text-xs">{t.cv_skills}</Label>
                     <div className="flex gap-2 mt-1">
                       <Input value={skillInput} onChange={(e) => setSkillInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addSkill())} placeholder="Ej: Atención al cliente" className="h-9" />
-                      <Button size="icon" onClick={addSkill}><Plus className="h-4 w-4" /></Button>
+                      <Button size="icon" onClick={addSkill} aria-label="Añadir habilidad"><Plus className="h-4 w-4" /></Button>
                     </div>
                     {skills.length > 0 && (
                       <div className="flex flex-wrap gap-1.5 mt-2">
@@ -425,7 +444,7 @@ export function CVSection() {
                     <Label className="text-xs">{t.cv_languages}</Label>
                     <div className="flex gap-2 mt-1">
                       <Input value={langInput} onChange={(e) => setLangInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addLanguage())} placeholder="Ej: Español (nativo)" className="h-9" />
-                      <Button size="icon" onClick={addLanguage}><Plus className="h-4 w-4" /></Button>
+                      <Button size="icon" onClick={addLanguage} aria-label="Añadir idioma"><Plus className="h-4 w-4" /></Button>
                     </div>
                     {languages.length > 0 && (
                       <div className="flex flex-wrap gap-1.5 mt-2">

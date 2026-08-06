@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import ZAI from 'z-ai-web-dev-sdk';
+import { invokeAIText } from '@/lib/ai-provider';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
@@ -28,6 +28,26 @@ const LANG_INSTRUCTIONS: Record<string, string> = {
   uk: 'Напиши лист українською мовою, формально, але тепло.',
 };
 
+function offlineLetter(body: CoverLetterRequest): string {
+  const fullName = body.fullName || '[Tu nombre]';
+  const profession = body.profession || 'profesional';
+  const company = body.companyName || 'su empresa';
+  const jobTitle = body.jobTitle || 'el puesto';
+  const skills = body.skills?.length ? body.skills.slice(0, 4).join(', ') : 'con muchas ganas de aprender';
+  const experience = body.experience?.trim() || 'con interés en aportar y crecer profesionalmente';
+
+  return `Estimado/a equipo de ${company}:
+
+Mi nombre es ${fullName} y me dirijo a ustedes para ofrecer mi candidatura para ${jobTitle}. Soy ${profession} y ${experience}.
+
+Entre mis puntos fuertes destacan: ${skills}. Soy una persona responsable, con gran capacidad de adaptación y con muchas ganas de formar parte de un equipo como el de ${company}.
+
+Me encantaría tener la oportunidad de una entrevista para contarles en detalle cómo puedo aportar valor a su organización. Pueden contactarme por teléfono o correo electrónico en cualquier momento.
+
+Atentamente,
+${fullName}`;
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body: CoverLetterRequest = await req.json();
@@ -40,8 +60,6 @@ export async function POST(req: NextRequest) {
       friendly: 'Usa un tono cercano y amable, pero mantén el profesionalismo.',
       direct: 'Sé directo y conciso, ve al grano sin rodeos.',
     };
-
-    const zai = await ZAI.create();
 
     const systemPrompt = `Eres un experto en recursos humanos en España. Escribes cartas de presentación que destacan las fortalezas del candidato de forma honesta y persuasiva, adaptadas al mercado laboral español. ${langInstruction} ${toneInstructions[tone]} La carta debe tener máximo 3 párrafos (250-350 palabras). Sin emojis.`;
 
@@ -61,17 +79,16 @@ Estructura:
 
 Devuelve SOLO el texto de la carta, lista para usar.`;
 
-    const completion = await zai.chat.completions.create({
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: userPrompt },
-      ],
-      thinking: { type: 'disabled' },
-    });
+    const result = await invokeAIText(systemPrompt, userPrompt, { offline: () => offlineLetter(body) });
 
-    const text = completion.choices[0]?.message?.content?.trim() || '';
+    if (!result.text) {
+      return NextResponse.json(
+        { ok: false, error: 'No hay proveedor de IA configurado (GROQ_API_KEY o .z-ai-config).', text: '' },
+        { status: 500 }
+      );
+    }
 
-    return NextResponse.json({ text, ok: true });
+    return NextResponse.json({ text: result.text, ok: true, provider: result.provider });
   } catch (error: unknown) {
     console.error('Cover letter generation error:', error);
     const message = error instanceof Error ? error.message : 'Unknown error';

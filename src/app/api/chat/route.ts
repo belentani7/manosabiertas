@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import ZAI from 'z-ai-web-dev-sdk';
 import { z } from 'zod';
-import { callConfiguredProvider } from '@/lib/ai-provider';
+import { invokeAIText } from '@/lib/ai-provider';
 import { getOfflineTutorReply } from '@/lib/offline-tutor';
 
 export const runtime = 'nodejs';
@@ -104,28 +103,23 @@ export async function POST(req: NextRequest) {
     fallbackLanguage = lang;
     const langInstruction = LANG_INSTRUCTIONS[lang] || LANG_INSTRUCTIONS.es;
 
-    const zai = await ZAI.create();
-
     const messages = [
       { role: 'system' as const, content: `${SYSTEM_PROMPT}\n\n${langInstruction}${body.context ? `\n\nContexto actual: ${body.context}` : ''}` },
       ...body.messages.slice(-10), // Keep last 10 messages for context
     ];
 
-    try {
-      const configured = await callConfiguredProvider(messages);
-      if (configured) return NextResponse.json({ text: configured.text, ok: true, provider: configured.provider, model: configured.model });
-    } catch (providerError) {
-      console.warn('Configured AI provider unavailable; falling back:', providerError);
-    }
+    const systemPrompt = messages[0].content;
+    const userPrompt = messages.slice(1).map((m) => `${m.role === 'user' ? 'Usuario' : 'Asistente'}: ${m.content}`).join('\n\n');
 
-    const completion = await zai.chat.completions.create({
-      messages,
-      thinking: { type: 'disabled' },
+    const result = await invokeAIText(systemPrompt, userPrompt, {
+      offline: () => getOfflineTutorReply(fallbackQuestion, fallbackLanguage),
     });
 
-    const text = completion.choices[0]?.message?.content?.trim() || '';
+    if (!result.text) {
+      return NextResponse.json({ ok: true, degraded: true, provider: 'local', text: getOfflineTutorReply(fallbackQuestion, fallbackLanguage) });
+    }
 
-    return NextResponse.json({ text, ok: true, provider: 'zai' });
+    return NextResponse.json({ text: result.text, ok: true, provider: result.provider });
   } catch (error: unknown) {
     console.error('Chat API error:', error);
     return NextResponse.json({ ok: true, degraded: true, provider: 'local', text: getOfflineTutorReply(fallbackQuestion, fallbackLanguage) });
