@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { StaticHomeFallback } from '@/components/seo/static-home-fallback';
 import { ManosAbiertasClient } from '@/components/manos-abiertas/manos-abiertas-client';
 
 export const metadata: Metadata = {
@@ -8,10 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return (
-    <>
-      <StaticHomeFallback />
-      <ManosAbiertasClient />
-    </>
-  );
+  return <ManosAbiertasClient />;
 }

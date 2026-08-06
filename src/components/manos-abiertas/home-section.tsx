@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Sparkles, FileText, BookOpen, Database, Shield, Phone, Globe, Heart, Users, GraduationCap, ChevronRight, Star, Wrench, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -20,6 +20,7 @@ import { PersonalRoute } from './personal-route';
 export function HomeSection() {
   const { language, setActiveSection } = useAppStore();
   const t = getTranslation(language);
+  const reduceMotion = useReducedMotion();
 
   const quickAccess: { id: SectionId; emoji: string; icon: typeof Sparkles; title: string; desc: string; gradient: string }[] = [
     {
@@ -108,19 +109,19 @@ export function HomeSection() {
       {/* HERO */}
       <section className="relative gradient-hero overflow-hidden">
         {/* Decorative blobs */}
-        <div className="absolute top-10 left-10 w-72 h-72 bg-brand-saffron/20 rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-10 right-10 w-96 h-96 bg-brand-warm/15 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-10 left-10 w-72 h-72 bg-brand-saffron/20 rounded-full blur-3xl motion-safe:animate-pulse-slow" />
+        <div className="absolute bottom-10 right-10 w-96 h-96 bg-brand-warm/15 rounded-full blur-3xl motion-safe:animate-pulse-slow" style={{ animationDelay: '2s' }} />
 
         <div className="container mx-auto max-w-7xl px-4 py-16 md:py-24 relative">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.6 }}
             className="text-center max-w-4xl mx-auto"
           >
             <Badge variant="secondary" className="mb-5 gap-1.5 py-1.5 px-3 text-xs">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
               </span>
               {LANGUAGE_COUNT} idiomas · {RESOURCES.length.toLocaleString()}+ recursos verificados
@@ -157,16 +158,16 @@ export function HomeSection() {
 
             {/* Visual mockup - CV preview + AI chat */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.5 }}
+              transition={reduceMotion ? { duration: 0 } : { duration: 0.7, delay: 0.5 }}
               className="mt-12 relative max-w-4xl mx-auto"
             >
               <div className="grid sm:grid-cols-2 gap-4 items-end">
                 {/* Mini CV preview */}
                 <motion.div
-                  animate={{ y: [0, -6, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                  animate={reduceMotion ? { y: 0 } : { y: [0, -6, 0] }}
+                  transition={reduceMotion ? { duration: 0 } : { duration: 4, repeat: Infinity, ease: 'easeInOut' }}
                   className="bg-white rounded-xl shadow-2xl border border-border p-4 text-left transform sm:rotate-[-2deg] hover:rotate-0 transition-transform"
                 >
                   <div className="flex items-center gap-2 mb-2 pb-2 border-b border-slate-200">
@@ -200,8 +201,8 @@ export function HomeSection() {
 
                 {/* Mini AI chat preview */}
                 <motion.div
-                  animate={{ y: [0, 6, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+                  animate={reduceMotion ? { y: 0 } : { y: [0, 6, 0] }}
+                  transition={reduceMotion ? { duration: 0 } : { duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
                   className="bg-white rounded-xl shadow-2xl border border-border p-4 text-left transform sm:rotate-[2deg] hover:rotate-0 transition-transform"
                 >
                   <div className="flex items-center gap-2 mb-3 pb-2 border-b border-slate-200">
@@ -210,7 +211,7 @@ export function HomeSection() {
                     </div>
                     <div className="text-[10px] font-semibold text-slate-700">Asistente IA</div>
                     <div className="ml-auto flex gap-0.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 motion-safe:animate-pulse" />
                     </div>
                   </div>
                   {/* Chat bubbles */}
@@ -235,9 +236,9 @@ export function HomeSection() {
                   </div>
                   {/* Typing indicator */}
                   <div className="mt-2 flex items-center gap-1">
-                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300 animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300 animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300 animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300 motion-safe:animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300 motion-safe:animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300 motion-safe:animate-bounce" style={{ animationDelay: '300ms' }} />
                     <span className="text-[8px] text-slate-400 ml-1">IA escribiendo...</span>
                   </div>
                 </motion.div>
@@ -245,18 +246,18 @@ export function HomeSection() {
 
               {/* Floating badges */}
               <motion.div
-                initial={{ opacity: 0, scale: 0 }}
+                initial={reduceMotion ? false : { opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1 }}
+                transition={reduceMotion ? { duration: 0 } : { delay: 1 }}
                 className="absolute -top-3 -left-3 bg-card border border-border rounded-lg shadow-lg px-3 py-1.5 text-xs font-medium flex items-center gap-1.5"
               >
                 <span className="text-base">🤖</span>
                 8 IA disponibles
               </motion.div>
               <motion.div
-                initial={{ opacity: 0, scale: 0 }}
+                initial={reduceMotion ? false : { opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1.2 }}
+                transition={reduceMotion ? { duration: 0 } : { delay: 1.2 }}
                 className="absolute -bottom-3 -right-3 bg-card border border-border rounded-lg shadow-lg px-3 py-1.5 text-xs font-medium flex items-center gap-1.5"
               >
                 <span className="text-base">📝</span>
@@ -267,9 +268,9 @@ export function HomeSection() {
 
           {/* Stats bar */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.6, delay: 0.4 }}
             className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto"
           >
             {stats.map((stat) => {
@@ -316,9 +317,9 @@ export function HomeSection() {
             return (
               <motion.button
                 key={item.id}
-                initial={{ opacity: 0, y: 16 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.06 }}
+                transition={reduceMotion ? { duration: 0 } : { delay: i * 0.06 }}
                 onClick={() => setActiveSection(item.id)}
                 className="group text-left"
               >
@@ -351,7 +352,7 @@ export function HomeSection() {
       <section className="container mx-auto max-w-7xl px-4">
         <div className="grid md:grid-cols-2 gap-6 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={reduceMotion ? false : { opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="space-y-4"
@@ -373,7 +374,7 @@ export function HomeSection() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={reduceMotion ? false : { opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="relative"
@@ -395,10 +396,10 @@ export function HomeSection() {
                   ].map((item, i) => (
                     <motion.div
                       key={i}
-                      initial={{ opacity: 0, x: 10 }}
+                      initial={reduceMotion ? false : { opacity: 0, x: 10 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: i * 0.08 }}
+                      transition={reduceMotion ? { duration: 0 } : { delay: i * 0.08 }}
                       className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-accent/40 transition-colors"
                     >
                       <span className="text-2xl">{item.emoji}</span>
@@ -425,10 +426,10 @@ export function HomeSection() {
           {AI_COURSES.map((course, i) => (
             <motion.button
               key={course.id}
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={reduceMotion ? false : { opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.04 }}
+              transition={reduceMotion ? { duration: 0 } : { delay: i * 0.04 }}
               onClick={() => setActiveSection('learn-ai')}
               className="group p-3 rounded-xl border border-border bg-card hover:border-primary/40 card-hover text-center"
             >

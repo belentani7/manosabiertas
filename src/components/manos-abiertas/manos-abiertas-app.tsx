@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { NavBar } from './nav-bar';
 import { Footer } from './footer';
@@ -28,6 +28,7 @@ const CommunitySection = dynamic(() => import('./community-section').then((m) =>
 export function ManosAbiertasApp() {
   const { activeSection, setActiveSection, readingMode } = useAppStore();
   const [showTop, setShowTop] = useState(false);
+  const reduceMotion = useReducedMotion();
 
   // Hash-based routing: read the initial hash and stay in sync with it.
   useEffect(() => {
@@ -74,10 +75,10 @@ export function ManosAbiertasApp() {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeSection}
-            initial={{ opacity: 0, y: 8 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
+            exit={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.2 }}
           >
             {activeSection === 'home' && <HomeSection />}
             {activeSection === 'learn-ai' && <LearnAISection />}
@@ -99,16 +100,17 @@ export function ManosAbiertasApp() {
       <AnimatePresence>
         {showTop && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
+            initial={reduceMotion ? false : { opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.5 }}
+            exit={reduceMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
+            transition={reduceMotion ? { duration: 0 } : undefined}
             className="fixed bottom-20 right-4 z-30 print:hidden"
           >
             <Button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              onClick={() => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' })}
               size="icon"
               variant="outline"
-              className="rounded-full shadow-lg h-10 w-10 bg-card/90 backdrop-blur"
+              className="rounded-full shadow-lg h-11 w-11 bg-card/90 backdrop-blur"
               aria-label="Volver arriba"
             >
               <ArrowUp className="h-4 w-4" />

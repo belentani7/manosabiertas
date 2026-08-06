@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Menu, X, Heart, Sparkles, FileText, BookOpen, Database, Shield, Phone, Home as HomeIcon, Moon, Sun, Wrench, Calendar, GraduationCap, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -35,7 +35,7 @@ function ThemeToggle() {
       size="icon"
       onClick={() => setTheme(current === 'dark' ? 'light' : 'dark')}
       aria-label="Cambiar tema"
-      className="h-9 w-9"
+      className="h-11 w-11"
       suppressHydrationWarning
     >
       {current === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
@@ -48,6 +48,7 @@ export function NavBar() {
   const t = getTranslation(language);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -82,7 +83,7 @@ export function NavBar() {
           <button
             onClick={() => setActiveSection('home')}
             aria-label="Manos Abiertas — Inicio"
-            className="flex items-center gap-2.5 flex-shrink-0 group"
+            className="flex min-h-11 items-center gap-2.5 flex-shrink-0 group"
           >
             <div className="relative">
               <div className="w-9 h-9 rounded-xl gradient-brand flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
@@ -107,7 +108,7 @@ export function NavBar() {
                   onClick={() => setActiveSection(item.id)}
                   aria-current={active ? 'page' : undefined}
                   className={cn(
-                    'relative px-3 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-1.5',
+                    'relative min-h-11 px-3 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-1.5',
                     active ? 'text-primary' : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
                   )}
                 >
@@ -117,7 +118,7 @@ export function NavBar() {
                     <motion.div
                       layoutId="nav-active"
                       className="absolute inset-0 bg-primary/10 rounded-lg -z-10"
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      transition={reduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
                 </button>
@@ -133,7 +134,7 @@ export function NavBar() {
             <Button
               variant="ghost"
               size="icon"
-              className="lg:hidden h-9 w-9"
+              className="lg:hidden h-11 w-11"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Menú"
             >
@@ -147,9 +148,10 @@ export function NavBar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
+            initial={reduceMotion ? false : { opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
+            exit={reduceMotion ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
+            transition={reduceMotion ? { duration: 0 } : undefined}
             className="lg:hidden overflow-hidden border-t border-border glass"
           >
             <nav className="container mx-auto max-w-7xl px-4 py-3 grid grid-cols-2 gap-1.5">
@@ -165,7 +167,7 @@ export function NavBar() {
                       setMobileOpen(false);
                     }}
                     className={cn(
-                      'flex items-center gap-2.5 px-3 py-3 rounded-lg text-sm font-medium transition-colors',
+                      'flex min-h-11 items-center gap-2.5 px-3 py-3 rounded-lg text-sm font-medium transition-colors',
                       active
                         ? 'bg-primary/10 text-primary'
                         : 'text-foreground hover:bg-accent'

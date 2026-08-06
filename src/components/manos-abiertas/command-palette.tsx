@@ -179,7 +179,7 @@ export function CommandPalette() {
       {/* Trigger button - shown in nav on desktop */}
       <button
         onClick={() => setOpen(true)}
-        className="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border bg-muted/30 hover:bg-muted/60 text-xs text-muted-foreground transition-colors"
+        className="hidden min-h-11 md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border bg-muted/30 hover:bg-muted/60 text-xs text-muted-foreground transition-colors"
         aria-label="Abrir búsqueda (Cmd+K)"
       >
         <Search className="h-3.5 w-3.5" />
@@ -204,7 +204,7 @@ export function CommandPalette() {
               onChange={(e) => { setQuery(e.target.value); setSelectedIndex(0); }}
               onKeyDown={handleKeyDown}
               placeholder="Buscar secciones, cursos IA, recursos, derechos..."
-              className="border-0 shadow-none focus-visible:ring-0 h-8"
+              className="border-0 shadow-none focus-visible:ring-0 h-11"
             />
             <kbd className="text-[10px] text-muted-foreground border border-border rounded px-1.5 py-0.5">
               ESC
@@ -227,7 +227,7 @@ export function CommandPalette() {
                     onClick={() => selectItem(item)}
                     onMouseEnter={() => setSelectedIndex(idx)}
                     className={cn(
-                      'w-full flex items-center gap-3 p-2.5 rounded-lg text-left transition-colors',
+                      'w-full min-h-11 flex items-center gap-3 p-2.5 rounded-lg text-left transition-colors',
                       idx === safeSelectedIndex ? 'bg-primary/10' : 'hover:bg-accent/50'
                     )}
                   >

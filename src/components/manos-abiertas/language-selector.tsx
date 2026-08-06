@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Check, Search, Globe, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -16,6 +16,7 @@ export function LanguageSelector({ compact = false }: { compact?: boolean }) {
   const [search, setSearch] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
 
   const current = LANGUAGES.find((l) => l.code === language) || LANGUAGES[0];
 
@@ -54,22 +55,22 @@ export function LanguageSelector({ compact = false }: { compact?: boolean }) {
         variant="outline"
         size={compact ? 'sm' : 'default'}
         onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
-        className="gap-2 font-medium"
+        className="min-h-11 gap-2 font-medium"
         aria-label="Seleccionar idioma"
       >
         <Globe className="h-4 w-4 text-primary" />
         <span className="text-lg leading-none">{current.flag}</span>
         {!compact && <span className="hidden sm:inline">{current.name}</span>}
-        <ChevronDown className={cn('h-3 w-3 transition-transform', languageMenuOpen && 'rotate-180')} />
+        <ChevronDown className={cn('h-3 w-3 transition-transform motion-reduce:transition-none', languageMenuOpen && 'rotate-180')} />
       </Button>
 
       <AnimatePresence>
         {languageMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 8, scale: 0.97 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 8, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.97 }}
-            transition={{ duration: 0.15 }}
+            exit={reduceMotion ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 8, scale: 0.97 }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.15 }}
             className="absolute right-0 top-full mt-2 z-50 w-80 rounded-xl border border-border bg-card shadow-xl overflow-hidden"
           >
             <div className="p-3 border-b border-border bg-muted/30">
@@ -87,7 +88,7 @@ export function LanguageSelector({ compact = false }: { compact?: boolean }) {
                   placeholder="Buscar idioma..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="pl-8 h-9 text-sm"
+                  className="pl-8 h-11 text-sm"
                 />
               </div>
             </div>
@@ -98,7 +99,7 @@ export function LanguageSelector({ compact = false }: { compact?: boolean }) {
                     key={lang.code}
                     onClick={() => selectLanguage(lang.code)}
                     className={cn(
-                      'w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm hover:bg-accent transition-colors text-left',
+                      'w-full min-h-11 flex items-center gap-3 px-3 py-2 rounded-lg text-sm hover:bg-accent transition-colors text-left',
                       lang.code === language && 'bg-accent/60',
                       lang.rtl && 'flex-row-reverse text-right'
                     )}

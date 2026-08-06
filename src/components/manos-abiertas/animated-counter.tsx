@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion';
+import { useInView, useMotionValue, useTransform, animate, useReducedMotion } from 'framer-motion';
 
 interface AnimatedCounterProps {
   value: number;
@@ -21,17 +21,23 @@ export function AnimatedCounter({
   const count = useMotionValue(0);
   const rounded = useTransform(count, (latest) => format(latest));
   const [display, setDisplay] = useState(format(0));
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     if (isInView) {
-      const controls = animate(count, value, { duration, ease: 'easeOut' });
       const unsub = rounded.on('change', (v) => setDisplay(v));
+      if (reduceMotion) {
+        count.set(value);
+        return unsub;
+      }
+
+      const controls = animate(count, value, { duration, ease: 'easeOut' });
       return () => {
         controls.stop();
         unsub();
       };
     }
-  }, [isInView, value, duration, count, rounded]);
+  }, [isInView, value, duration, count, rounded, reduceMotion]);
 
   return (
     <span ref={ref} className={className}>
