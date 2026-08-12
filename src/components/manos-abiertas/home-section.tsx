@@ -124,7 +124,7 @@ export function HomeSection() {
                 <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
               </span>
-              {LANGUAGE_COUNT} idiomas · {RESOURCES.length.toLocaleString()}+ recursos verificados
+              {LANGUAGE_COUNT} idiomas · {RESOURCES.length.toLocaleString()} recursos con trazabilidad visible
             </Badge>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-balance">

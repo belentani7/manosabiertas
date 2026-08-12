@@ -1,0 +1,37 @@
+{
+  "generatedAt": "2026-08-12",
+  "count": 6,
+  "format": "A4 portrait, maximum one printed page",
+  "pages": [
+    {
+      "id": "office",
+      "name": "Office",
+      "path": "office.html"
+    },
+    {
+      "id": "whatsapp",
+      "name": "WhatsApp",
+      "path": "whatsapp.html"
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini",
+      "path": "gemini.html"
+    },
+    {
+      "id": "copilot",
+      "name": "Copilot",
+      "path": "copilot.html"
+    },
+    {
+      "id": "deepseek",
+      "name": "DeepSeek",
+      "path": "deepseek.html"
+    },
+    {
+      "id": "qwen",
+      "name": "Qwen",
+      "path": "qwen.html"
+    }
+  ]
+}

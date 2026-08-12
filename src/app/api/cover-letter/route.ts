@@ -1,9 +1,13 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { z } from 'zod';
 import { invokeAIText } from '@/lib/ai-provider';
+import { apiError, apiJson, enforceRateLimit, hasRemoteAIConsent, readJsonBody, reportServerError } from '@/lib/api-security';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
+
+const MAX_BODY_BYTES = 32_000;
+const RATE_LIMIT = { limit: 8, windowMs: 10 * 60_000 };
 
 const coverLetterSchema = z.object({
   fullName: z.string().trim().max(120).optional(),
@@ -53,9 +57,16 @@ ${fullName}`;
 
 export async function POST(req: NextRequest) {
   try {
-    const parsed = coverLetterSchema.safeParse(await req.json());
+    const limited = await enforceRateLimit(req, 'ai-cover-letter', RATE_LIMIT);
+    if (limited) return limited;
+
+    const json = await readJsonBody(req, MAX_BODY_BYTES);
+    if (!json.ok) return json.response;
+
+    const remoteConsent = hasRemoteAIConsent(json.data);
+    const parsed = coverLetterSchema.safeParse(json.data);
     if (!parsed.success) {
-      return NextResponse.json({ ok: false, error: 'Solicitud no válida', text: '' }, { status: 400 });
+      return apiError('VALIDATION_ERROR', 'Solicitud no válida', 400, { text: '' });
     }
     const body: CoverLetterRequest = parsed.data;
     const lang = body.language || 'es';
@@ -86,21 +97,17 @@ Estructura:
 
 Devuelve SOLO el texto de la carta, lista para usar.`;
 
-    const result = await invokeAIText(systemPrompt, userPrompt, { offline: () => offlineLetter(body) });
+    const result = remoteConsent
+      ? await invokeAIText(systemPrompt, userPrompt, { offline: () => offlineLetter(body) })
+      : { text: offlineLetter(body), provider: 'offline' as const };
 
     if (!result.text) {
-      return NextResponse.json(
-        { ok: false, error: 'No hay proveedor de IA configurado (GROQ_API_KEY o .z-ai-config).', text: '' },
-        { status: 500 }
-      );
+      return apiError('AI_UNAVAILABLE', 'El servicio de generación no está disponible.', 503, { text: '' });
     }
 
-    return NextResponse.json({ text: result.text, ok: true, provider: result.provider });
+    return apiJson({ text: result.text, ok: true, provider: result.provider, degraded: result.provider === 'offline' });
   } catch (error: unknown) {
-    console.error('Cover letter generation error:', error);
-    return NextResponse.json(
-      { ok: false, error: 'No se pudo generar la carta.', text: '' },
-      { status: 500 }
-    );
+    reportServerError('cover-letter-api', error);
+    return apiError('INTERNAL_ERROR', 'No se pudo generar la carta.', 500, { text: '' });
   }
 }

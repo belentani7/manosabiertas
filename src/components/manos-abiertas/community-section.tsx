@@ -482,7 +482,9 @@ function ForumSection({ searchQuery, setSearchQuery }: { searchQuery: string; se
       <div className="flex flex-wrap items-center gap-2">
         <div className="relative flex-1 min-w-[200px]">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <label htmlFor="community-topic-search" className="sr-only">Buscar tema en la comunidad</label>
           <input
+            id="community-topic-search"
             type="text"
             placeholder="Buscar tema..."
             value={searchQuery}
@@ -497,7 +499,7 @@ function ForumSection({ searchQuery, setSearchQuery }: { searchQuery: string; se
               size="sm"
               variant={filter === c.id ? 'default' : 'outline'}
               onClick={() => setFilter(c.id)}
-              className="text-xs h-8"
+              className="text-xs h-11"
             >
               {c.label}
             </Button>
@@ -630,7 +632,7 @@ function LanguageExchangeBoard() {
                   </div>
                 </div>
 
-                <Button size="sm" variant="outline" className="w-full mt-3 text-xs h-8">
+                <Button size="sm" variant="outline" className="w-full mt-3 text-xs h-11">
                   <Globe className="h-3 w-3 mr-1" />
                   Contactar
                 </Button>

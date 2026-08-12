@@ -1,10 +1,12 @@
 import { getStore } from '@netlify/blobs';
 import { z } from 'zod';
+import { apiError, apiJson, communityContentRisk, enforceRateLimit, readJsonBody } from '@/lib/api-security';
 
 const STORE_NAME = 'manos-abiertas-community';
 const POST_PREFIX = 'post:';
 const MAX_BODY_BYTES = 12_000;
-const POST_COOLDOWN_MS = 30_000;
+const READ_RATE_LIMIT = { limit: 60, windowMs: 5 * 60_000 };
+const POST_RATE_LIMIT = { limit: 3, windowMs: 60 * 60_000 };
 
 const postSchema = z.object({
   title: z.string().trim().min(5).max(140),
@@ -22,23 +24,17 @@ type CommunityPost = {
   source: 'community';
 };
 
-function response(data: unknown, status = 200) {
-  return Response.json(data, {
-    status,
-    headers: { 'Cache-Control': 'no-store' },
-  });
-}
+const storedPostSchema = postSchema.extend({
+  id: z.string().uuid(),
+  replies: z.number().int().min(0),
+  createdAt: z.string().datetime(),
+  source: z.literal('community'),
+});
 
-async function requestFingerprint(request: Request) {
-  const address = request.headers.get('x-nf-client-connection-ip')
-    || request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
-    || 'anonymous';
-  const bytes = new TextEncoder().encode(address);
-  const digest = await crypto.subtle.digest('SHA-256', bytes);
-  return Array.from(new Uint8Array(digest)).map((value) => value.toString(16).padStart(2, '0')).join('').slice(0, 32);
-}
+export async function GET(request: Request) {
+  const limited = await enforceRateLimit(request, 'community-read', READ_RATE_LIMIT);
+  if (limited) return limited;
 
-export async function GET() {
   try {
     // Keep getStore inside the request handler. Netlify configures its runtime here.
     const store = getStore(STORE_NAME);
@@ -46,40 +42,50 @@ export async function GET() {
     const posts = await Promise.all(
       blobs.slice(-100).map(async ({ key }) => {
         const value = await store.get(key, { type: 'json', consistency: 'strong' }) as unknown;
-        return value && typeof value === 'object' ? value as CommunityPost : null;
+        const parsed = storedPostSchema.safeParse(value);
+        if (!parsed.success || communityContentRisk(parsed.data.title, parsed.data.author)) return null;
+        return parsed.data as CommunityPost;
       })
     );
 
-    return response({
+    return apiJson({
+      ok: true,
       mode: 'shared',
       posts: posts
         .filter((post): post is CommunityPost => post !== null)
         .sort((a, b) => b.createdAt.localeCompare(a.createdAt)),
     });
   } catch {
-    return response({ mode: 'local', posts: [], message: 'La comunidad compartida se activará al publicar en Netlify.' }, 503);
+    return apiError('COMMUNITY_UNAVAILABLE', 'La comunidad compartida no está disponible todavía.', 503, {
+      mode: 'local',
+      posts: [],
+    });
   }
 }
 
 export async function POST(request: Request) {
-  const contentLength = Number(request.headers.get('content-length') || 0);
-  if (contentLength > MAX_BODY_BYTES) {
-    return response({ error: 'La solicitud es demasiado grande.' }, 413);
-  }
-
   try {
-    const parsed = postSchema.safeParse(await request.json());
+    const limited = await enforceRateLimit(request, 'community-post', POST_RATE_LIMIT);
+    if (limited) return limited;
+
+    const json = await readJsonBody(request, MAX_BODY_BYTES);
+    if (!json.ok) return json.response;
+
+    const parsed = postSchema.safeParse(json.data);
     if (!parsed.success) {
-      return response({ error: 'Tema no válido. Revisa el título, categoría y nombre.' }, 400);
+      return apiError('VALIDATION_ERROR', 'Tema no válido. Revisa el título, categoría y nombre.', 400);
+    }
+
+    if (communityContentRisk(parsed.data.title, parsed.data.author)) {
+      return apiError(
+        'PUBLICATION_BLOCKED',
+        'No se puede publicar automáticamente este tema. Elimina datos personales, enlaces o texto potencialmente peligroso y vuelve a intentarlo.',
+        422,
+        { published: false },
+      );
     }
 
     const store = getStore(STORE_NAME);
-    const rateKey = `rate:${await requestFingerprint(request)}`;
-    const lastPost = await store.get(rateKey, { type: 'json', consistency: 'strong' }) as unknown;
-    if (lastPost && typeof lastPost === 'object' && 'at' in lastPost && typeof lastPost.at === 'number' && Date.now() - lastPost.at < POST_COOLDOWN_MS) {
-      return response({ error: 'Espera unos segundos antes de publicar otro tema.' }, 429);
-    }
-
     const post: CommunityPost = {
       id: crypto.randomUUID(),
       title: parsed.data.title,
@@ -94,10 +100,9 @@ export async function POST(request: Request) {
     await store.setJSON(`${POST_PREFIX}${post.id}`, post, {
       metadata: { category: post.category },
     });
-    await store.setJSON(rateKey, { at: Date.now() });
 
-    return response({ mode: 'shared', post }, 201);
+    return apiJson({ ok: true, mode: 'shared', post, published: true }, 201);
   } catch {
-    return response({ error: 'La comunidad compartida no está disponible todavía.' }, 503);
+    return apiError('COMMUNITY_UNAVAILABLE', 'La comunidad compartida no está disponible todavía.', 503);
   }
 }

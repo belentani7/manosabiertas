@@ -19,6 +19,9 @@ import { ATSAnalyzer } from './ats-analyzer';
 import { useAppStore } from '@/stores/app-store';
 import { getTranslation } from '@/i18n/translations';
 import { cn } from '@/lib/utils';
+import { useRemoteAIConsent } from '@/hooks/use-remote-ai-consent';
+import { withRemoteAIConsent } from '@/lib/remote-ai-consent';
+import { RemoteAIConsent } from './remote-ai-consent';
 
 interface Experience {
   id: string;
@@ -38,6 +41,7 @@ interface Education {
 
 export function CVSection() {
   const { language } = useAppStore();
+  const { remoteAIConsent } = useRemoteAIConsent();
   const t = getTranslation(language);
   const [template, setTemplate] = useState(CV_TEMPLATES[0]);
   const [fullName, setFullName] = useState('');
@@ -129,7 +133,7 @@ export function CVSection() {
       const resp = await fetch('/api/cv/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+        body: JSON.stringify(withRemoteAIConsent({
           field,
           fullName,
           profession,
@@ -137,7 +141,7 @@ export function CVSection() {
           education: education.filter((e) => e.title || e.institution),
           skills,
           language,
-        }),
+        }, remoteAIConsent)),
       });
       if (!resp.ok) throw new Error('Error en la generación');
       const data = await resp.json();
@@ -170,6 +174,8 @@ export function CVSection() {
         </Badge>
         <h1 className="text-3xl md:text-4xl font-bold mb-2">{t.cv_title}</h1>
         <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base">{t.cv_subtitle}</p>
+
+        <RemoteAIConsent className="mx-auto mt-4 max-w-2xl" />
 
         {/* Tool toggle: CV vs Cover Letter */}
         <div className="mt-4 grid w-full grid-cols-1 gap-1 rounded-lg bg-muted p-1 sm:inline-grid sm:w-auto sm:grid-cols-3">
@@ -211,14 +217,14 @@ export function CVSection() {
       {/* Cover Letter Builder */}
       {activeTool === 'letter' && (
         <div className="max-w-3xl mx-auto">
-          <CoverLetterBuilder />
+          <CoverLetterBuilder remoteAIConsent={remoteAIConsent} />
         </div>
       )}
 
       {/* ATS Analyzer */}
       {activeTool === 'ats' && (
         <div className="max-w-3xl mx-auto">
-          <ATSAnalyzer />
+          <ATSAnalyzer remoteAIConsent={remoteAIConsent} />
         </div>
       )}
 
@@ -286,7 +292,7 @@ export function CVSection() {
                         variant="outline"
                         onClick={() => generateWithAI('summary')}
                         disabled={aiLoading === 'summary' || !profession}
-                        className="h-7 gap-1 text-xs"
+                        className="h-11 gap-1 text-xs"
                       >
                         {aiLoading === 'summary' ? (
                           <Loader2 className="h-3 w-3 animate-spin" />
@@ -335,7 +341,7 @@ export function CVSection() {
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-medium text-muted-foreground">Experiencia {i + 1}</span>
                       {experiences.length > 1 && (
-                    <Button size="icon" variant="ghost" onClick={() => removeExperience(exp.id)} className="h-7 w-7" aria-label="Eliminar experiencia">
+                    <Button size="icon" variant="ghost" onClick={() => removeExperience(exp.id)} className="h-11 w-11" aria-label="Eliminar experiencia">
                       <Trash2 className="h-3.5 w-3.5 text-destructive" />
                         </Button>
                       )}
@@ -350,7 +356,7 @@ export function CVSection() {
                       <div className="flex items-center justify-between mb-1">
                         <span className="text-xs text-muted-foreground">Descripción</span>
                         {i === 0 && exp.position && (
-                          <Button size="sm" variant="outline" onClick={() => generateWithAI('experience')} disabled={aiLoading === 'experience'} className="h-7 gap-1 text-xs">
+                          <Button size="sm" variant="outline" onClick={() => generateWithAI('experience')} disabled={aiLoading === 'experience'} className="h-11 gap-1 text-xs">
                             {aiLoading === 'experience' ? <Loader2 className="h-3 w-3 animate-spin" /> : <Sparkles className="h-3 w-3 text-primary" />}
                             Mejorar con IA
                           </Button>
@@ -375,7 +381,7 @@ export function CVSection() {
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-medium text-muted-foreground">Educación {i + 1}</span>
                       {education.length > 1 && (
-                        <Button size="icon" variant="ghost" onClick={() => removeEducation(ed.id)} className="h-7 w-7" aria-label="Eliminar formación">
+                        <Button size="icon" variant="ghost" onClick={() => removeEducation(ed.id)} className="h-11 w-11" aria-label="Eliminar formación">
                           <Trash2 className="h-3.5 w-3.5 text-destructive" />
                         </Button>
                       )}
@@ -494,7 +500,7 @@ export function CVSection() {
                         setLanguages(['Español (nativo)', 'Inglés (básico)', 'Rumano (nativo)']);
                         toast.success('Datos de ejemplo cargados ✨');
                       }}
-                      className="h-7 gap-1 text-xs"
+                      className="h-11 gap-1 text-xs"
                     >
                       <Sparkles className="h-3 w-3 text-primary" />
                       Ver ejemplo

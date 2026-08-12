@@ -23,7 +23,7 @@ export function ReadingModeToggle() {
         variant="ghost"
         size="sm"
         onClick={() => setOpen(!open)}
-        className="gap-1.5 text-xs h-7"
+        className="gap-1.5 text-xs h-11"
       >
         {readingMode === 'normal' ? <Eye className="h-3.5 w-3.5" /> : readingMode === 'study' ? <BookOpen className="h-3.5 w-3.5" /> : readingMode === 'large' ? <Type className="h-3.5 w-3.5" /> : <Contrast className="h-3.5 w-3.5" />}
         {readingMode === 'normal' ? 'Normal' : readingMode === 'study' ? 'Estudio' : readingMode === 'large' ? 'Grande' : 'Contraste'}

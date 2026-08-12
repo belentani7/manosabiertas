@@ -126,7 +126,7 @@ export function TTSPlayer({ text, title }: { text: string; title?: string }) {
               size="icon"
               variant="ghost"
               onClick={handlePlay}
-              className="h-8 w-8"
+              className="h-11 w-11"
               aria-label={paused ? 'Reanudar' : 'Pausar'}
             >
               {paused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
@@ -135,7 +135,7 @@ export function TTSPlayer({ text, title }: { text: string; title?: string }) {
               size="icon"
               variant="ghost"
               onClick={stop}
-              className="h-8 w-8 text-destructive hover:text-destructive"
+              className="h-11 w-11 text-destructive hover:text-destructive"
               aria-label="Detener"
             >
               <Square className="h-4 w-4" />

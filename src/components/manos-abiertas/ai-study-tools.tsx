@@ -9,6 +9,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useAppStore } from '@/stores/app-store';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
+import { useRemoteAIConsent } from '@/hooks/use-remote-ai-consent';
+import { withRemoteAIConsent } from '@/lib/remote-ai-consent';
+import { RemoteAIConsent } from './remote-ai-consent';
 
 interface AIStudyToolsProps {
   content: string;
@@ -22,6 +25,7 @@ interface Question {
 
 export function AIStudyTools({ content, title }: AIStudyToolsProps) {
   const { language } = useAppStore();
+  const { remoteAIConsent } = useRemoteAIConsent();
   const [loading, setLoading] = useState<'questions' | 'summary' | null>(null);
   const [questions, setQuestions] = useState<Question[] | null>(null);
   const [summary, setSummary] = useState<string | null>(null);
@@ -34,7 +38,7 @@ export function AIStudyTools({ content, title }: AIStudyToolsProps) {
       const resp = await fetch('/api/study-tools', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tool: 'questions', content, title, language }),
+        body: JSON.stringify(withRemoteAIConsent({ tool: 'questions', content, title, language }, remoteAIConsent)),
       });
       if (!resp.ok) throw new Error('Error');
       const data = await resp.json();
@@ -63,7 +67,7 @@ export function AIStudyTools({ content, title }: AIStudyToolsProps) {
       const resp = await fetch('/api/study-tools', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tool: 'summary', content, title, language }),
+        body: JSON.stringify(withRemoteAIConsent({ tool: 'summary', content, title, language }, remoteAIConsent)),
       });
       if (!resp.ok) throw new Error('Error');
       const data = await resp.json();
@@ -79,6 +83,7 @@ export function AIStudyTools({ content, title }: AIStudyToolsProps) {
 
   return (
     <div className="mt-4">
+      <RemoteAIConsent compact className="mb-3" />
       {/* Action buttons */}
       <div className="flex gap-2 flex-wrap">
         <Button

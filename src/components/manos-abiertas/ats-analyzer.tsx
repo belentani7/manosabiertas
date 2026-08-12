@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
 import { useAppStore } from '@/stores/app-store';
 import { cn } from '@/lib/utils';
+import { withRemoteAIConsent } from '@/lib/remote-ai-consent';
 
 const STORAGE_KEY = 'manos-abiertas-cv';
 
@@ -44,7 +45,7 @@ function scoreColor(score: number) {
   return { text: 'text-rose-600 dark:text-rose-400', bar: 'bg-rose-500', label: 'Compatibilidad baja', emoji: '⚠️' };
 }
 
-export function ATSAnalyzer() {
+export function ATSAnalyzer({ remoteAIConsent }: { remoteAIConsent: boolean }) {
   const { language } = useAppStore();
   const [jobDescription, setJobDescription] = useState('');
   const [loading, setLoading] = useState(false);
@@ -80,7 +81,7 @@ export function ATSAnalyzer() {
       const resp = await fetch('/api/cv/ats', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+        body: JSON.stringify(withRemoteAIConsent({
           fullName: cvData.fullName || '',
           profession: cvData.profession || '',
           summary: cvData.summary || '',
@@ -90,7 +91,7 @@ export function ATSAnalyzer() {
           languages: cvData.languages || [],
           jobDescription,
           language,
-        }),
+        }, remoteAIConsent)),
       });
       const data = await resp.json();
       if (!resp.ok || !data.ok || !data.data) throw new Error(data.error || 'Error analizando');

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { LANGUAGES, type LanguageCode } from '@/i18n/languages';
-import { translations } from '@/i18n/translations';
+import { getTranslation } from '@/i18n/translations';
 import { ManosAbiertasApp } from '@/components/manos-abiertas/manos-abiertas-app';
 
 // Generate static params for all supported locales
@@ -25,7 +25,7 @@ export async function generateMetadata({
   }
 
   const lang = LANGUAGES.find((l) => l.code === locale);
-  const t = translations[locale] || translations.es;
+  const t = getTranslation(locale);
 
   return {
     title: t.home_welcome || 'Manos Abiertas',

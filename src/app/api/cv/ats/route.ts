@@ -1,9 +1,13 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { z } from 'zod';
 import { invokeAIText } from '@/lib/ai-provider';
+import { apiError, apiJson, enforceRateLimit, hasRemoteAIConsent, readJsonBody, reportServerError } from '@/lib/api-security';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
+
+const MAX_BODY_BYTES = 128_000;
+const RATE_LIMIT = { limit: 6, windowMs: 10 * 60_000 };
 
 const atsShortText = z.string().trim().max(200);
 const atsRequestSchema = z.object({
@@ -63,9 +67,16 @@ function extractJson(text: string): ATSAnalysis | null {
 
 export async function POST(req: NextRequest) {
   try {
-    const parsed = atsRequestSchema.safeParse(await req.json());
+    const limited = await enforceRateLimit(req, 'ai-cv-ats', RATE_LIMIT);
+    if (limited) return limited;
+
+    const json = await readJsonBody(req, MAX_BODY_BYTES);
+    if (!json.ok) return json.response;
+
+    const remoteConsent = hasRemoteAIConsent(json.data);
+    const parsed = atsRequestSchema.safeParse(json.data);
     if (!parsed.success) {
-      return NextResponse.json({ ok: false, error: 'Solicitud no válida', data: null }, { status: 400 });
+      return apiError('VALIDATION_ERROR', 'Solicitud no válida', 400, { data: null });
     }
     const body: ATSRequest = parsed.data;
     const lang = body.language || 'es';
@@ -102,9 +113,7 @@ ${body.jobDescription}
 
 Devuelve SOLO el objeto JSON con el análisis ATS.`;
 
-    const result = await invokeAIText(systemPrompt, userPrompt, {
-      maxTokens: 1200,
-      offline: () => {
+    const offline = () => {
         const cvText = [body.profession, body.summary, ...(body.skills || [])].filter(Boolean).join(' ').toLowerCase();
         const jobWords = (body.jobDescription || '').toLowerCase().split(/[^a-záéíóúñü0-9+]+/).filter((w) => w.length > 3);
         const unique = [...new Set(jobWords)];
@@ -128,23 +137,20 @@ Devuelve SOLO el objeto JSON con el análisis ATS.`;
           ],
           summary: `Puntuación orientativa estimada sin conexión a IA: ${score}/100. Configura GROQ_API_KEY en el entorno para un análisis con IA más preciso.`,
         });
-      },
-    });
+      };
+
+    const result = remoteConsent
+      ? await invokeAIText(systemPrompt, userPrompt, { maxTokens: 1200, offline })
+      : { text: offline(), provider: 'offline' as const };
 
     if (!result.text) {
-      return NextResponse.json(
-        { ok: false, error: 'No hay proveedor de IA configurado (GROQ_API_KEY o .z-ai-config).', data: null },
-        { status: 500 }
-      );
+      return apiError('AI_UNAVAILABLE', 'El servicio de análisis no está disponible.', 503, { data: null });
     }
 
     const analysis = extractJson(result.text);
 
     if (!analysis || typeof analysis.score !== 'number') {
-      return NextResponse.json(
-        { ok: false, error: 'No se pudo interpretar el análisis ATS.', data: null },
-        { status: 500 }
-      );
+      return apiError('INVALID_AI_RESPONSE', 'No se pudo interpretar el análisis ATS.', 502, { data: null });
     }
 
     const safe: ATSAnalysis = {
@@ -156,12 +162,9 @@ Devuelve SOLO el objeto JSON con el análisis ATS.`;
       summary: typeof analysis.summary === 'string' ? analysis.summary : '',
     };
 
-    return NextResponse.json({ ok: true, data: safe });
+    return apiJson({ ok: true, data: safe, provider: result.provider, degraded: result.provider === 'offline' });
   } catch (error: unknown) {
-    console.error('ATS analysis error:', error);
-    return NextResponse.json(
-      { ok: false, error: 'No se pudo analizar el CV.', data: null },
-      { status: 500 }
-    );
+    reportServerError('cv-ats-api', error);
+    return apiError('INTERNAL_ERROR', 'No se pudo analizar el CV.', 500, { data: null });
   }
 }

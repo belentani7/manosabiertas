@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     template: "%s · Manos Abiertas",
   },
   description:
-    "Plataforma gratuita multilingüe para personas inmigrantes en España. Aprende inteligencia artificial (ChatGPT, Gemini, Copilot, DeepSeek), crea tu currículum con IA, curso completo de Office y 3000+ recursos verificados.",
+    "Plataforma gratuita multilingüe para personas inmigrantes en España. Aprende inteligencia artificial, crea tu currículum, estudia Office y consulta un catálogo de recursos con fuente y estado de revisión visible.",
   keywords: [
     "inmigrantes España",
     "latinoamericanos en España",

@@ -1,5 +1,5 @@
 // Manos Abiertas - Internationalization
-// 35+ languages for immigrant communities in Spain
+// Selectable languages for immigrant communities in Spain.
 
 export type LanguageCode =
   | 'es' | 'ca' | 'pt-BR' | 'pt' | 'en' | 'zh' | 'hi' | 'qu' | 'ar' | 'fr'
@@ -13,6 +13,16 @@ export interface Language {
   englishName: string;
   flag: string;
   rtl?: boolean;
+}
+
+export const RTL_LANGUAGE_CODES = ['ar', 'fa', 'ur'] as const satisfies readonly LanguageCode[];
+
+export function isRtlLanguage(code: LanguageCode): boolean {
+  return RTL_LANGUAGE_CODES.some((rtlCode) => rtlCode === code);
+}
+
+export function getLanguageDirection(code: LanguageCode): 'ltr' | 'rtl' {
+  return isRtlLanguage(code) ? 'rtl' : 'ltr';
 }
 
 export const LANGUAGES: Language[] = [

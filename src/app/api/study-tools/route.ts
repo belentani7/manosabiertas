@@ -1,9 +1,13 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { z } from 'zod';
 import { invokeAIText } from '@/lib/ai-provider';
+import { apiError, apiJson, enforceRateLimit, hasRemoteAIConsent, readJsonBody, reportServerError } from '@/lib/api-security';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
+
+const MAX_BODY_BYTES = 16_000;
+const RATE_LIMIT = { limit: 12, windowMs: 5 * 60_000 };
 
 const studyToolsSchema = z.object({
   tool: z.enum(['questions', 'summary']),
@@ -16,9 +20,16 @@ type StudyToolsRequest = z.infer<typeof studyToolsSchema>;
 
 export async function POST(req: NextRequest) {
   try {
-    const parsed = studyToolsSchema.safeParse(await req.json());
+    const limited = await enforceRateLimit(req, 'ai-study-tools', RATE_LIMIT);
+    if (limited) return limited;
+
+    const json = await readJsonBody(req, MAX_BODY_BYTES);
+    if (!json.ok) return json.response;
+
+    const remoteConsent = hasRemoteAIConsent(json.data);
+    const parsed = studyToolsSchema.safeParse(json.data);
     if (!parsed.success) {
-      return NextResponse.json({ ok: false, error: 'Solicitud no válida', text: '' }, { status: 400 });
+      return apiError('VALIDATION_ERROR', 'Solicitud no válida', 400, { text: '' });
     }
     const body: StudyToolsRequest = parsed.data;
     const lang = body.language || 'es';
@@ -59,8 +70,7 @@ ${content}
 Formato: lista numerada, cada punto en una línea, máximo 15 palabras por punto.`;
     }
 
-    const result = await invokeAIText(systemPrompt, userPrompt, {
-      offline: () => {
+    const offline = () => {
         const sentences = content.split(/(?<=[.!?])\s+/).filter((s) => s.trim().length > 20);
         if (body.tool === 'questions') {
           const qs = (sentences.slice(0, 3).map((s, i) => ({
@@ -70,22 +80,19 @@ Formato: lista numerada, cada punto en una línea, máximo 15 palabras por punto
           return JSON.stringify({ questions: qs });
         }
         return sentences.slice(0, 5).map((s, i) => `${i + 1}. ${s.trim().slice(0, 120)}`).join('\n');
-      },
-    });
+      };
+
+    const result = remoteConsent
+      ? await invokeAIText(systemPrompt, userPrompt, { offline })
+      : { text: offline(), provider: 'offline' as const };
 
     if (!result.text) {
-      return NextResponse.json(
-        { ok: false, error: 'No hay proveedor de IA configurado (GROQ_API_KEY o .z-ai-config).', text: '' },
-        { status: 500 }
-      );
+      return apiError('AI_UNAVAILABLE', 'El servicio de estudio no está disponible.', 503, { text: '' });
     }
 
-    return NextResponse.json({ text: result.text, ok: true, tool: body.tool, provider: result.provider });
+    return apiJson({ text: result.text, ok: true, tool: body.tool, provider: result.provider, degraded: result.provider === 'offline' });
   } catch (error: unknown) {
-    console.error('Study tools API error:', error);
-    return NextResponse.json(
-      { ok: false, error: 'No se pudo procesar la solicitud.', text: '' },
-      { status: 500 }
-    );
+    reportServerError('study-tools-api', error);
+    return apiError('INTERNAL_ERROR', 'No se pudo procesar la solicitud.', 500, { text: '' });
   }
 }

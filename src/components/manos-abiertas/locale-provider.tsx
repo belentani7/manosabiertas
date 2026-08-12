@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, ReactNode } from 'react';
+import { createContext, useContext, ReactNode, useEffect } from 'react';
 import type { LanguageCode } from '@/i18n/languages';
 import type { UITranslations } from '@/i18n/translations';
 
@@ -14,12 +14,19 @@ const LocaleContext = createContext<LocaleContextType | undefined>(undefined);
 export function ManoAbiertoLocaleProvider({
   locale,
   translations: t,
+  dir,
   children,
 }: {
   locale: LanguageCode;
   translations: UITranslations;
+  dir: 'ltr' | 'rtl';
   children: ReactNode;
 }) {
+  useEffect(() => {
+    document.documentElement.lang = locale;
+    document.documentElement.dir = dir;
+  }, [dir, locale]);
+
   return (
     <LocaleContext.Provider value={{ locale, t }}>
       {children}

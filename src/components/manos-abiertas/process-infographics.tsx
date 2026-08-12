@@ -204,7 +204,7 @@ function StepCard({
       <button
         onClick={onToggle}
         className={cn(
-          'absolute left-0 top-3 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm border-2 transition-all z-10',
+          'absolute left-0 top-3 w-11 h-11 rounded-full flex items-center justify-center font-bold text-sm border-2 transition-all z-10',
           isCompleted
             ? 'bg-emerald-500 border-emerald-500 text-white'
             : 'bg-card border-border text-muted-foreground hover:border-primary'

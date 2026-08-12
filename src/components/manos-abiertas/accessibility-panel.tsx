@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Accessibility, X, Type, Eye, Volume2, VolumeX, Sun,
-  Moon, Minus, Plus, RotateCcw, Palette, MousePointer,
+  Accessibility, X, Type, Eye,
+  Minus, Plus, RotateCcw, Palette, MousePointer,
   Keyboard, ZoomIn,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -57,6 +57,8 @@ export function AccessibilityPanel() {
   const [isOpen, setIsOpen] = useState(false);
   const [settings, setSettings] = useState<AccessibilitySettings>(loadSettings);
   const [mounted, setMounted] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => setMounted(true));
@@ -102,6 +104,45 @@ export function AccessibilityPanel() {
     };
   }, [settings, mounted]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const panel = panelRef.current;
+    const frame = window.requestAnimationFrame(() => {
+      panel?.querySelector<HTMLElement>('[data-autofocus]')?.focus();
+    });
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setIsOpen(false);
+        return;
+      }
+      if (event.key !== 'Tab' || !panel) return;
+
+      const focusable = Array.from(panel.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), [href], input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      ));
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      document.removeEventListener('keydown', handleKeyDown);
+      triggerRef.current?.focus();
+    };
+  }, [isOpen]);
+
   const updateSetting = useCallback(<K extends keyof AccessibilitySettings>(
     key: K,
     value: AccessibilitySettings[K]
@@ -121,23 +162,27 @@ export function AccessibilityPanel() {
     <>
       {/* Toggle Button */}
       <motion.button
+        ref={triggerRef}
         onClick={() => setIsOpen(true)}
         className={cn(
           'fixed left-4 bottom-4 z-40 print:hidden',
           'w-12 h-12 rounded-full shadow-lg',
           'bg-primary text-primary-foreground',
           'flex items-center justify-center',
-          'hover:scale-110 transition-transform',
+          'hover:scale-110 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
           isOpen && 'hidden'
         )}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         aria-label="Abrir panel de accesibilidad"
+        aria-expanded={isOpen}
+        aria-controls="accessibility-panel"
+        aria-haspopup="dialog"
         title="Accesibilidad"
       >
         <Accessibility className="h-6 w-6" />
         {hasChanges && (
-          <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-brand-saffron rounded-full border-2 border-background" />
+          <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-brand-saffron rounded-full border-2 border-background" aria-hidden="true" />
         )}
       </motion.button>
 
@@ -150,12 +195,19 @@ export function AccessibilityPanel() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm lg:hidden print:hidden"
+              className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm print:hidden"
               onClick={() => setIsOpen(false)}
+              aria-hidden="true"
             />
 
             {/* Panel */}
             <motion.div
+              ref={panelRef}
+              id="accessibility-panel"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="accessibility-panel-title"
+              aria-describedby="accessibility-panel-description"
               initial={{ opacity: 0, x: -300 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -300 }}
@@ -169,11 +221,11 @@ export function AccessibilityPanel() {
                     <Accessibility className="h-4 w-4 text-white" />
                   </div>
                   <div>
-                    <h2 className="font-bold text-sm">Accesibilidad</h2>
-                    <p className="text-[10px] text-muted-foreground">Personaliza tu experiencia</p>
+                    <h2 id="accessibility-panel-title" className="font-bold text-sm">Accesibilidad</h2>
+                    <p id="accessibility-panel-description" className="text-[10px] text-muted-foreground">Personaliza tu experiencia</p>
                   </div>
                 </div>
-                <Button size="icon" variant="ghost" className="h-8 w-8" onClick={() => setIsOpen(false)} aria-label="Cerrar panel de accesibilidad">
+                <Button data-autofocus size="icon" variant="ghost" className="h-11 w-11" onClick={() => setIsOpen(false)} aria-label="Cerrar panel de accesibilidad">
                   <X className="h-4 w-4" />
                 </Button>
               </div>
@@ -187,7 +239,7 @@ export function AccessibilityPanel() {
                       <Button
                         size="icon"
                         variant="outline"
-                        className="h-7 w-7"
+                        className="h-11 w-11"
                         onClick={() => updateSetting('fontSize', Math.max(80, settings.fontSize - 5))}
                         disabled={settings.fontSize <= 80}
                         aria-label="Reducir tamaño de texto"
@@ -201,11 +253,13 @@ export function AccessibilityPanel() {
                         max={150}
                         step={5}
                         className="flex-1"
+                        aria-label="Tamaño de texto"
+                        aria-valuetext={`${settings.fontSize}%`}
                       />
                       <Button
                         size="icon"
                         variant="outline"
-                        className="h-7 w-7"
+                        className="h-11 w-11"
                         onClick={() => updateSetting('fontSize', Math.min(150, settings.fontSize + 5))}
                         disabled={settings.fontSize >= 150}
                         aria-label="Aumentar tamaño de texto"
@@ -223,6 +277,8 @@ export function AccessibilityPanel() {
                       min={12}
                       max={22}
                       step={1}
+                      aria-label="Altura de línea"
+                      aria-valuetext={settings.lineHeight.toFixed(1)}
                     />
                   </SettingGroup>
 
@@ -234,6 +290,8 @@ export function AccessibilityPanel() {
                       min={0}
                       max={3}
                       step={0.5}
+                      aria-label="Espaciado de letras"
+                      aria-valuetext={`${settings.letterSpacing} píxeles`}
                     />
                   </SettingGroup>
 
@@ -244,6 +302,8 @@ export function AccessibilityPanel() {
                     description="OpenDyslexic, más legible"
                   >
                     <Switch
+                      id="accessibility-dyslexic-font"
+                      aria-label="Fuente para dislexia"
                       checked={settings.dyslexicFont}
                       onCheckedChange={(v) => updateSetting('dyslexicFont', v)}
                     />
@@ -256,6 +316,8 @@ export function AccessibilityPanel() {
                     description="Menos movimiento en la interfaz"
                   >
                     <Switch
+                      id="accessibility-reduced-motion"
+                      aria-label="Reducir animaciones"
                       checked={settings.reducedMotion}
                       onCheckedChange={(v) => updateSetting('reducedMotion', v)}
                     />
@@ -268,6 +330,8 @@ export function AccessibilityPanel() {
                     description="Indicadores de foco más visibles"
                   >
                     <Switch
+                      id="accessibility-enhanced-focus"
+                      aria-label="Foco mejorado"
                       checked={settings.enhancedFocus}
                       onCheckedChange={(v) => updateSetting('enhancedFocus', v)}
                     />
@@ -280,6 +344,8 @@ export function AccessibilityPanel() {
                     description="Más fácil de ver"
                   >
                     <Switch
+                      id="accessibility-large-cursor"
+                      aria-label="Cursor grande"
                       checked={settings.cursorSize === 'large'}
                       onCheckedChange={(v) => updateSetting('cursorSize', v ? 'large' : 'normal')}
                     />
@@ -291,13 +357,15 @@ export function AccessibilityPanel() {
                       {COLOR_FILTERS.map((filter) => (
                         <button
                           key={filter.id}
+                          type="button"
                           onClick={() => updateSetting('colorFilter', filter.id)}
                           className={cn(
-                            'flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs transition-all',
+                            'flex min-h-11 items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
                             settings.colorFilter === filter.id
                               ? 'bg-primary/10 border-primary/30 text-primary font-medium'
                               : 'border-border hover:bg-accent/50 text-muted-foreground'
                           )}
+                          aria-pressed={settings.colorFilter === filter.id}
                         >
                           <span>{filter.emoji}</span>
                           <span>{filter.label}</span>

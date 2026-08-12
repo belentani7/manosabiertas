@@ -1,6 +1,6 @@
 // Manos Abiertas - Resources Database
-// 3000+ verified links for immigrants in Spain
-// Generated from real government, NGO, GitHub, AI tool & education sources
+// Resource catalogue for immigrants in Spain.
+// Trust is derived from explicit provenance; catalogue inclusion is not verification.
 
 export type ResourceCategory =
   | 'legal' | 'health' | 'housing' | 'work' | 'education'
@@ -22,7 +22,7 @@ export interface Resource {
   url: string;
   category: ResourceCategory;
   region: ResourceRegion;
-  source: string;
+  source?: string;
   language?: string;
   tags?: string[];
   free?: boolean;
@@ -30,6 +30,105 @@ export interface Resource {
   format?: string;
   audience?: string;
   verifiedAt?: string;
+  expiresAt?: string;
+  evidenceUrl?: string;
+  reviewedBy?: string;
+}
+
+export type ResourceTrustStatus = 'verified' | 'current-review-due' | 'pending';
+
+export type ResourceTrustReason =
+  | 'missing-source'
+  | 'missing-date'
+  | 'invalid-date'
+  | 'future-date'
+  | 'invalid-expiry'
+  | 'expiry-before-verification'
+  | 'invalid-evidence-url'
+  | 'invalid-reviewer'
+  | 'review-expired';
+
+export interface ResourceTrust {
+  status: ResourceTrustStatus;
+  source?: string;
+  verifiedAt?: string;
+  expiresAt?: string;
+  reviewDueAt?: string;
+  evidenceUrl?: string;
+  reviewedBy?: string;
+  reason?: ResourceTrustReason;
+}
+
+const ISO_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+const DAY_IN_MS = 24 * 60 * 60 * 1000;
+
+// A recorded review is current for at most 365 days. An earlier explicit
+// expiresAt shortens this window; it can never extend an old review.
+export const RESOURCE_REVIEW_MAX_AGE_DAYS = 365;
+
+function getValidIsoDate(value: string | undefined): string | undefined {
+  if (!value || !ISO_DATE_PATTERN.test(value)) return undefined;
+  const date = new Date(`${value}T00:00:00.000Z`);
+  if (Number.isNaN(date.getTime()) || date.toISOString().slice(0, 10) !== value) return undefined;
+  return value;
+}
+
+function getValidEvidenceUrl(value: string | undefined): string | undefined {
+  if (!value) return undefined;
+  try {
+    const url = new URL(value);
+    return ['http:', 'https:'].includes(url.protocol) && url.hostname ? url.toString() : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+function addDays(value: string, days: number): string {
+  const date = new Date(`${value}T00:00:00.000Z`);
+  return new Date(date.getTime() + days * DAY_IN_MS).toISOString().slice(0, 10);
+}
+
+export function getResourceTrust(resource: Resource, now = new Date()): ResourceTrust {
+  const source = resource.source?.trim() || undefined;
+  const verifiedAt = getValidIsoDate(resource.verifiedAt);
+  const expiresAt = getValidIsoDate(resource.expiresAt);
+  const evidenceUrl = getValidEvidenceUrl(resource.evidenceUrl);
+  const reviewedBy = resource.reviewedBy?.trim() || undefined;
+
+  if (!source) {
+    return { status: 'pending', verifiedAt, expiresAt, evidenceUrl, reviewedBy, reason: 'missing-source' };
+  }
+  if (!resource.verifiedAt) {
+    return { status: 'pending', source, expiresAt, evidenceUrl, reviewedBy, reason: 'missing-date' };
+  }
+  if (!verifiedAt) {
+    return { status: 'pending', source, expiresAt, evidenceUrl, reviewedBy, reason: 'invalid-date' };
+  }
+  if (new Date(`${verifiedAt}T00:00:00.000Z`).getTime() > now.getTime()) {
+    return { status: 'pending', source, verifiedAt, expiresAt, evidenceUrl, reviewedBy, reason: 'future-date' };
+  }
+  if (resource.expiresAt && !expiresAt) {
+    return { status: 'pending', source, verifiedAt, evidenceUrl, reviewedBy, reason: 'invalid-expiry' };
+  }
+  if (expiresAt && expiresAt < verifiedAt) {
+    return { status: 'pending', source, verifiedAt, expiresAt, evidenceUrl, reviewedBy, reason: 'expiry-before-verification' };
+  }
+  if (resource.evidenceUrl && !evidenceUrl) {
+    return { status: 'pending', source, verifiedAt, expiresAt, reviewedBy, reason: 'invalid-evidence-url' };
+  }
+  if (resource.reviewedBy !== undefined && !reviewedBy) {
+    return { status: 'pending', source, verifiedAt, expiresAt, evidenceUrl, reason: 'invalid-reviewer' };
+  }
+
+  const maxAgeDueAt = addDays(verifiedAt, RESOURCE_REVIEW_MAX_AGE_DAYS);
+  const reviewDueAt = expiresAt && expiresAt < maxAgeDueAt ? expiresAt : maxAgeDueAt;
+  const trust = { source, verifiedAt, expiresAt, reviewDueAt, evidenceUrl, reviewedBy };
+
+  if (now.getTime() >= new Date(`${reviewDueAt}T00:00:00.000Z`).getTime()) {
+    return { status: 'current-review-due', ...trust, reason: 'review-expired' };
+  }
+
+  return { status: 'verified', ...trust };
 }
 
 export const RESOURCE_CATEGORIES: { value: ResourceCategory; label: string; icon: string }[] = [
@@ -1158,7 +1257,7 @@ export function searchResources(
       !q ||
       r.title.toLowerCase().includes(q) ||
       r.description.toLowerCase().includes(q) ||
-      r.source.toLowerCase().includes(q) ||
+      r.source?.toLowerCase().includes(q) ||
       r.tags?.some((t) => t.toLowerCase().includes(q));
     const matchesCategory =
       !filters?.category || filters.category === 'all' || r.category === filters.category;

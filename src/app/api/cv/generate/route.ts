@@ -1,9 +1,13 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { z } from 'zod';
 import { invokeAIText } from '@/lib/ai-provider';
+import { apiError, apiJson, enforceRateLimit, hasRemoteAIConsent, readJsonBody, reportServerError } from '@/lib/api-security';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
+
+const MAX_BODY_BYTES = 128_000;
+const RATE_LIMIT = { limit: 8, windowMs: 10 * 60_000 };
 
 const shortText = z.string().trim().max(200);
 const cvRequestSchema = z.object({
@@ -72,9 +76,16 @@ function offlineExperience(body: CVRequest): string {
 
 export async function POST(req: NextRequest) {
   try {
-    const parsed = cvRequestSchema.safeParse(await req.json());
+    const limited = await enforceRateLimit(req, 'ai-cv-generate', RATE_LIMIT);
+    if (limited) return limited;
+
+    const json = await readJsonBody(req, MAX_BODY_BYTES);
+    if (!json.ok) return json.response;
+
+    const remoteConsent = hasRemoteAIConsent(json.data);
+    const parsed = cvRequestSchema.safeParse(json.data);
     if (!parsed.success) {
-      return NextResponse.json({ ok: false, error: 'Solicitud no válida', text: '' }, { status: 400 });
+      return apiError('VALIDATION_ERROR', 'Solicitud no válida', 400, { text: '' });
     }
     const body: CVRequest = parsed.data;
     const lang = body.language || 'es';
@@ -108,21 +119,17 @@ Reescribe en formato de viñetas (•) con logros concretos y verbos de acción.
       offline = () => offlineExperience(body);
     }
 
-    const result = await invokeAIText(systemPrompt, userPrompt, { offline });
+    const result = remoteConsent
+      ? await invokeAIText(systemPrompt, userPrompt, { offline })
+      : { text: offline?.() || '', provider: 'offline' as const };
 
     if (!result.text) {
-      return NextResponse.json(
-        { ok: false, error: 'No hay proveedor de IA configurado (GROQ_API_KEY o .z-ai-config).', text: '' },
-        { status: 500 }
-      );
+      return apiError('AI_UNAVAILABLE', 'El servicio de generación no está disponible.', 503, { text: '' });
     }
 
-    return NextResponse.json({ text: result.text, ok: true, provider: result.provider });
+    return apiJson({ text: result.text, ok: true, provider: result.provider, degraded: result.provider === 'offline' });
   } catch (error: unknown) {
-    console.error('CV generation error:', error);
-    return NextResponse.json(
-      { ok: false, error: 'No se pudo generar el contenido del CV.', text: '' },
-      { status: 500 }
-    );
+    reportServerError('cv-generate-api', error);
+    return apiError('INTERNAL_ERROR', 'No se pudo generar el contenido del CV.', 500, { text: '' });
   }
 }

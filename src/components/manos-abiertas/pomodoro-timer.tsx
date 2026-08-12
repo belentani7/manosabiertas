@@ -100,7 +100,7 @@ export function PomodoroTimer() {
         variant="outline"
         size="sm"
         onClick={() => { setPomodoroActive(true); setIsRunning(true); }}
-        className="gap-1.5 text-xs h-7"
+        className="gap-1.5 text-xs h-11"
       >
         <Timer className="h-3.5 w-3.5" />
         Pomodoro
@@ -115,7 +115,7 @@ export function PomodoroTimer() {
           variant="outline"
           size="sm"
           onClick={() => setPomodoroActive(true)}
-          className="gap-1.5 text-xs h-7"
+          className="gap-1.5 text-xs h-11"
         >
           <Timer className="h-3.5 w-3.5" />
           {completedSessions > 0 && (

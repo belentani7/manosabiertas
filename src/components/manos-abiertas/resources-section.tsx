@@ -2,14 +2,14 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Search, ExternalLink, Filter, Database, Tag, MapPin, Star, X, Heart, ArrowUpDown, LayoutGrid, List as ListIcon, Download } from 'lucide-react';
+import { Search, ExternalLink, Filter, Database, MapPin, Star, X, Heart, ArrowUpDown, LayoutGrid, List as ListIcon, Download, ShieldCheck, ShieldAlert, Clock3 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { RESOURCES, RESOURCE_CATEGORIES, REGIONS, searchResources, type Resource, type ResourceCategory, type ResourceRegion } from '@/data/resources';
+import { RESOURCES, RESOURCE_CATEGORIES, REGIONS, getResourceTrust, searchResources, type Resource, type ResourceCategory, type ResourceRegion } from '@/data/resources';
 import { useAppStore } from '@/stores/app-store';
 import { getTranslation } from '@/i18n/translations';
 import { ResourceSubmissionForm } from './resource-submission-form';
@@ -39,6 +39,13 @@ export function ResourcesSection() {
   const [favorites, setFavorites] = useState<Set<string>>(loadFavorites);
   const [sortBy, setSortBy] = useState<'relevance' | 'az' | 'category'>('relevance');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const trustCounts = useMemo(() => RESOURCES.reduce(
+    (counts, resource) => {
+      counts[getResourceTrust(resource).status] += 1;
+      return counts;
+    },
+    { verified: 0, 'current-review-due': 0, pending: 0 }
+  ), []);
 
   // Persist favorites whenever they change
   useEffect(() => {
@@ -87,6 +94,16 @@ h1 { color: #c2410c; border-bottom: 2px solid #c2410c; padding-bottom: 10px; }
 ${favResources.map((r) => {
   const cat = RESOURCE_CATEGORIES.find((c) => c.value === r.category);
   const reg = REGIONS.find((rr) => rr.value === r.region);
+  const trust = getResourceTrust(r);
+  const trustLabel = trust.status === 'verified'
+    ? 'Vigente según fecha registrada'
+    : trust.status === 'current-review-due'
+      ? 'Revisión vencida'
+      : 'Pendiente de revisión';
+  const trustText = `${trustLabel} · Fuente: ${trust.source || 'no documentada'}${trust.verifiedAt ? ` · Revisado: ${trust.verifiedAt}` : ''}${trust.reviewDueAt ? ` · Próxima revisión: ${trust.reviewDueAt}` : ''}${trust.reviewedBy ? ` · Responsable: ${trust.reviewedBy}` : ''}`;
+  const evidenceText = trust.evidenceUrl
+    ? `<br>Evidencia: <a href="${trust.evidenceUrl}" target="_blank" rel="noopener noreferrer">${trust.evidenceUrl}</a>`
+    : '';
   return `<div class="resource">
 <h3>${cat?.icon || '🔗'} ${r.title}</h3>
 <p>${r.description}</p>
@@ -95,7 +112,7 @@ ${favResources.map((r) => {
 <span class="badge">${cat?.label || r.category}</span>
 ${reg ? `<span class="badge">${reg.label}</span>` : ''}
 ${r.free ? '<span class="badge">✓ Gratis</span>' : ''}
-Fuente: ${r.source}
+${trustText}${evidenceText}
 </div>
 </div>`;
 }).join('')}
@@ -158,7 +175,12 @@ Plataforma gratuita para personas inmigrantes en España
           {RESOURCES.length.toLocaleString()} {t.resources_total}
         </Badge>
         <h1 className="text-3xl md:text-4xl font-bold mb-2">{t.resources_title}</h1>
-        <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base mb-3">{t.resources_subtitle}</p>
+        <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base mb-2">
+          Catálogo con trazabilidad explícita. La vigencia describe la fecha registrada, no una comprobación en tiempo real.
+        </p>
+        <p className="text-xs text-muted-foreground mb-3" aria-live="polite">
+          {trustCounts.verified.toLocaleString()} vigentes por fecha · {trustCounts['current-review-due'].toLocaleString()} con revisión vencida · {trustCounts.pending.toLocaleString()} pendientes
+        </p>
         <ResourceSubmissionForm />
       </div>
 
@@ -346,6 +368,65 @@ const CATEGORY_COLORS: Record<ResourceCategory, { bg: string; text: string; bord
   'language-learning': { bg: 'bg-green-50 dark:bg-green-950/30', text: 'text-green-700 dark:text-green-300', border: 'border-green-200 dark:border-green-900', dot: 'bg-green-600' },
 };
 
+function formatVerificationDate(value: string): string {
+  return new Intl.DateTimeFormat('es-ES', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(`${value}T00:00:00.000Z`));
+}
+
+function ResourceTrustIndicator({ resource, compact = false }: { resource: Resource; compact?: boolean }) {
+  const trust = getResourceTrust(resource);
+  const verified = trust.status === 'verified';
+  const reviewDue = trust.status === 'current-review-due';
+  const statusLabel = verified
+    ? 'Vigente según fecha registrada'
+    : reviewDue
+      ? 'Revisión vencida'
+      : 'Pendiente de revisión';
+  const sourceText = trust.source ? `Fuente: ${trust.source}` : 'Fuente no documentada';
+  const dateText = trust.verifiedAt
+    ? `Revisado: ${formatVerificationDate(trust.verifiedAt)}${trust.reviewDueAt ? ` · revisión requerida: ${formatVerificationDate(trust.reviewDueAt)}` : ''}`
+    : resource.verifiedAt
+      ? `Fecha declarada no válida: ${resource.verifiedAt}`
+      : 'Sin fecha de revisión';
+  const reviewerText = trust.reviewedBy ? ` · Responsable: ${trust.reviewedBy}` : '';
+
+  return (
+    <div
+      className={cn(
+        'flex items-center gap-1.5 min-w-0',
+        compact ? 'text-[10px]' : 'rounded-md border px-2 py-1 text-[10px]',
+        verified
+          ? 'text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-900 bg-emerald-50 dark:bg-emerald-950/30'
+          : reviewDue
+            ? 'text-red-800 dark:text-red-300 border-red-200 dark:border-red-900 bg-red-50 dark:bg-red-950/30'
+            : 'text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-900 bg-amber-50 dark:bg-amber-950/30'
+      )}
+      title={`${statusLabel}. ${sourceText}. ${dateText}${reviewerText}`}
+    >
+      {verified && <ShieldCheck className="h-3 w-3 flex-shrink-0" aria-hidden="true" />}
+      {reviewDue && <ShieldAlert className="h-3 w-3 flex-shrink-0" aria-hidden="true" />}
+      {!verified && !reviewDue && <Clock3 className="h-3 w-3 flex-shrink-0" aria-hidden="true" />}
+      <span className="font-semibold flex-shrink-0">{statusLabel}</span>
+      <span className="truncate">· {sourceText} · {dateText}{reviewerText}</span>
+      {trust.evidenceUrl && (
+        <a
+          href={trust.evidenceUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold underline underline-offset-2 flex-shrink-0"
+          aria-label={`Abrir evidencia de ${resource.title}`}
+        >
+          Evidencia
+        </a>
+      )}
+    </div>
+  );
+}
+
 function ResourceCard({ resource, isFavorite, onToggleFavorite, index, viewMode = 'grid' }: { resource: Resource; isFavorite: boolean; onToggleFavorite: () => void; index: number; viewMode?: 'grid' | 'list' }) {
   const cat = RESOURCE_CATEGORIES.find((c) => c.value === resource.category);
   const reg = REGIONS.find((r) => r.value === resource.region);
@@ -375,7 +456,7 @@ function ResourceCard({ resource, isFavorite, onToggleFavorite, index, viewMode 
             <div className="flex items-center gap-2 text-[10px] text-muted-foreground mt-0.5">
               <span className={cn('px-1.5 py-0 rounded-full', colors.bg, colors.text)}>{cat?.label}</span>
               {reg && <span className="flex items-center gap-0.5"><MapPin className="h-2.5 w-2.5" />{reg.label}</span>}
-              <span className="truncate">{resource.source}</span>
+              <ResourceTrustIndicator resource={resource} compact />
               {resource.free && <span className="text-emerald-600 dark:text-emerald-400 font-medium">✓ Gratis</span>}
               {resource.license && <span className="truncate">{resource.license}</span>}
             </div>
@@ -465,10 +546,7 @@ function ResourceCard({ resource, isFavorite, onToggleFavorite, index, viewMode 
             {resource.format && <Badge variant="outline" className="text-[9px] py-0 h-4">{resource.format}</Badge>}
           </div>
 
-          <div className="text-[10px] text-foreground/70 mb-2 truncate flex items-center gap-1 font-medium">
-            <Tag className="h-2.5 w-2.5 text-primary" />
-            {resource.source}
-          </div>
+          <ResourceTrustIndicator resource={resource} />
           {resource.license && <div className="text-[10px] text-muted-foreground truncate">Licencia: {resource.license}</div>}
         </CardContent>
       </Card>

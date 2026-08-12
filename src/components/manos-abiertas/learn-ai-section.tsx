@@ -313,13 +313,16 @@ function LessonViewer({
                 <button
                   key={l.id}
                   onClick={() => onSelectLesson(l.id)}
-                  className={cn(
-                    'h-1.5 flex-1 rounded-full transition-all hover:h-2.5',
-                    i < idx ? 'bg-white/80 hover:bg-white' : i === idx ? 'bg-white' : 'bg-white/20 hover:bg-white/40'
-                  )}
+                  className="group flex min-h-11 min-w-11 flex-1 items-center"
                   title={`Lección ${i + 1}: ${l.title}`}
                   aria-label={`Ir a lección ${i + 1}: ${l.title}`}
-                />
+                  aria-current={i === idx ? 'step' : undefined}
+                >
+                  <span className={cn(
+                    'h-1.5 w-full rounded-full transition-all group-hover:h-2.5',
+                    i < idx ? 'bg-white/80 group-hover:bg-white' : i === idx ? 'bg-white' : 'bg-white/20 group-hover:bg-white/40'
+                  )} />
+                </button>
               ))}
             </div>
           </div>

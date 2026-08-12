@@ -218,7 +218,9 @@ export function DocumentTemplates() {
               <p className="text-xs text-muted-foreground mb-2">
                 Edita el texto reemplazando los campos [ENTRE CORCHETES] con tus datos
               </p>
+              <label htmlFor="document-template-content" className="sr-only">Contenido editable de la plantilla</label>
               <textarea
+                id="document-template-content"
                 value={editedContent}
                 onChange={(e) => setEditedContent(e.target.value)}
                 className="w-full min-h-[400px] p-3 rounded-lg border border-border bg-card text-sm font-mono resize-y focus:outline-none focus:ring-2 focus:ring-primary"

@@ -3,7 +3,7 @@ import { ManosAbiertasClient } from '@/components/manos-abiertas/manos-abiertas-
 
 export const metadata: Metadata = {
   title: 'Manos Abiertas · IA, CV y Derechos para personas inmigrantes en España',
-  description: 'Plataforma gratuita multilingüe para personas inmigrantes en España. Aprende inteligencia artificial (ChatGPT, Gemini, Copilot, DeepSeek), crea tu currículum con IA, curso completo de Office y 3000+ recursos verificados.',
+  description: 'Plataforma gratuita multilingüe para personas inmigrantes en España. Aprende inteligencia artificial, crea tu currículum, estudia Office y consulta un catálogo de recursos con fuente y estado de revisión visible.',
 };
 
 export default function Home() {

@@ -13,6 +13,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 import { useAppStore } from '@/stores/app-store';
 import { cn } from '@/lib/utils';
+import { withRemoteAIConsent } from '@/lib/remote-ai-consent';
 
 const STORAGE_KEY = 'manos-abiertas-cover-letter';
 
@@ -22,7 +23,7 @@ const TONE_OPTIONS = [
   { value: 'direct' as const, label: 'Directo', emoji: '⚡', desc: 'Conciso y al grano' },
 ];
 
-export function CoverLetterBuilder() {
+export function CoverLetterBuilder({ remoteAIConsent }: { remoteAIConsent: boolean }) {
   const { language } = useAppStore();
   const [fullName, setFullName] = useState('');
   const [profession, setProfession] = useState('');
@@ -86,9 +87,9 @@ export function CoverLetterBuilder() {
       const resp = await fetch('/api/cover-letter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+        body: JSON.stringify(withRemoteAIConsent({
           fullName, profession, companyName, jobTitle, experience, skills, tone, language,
-        }),
+        }, remoteAIConsent)),
       });
       if (!resp.ok) throw new Error('Error');
       const data = await resp.json();
@@ -223,7 +224,7 @@ export function CoverLetterBuilder() {
                     placeholder="Ej: Empatía"
                     className="text-sm h-9"
                   />
-                <Button size="icon" onClick={addSkill} className="h-9 w-9" aria-label="Añadir habilidad">
+                <Button size="icon" onClick={addSkill} className="h-11 w-11" aria-label="Añadir habilidad">
                   <Sparkles className="h-3.5 w-3.5" />
                   </Button>
                 </div>
@@ -300,11 +301,11 @@ export function CoverLetterBuilder() {
                       Generada con IA · {TONE_OPTIONS.find(t => t.value === tone)?.label}
                     </Badge>
                     <div className="flex gap-1">
-                      <Button size="sm" variant="ghost" onClick={copyLetter} className="h-7 gap-1 text-xs">
+                      <Button size="sm" variant="ghost" onClick={copyLetter} className="h-11 gap-1 text-xs">
                         <Copy className="h-3 w-3" />
                         Copiar
                       </Button>
-                      <Button size="sm" variant="ghost" onClick={() => window.print()} className="h-7 gap-1 text-xs">
+                      <Button size="sm" variant="ghost" onClick={() => window.print()} className="h-11 gap-1 text-xs">
                         <Printer className="h-3 w-3" />
                         Imprimir
                       </Button>

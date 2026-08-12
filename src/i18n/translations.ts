@@ -192,7 +192,7 @@ const es: UITranslations = {
   office_powerpoint: 'PowerPoint',
 
   resources_title: 'Directorio de Recursos',
-  resources_subtitle: 'Más de 3000 enlaces verificados: gobierno, ONGs, empleo, sanidad y más',
+  resources_subtitle: 'Catálogo con fuentes y estado de revisión visible: gobierno, ONGs, empleo, sanidad y más',
   resources_filterCategory: 'Categoría',
   resources_filterRegion: 'Comunidad Autónoma',
   resources_total: 'recursos disponibles',
@@ -207,7 +207,7 @@ const es: UITranslations = {
   rights_emergency: 'Emergencias',
 
   footer_madeWith: 'Hecho con cariño para la comunidad inmigrante',
-  footer_disclaimer: 'Información verificada de fuentes oficiales. No es asesoramiento legal.',
+  footer_disclaimer: 'Cada ficha indica fuente y fecha cuando existen. No es asesoramiento legal.',
   footer_rights: 'Manos Abiertas © 2025 · Acceso libre y gratuito',
 };
 
@@ -292,7 +292,7 @@ const en: UITranslations = {
   office_powerpoint: 'PowerPoint',
 
   resources_title: 'Resources Directory',
-  resources_subtitle: 'Over 3000 verified links: government, NGOs, jobs, health and more',
+  resources_subtitle: 'Resource catalogue with sources and visible review status: government, NGOs, jobs, health and more',
   resources_filterCategory: 'Category',
   resources_filterRegion: 'Autonomous Community',
   resources_total: 'resources available',
@@ -307,7 +307,7 @@ const en: UITranslations = {
   rights_emergency: 'Emergencies',
 
   footer_madeWith: 'Made with love for the immigrant community',
-  footer_disclaimer: 'Verified information from official sources. Not legal advice.',
+  footer_disclaimer: 'Each entry shows its source and date when available. Not legal advice.',
   footer_rights: 'Manos Abiertas © 2025 · Free and open access',
 };
 
@@ -551,11 +551,11 @@ const de: UITranslations = {
   office_title: 'Kompletter Office-Kurs',
   office_subtitle: 'Beherrsche Word, Excel und PowerPoint von Grund auf',
   resources_title: 'Ressourcenverzeichnis',
-  resources_subtitle: 'Über 3000 verifizierte Links: Regierung, NGOs, Arbeit, Gesundheit und mehr',
+  resources_subtitle: 'Ressourcenkatalog mit Quellenangaben und sichtbarem Prüfstatus',
   rights_title: 'Rechte & Hilfe',
   rights_subtitle: 'Alles, was du wissen musst, um in Spanien in Würde zu leben',
   footer_madeWith: 'Mit Liebe für die Migrantengemeinschaft gemacht',
-  footer_disclaimer: 'Verifizierte Informationen aus offiziellen Quellen. Keine Rechtsberatung.',
+  footer_disclaimer: 'Jeder Eintrag nennt Quelle und Datum, sofern vorhanden. Keine Rechtsberatung.',
   footer_rights: 'Manos Abiertas © 2025 · Frei und kostenlos zugänglich',
 };
 
@@ -584,11 +584,11 @@ const it: UITranslations = {
   office_title: 'Corso completo di Office',
   office_subtitle: 'Padroneggia Word, Excel e PowerPoint da zero',
   resources_title: 'Elenco risorse',
-  resources_subtitle: 'Oltre 3000 link verificati: governo, ONG, lavoro, salute e altro',
+  resources_subtitle: 'Catalogo di risorse con fonti e stato di revisione visibile',
   rights_title: 'Diritti & Aiuti',
   rights_subtitle: 'Tutto quello che devi sapere per vivere in Spagna con dignità',
   footer_madeWith: 'Fatto con amore per la comunità immigrata',
-  footer_disclaimer: 'Informazioni verificate da fonti ufficiali. Non è consulenza legale.',
+  footer_disclaimer: 'Ogni scheda indica fonte e data quando disponibili. Non è consulenza legale.',
   footer_rights: 'Manos Abiertas © 2025 · Accesso libero e gratuito',
 };
 
@@ -617,11 +617,11 @@ const ru: UITranslations = {
   office_title: 'Полный курс Office',
   office_subtitle: 'Освойте Word, Excel и PowerPoint с нуля',
   resources_title: 'Каталог ресурсов',
-  resources_subtitle: 'Более 3000 проверенных ссылок: правительство, НКО, работа, здоровье и другое',
+  resources_subtitle: 'Каталог ресурсов с источниками и видимым статусом проверки',
   rights_title: 'Права и помощь',
   rights_subtitle: 'Всё, что нужно знать, чтобы жить в Испании с достоинством',
   footer_madeWith: 'Сделано с любовью для сообщества иммигрантов',
-  footer_disclaimer: 'Проверенная информация из официальных источников. Не является юридической консультацией.',
+  footer_disclaimer: 'Каждая запись указывает источник и дату, если они доступны. Это не юридическая консультация.',
   footer_rights: 'Manos Abiertas © 2025 · Свободный и бесплатный доступ',
 };
 
@@ -650,11 +650,11 @@ const pl: UITranslations = {
   office_title: 'Kompletny kurs Office',
   office_subtitle: 'Opanuj Word, Excel i PowerPoint od podstaw',
   resources_title: 'Katalog zasobów',
-  resources_subtitle: 'Ponad 3000 zweryfikowanych linków: rząd, NGO, praca, zdrowie i więcej',
+  resources_subtitle: 'Katalog zasobów ze źródłami i widocznym statusem weryfikacji',
   rights_title: 'Prawa i pomoc',
   rights_subtitle: 'Wszystko, co musisz wiedzieć, aby godnie żyć w Hiszpanii',
   footer_madeWith: 'Zrobione z miłością dla społeczności imigranckiej',
-  footer_disclaimer: 'Zweryfikowane informacje z oficjalnych źródeł. To nie jest porada prawna.',
+  footer_disclaimer: 'Każdy wpis podaje źródło i datę, jeśli są dostępne. To nie jest porada prawna.',
   footer_rights: 'Manos Abiertas © 2025 · Darmowy i otwarty dostęp',
 };
 
@@ -683,11 +683,11 @@ const bg: UITranslations = {
   office_title: 'Пълен курс по Office',
   office_subtitle: 'Овладейте Word, Excel и PowerPoint от нулата',
   resources_title: 'Каталог с ресурси',
-  resources_subtitle: 'Над 3000 проверени връзки: правителство, НПО, работа, здраве и други',
+  resources_subtitle: 'Каталог с ресурси, източници и видим статус на проверка',
   rights_title: 'Права и помощ',
   rights_subtitle: 'Всичко, което трябва да знаете, за да живеете в Испания с достойнство',
   footer_madeWith: 'Направено с любов за имигрантската общност',
-  footer_disclaimer: 'Проверена информация от официални източници. Не е правен съвет.',
+  footer_disclaimer: 'Всеки запис посочва източник и дата, когато са налични. Не е правен съвет.',
   footer_rights: 'Manos Abiertas © 2025 · Свободен и безплатен достъп',
 };
 
@@ -716,11 +716,11 @@ const nl: UITranslations = {
   office_title: 'Complete Office-cursus',
   office_subtitle: 'Beheers Word, Excel en PowerPoint vanaf nul',
   resources_title: 'Bronnenmap',
-  resources_subtitle: 'Meer dan 3000 geverifieerde links: overheid, NGO\'s, werk, gezondheid en meer',
+  resources_subtitle: 'Catalogus met bronnen en zichtbare beoordelingsstatus',
   rights_title: 'Rechten & hulp',
   rights_subtitle: 'Alles wat je moet weten om waardig in Spanje te leven',
   footer_madeWith: 'Gemaakt met liefde voor de migrantengemeenschap',
-  footer_disclaimer: 'Geverifieerde informatie van officiële bronnen. Geen juridisch advies.',
+  footer_disclaimer: 'Elke vermelding toont bron en datum indien beschikbaar. Geen juridisch advies.',
   footer_rights: 'Manos Abiertas © 2025 · Vrij en gratis toegankelijk',
 };
 
@@ -749,11 +749,11 @@ const el: UITranslations = {
   office_title: 'Πλήρες μάθημα Office',
   office_subtitle: 'Κατέκτησε Word, Excel και PowerPoint από το μηδέν',
   resources_title: 'Κατάλογος πόρων',
-  resources_subtitle: 'Πάνω από 3000 επαληθευμένοι σύνδεσμοι: κυβέρνηση, ΜΚΟ, εργασία, υγεία και άλλα',
+  resources_subtitle: 'Κατάλογος πόρων με πηγές και ορατή κατάσταση ελέγχου',
   rights_title: 'Δικαιώματα & βοήθεια',
   rights_subtitle: 'Όλα όσα πρέπει να ξέρεις για να ζήσεις στην Ισπανία με αξιοπρέπεια',
   footer_madeWith: 'Φτιαγμένο με αγάπη για τη μεταναστευτική κοινότητα',
-  footer_disclaimer: 'Επαληθευμένες πληροφορίες από επίσημες πηγές. Δεν αποτελεί νομική συμβουλή.',
+  footer_disclaimer: 'Κάθε καταχώριση δείχνει πηγή και ημερομηνία όταν υπάρχουν. Δεν αποτελεί νομική συμβουλή.',
   footer_rights: 'Manos Abiertas © 2025 · Ελεύθερη και δωρεάν πρόσβαση',
 };
 
@@ -782,11 +782,11 @@ const tr: UITranslations = {
   office_title: 'Kapsamlı Office Kursu',
   office_subtitle: 'Word, Excel ve PowerPoint\'i sıfırdan öğren',
   resources_title: 'Kaynak Rehberi',
-  resources_subtitle: '3000\'den fazla doğrulanmış bağlantı: hükümet, STK\'lar, iş, sağlık ve daha fazlası',
+  resources_subtitle: 'Kaynakları ve görünür inceleme durumu olan kaynak kataloğu',
   rights_title: 'Haklar ve Yardım',
   rights_subtitle: 'İspanya\'da onurlu bir şekilde yaşamak için bilmen gereken her şey',
   footer_madeWith: 'Göçmen topluluğu için sevgiyle yapıldı',
-  footer_disclaimer: 'Resmi kaynaklardan doğrulanmış bilgiler. Hukuki tavsiye değildir.',
+  footer_disclaimer: 'Her kayıt, mevcut olduğunda kaynak ve tarih gösterir. Hukuki tavsiye değildir.',
   footer_rights: 'Manos Abiertas © 2025 · Ücretsiz ve açık erişim',
 };
 
@@ -815,11 +815,11 @@ const ur: UITranslations = {
   office_title: 'مکمل آفس کورس',
   office_subtitle: 'Word، Excel اور PowerPoint کو شروع سے سیکھیں',
   resources_title: 'وسائل کی ڈائرکٹری',
-  resources_subtitle: '3000 سے زیادہ تصدیق شدہ لنکس: حکومت، این جی اوز، روزگار، صحت اور مزید',
+  resources_subtitle: 'ذرائع اور واضح جائزہ حیثیت کے ساتھ وسائل کی فہرست',
   rights_title: 'حقوق اور امداد',
   rights_subtitle: 'اسپین میں عزت کے ساتھ رہنے کے لیے آپ کو جاننے کی ضرورت ہے',
   footer_madeWith: 'تارکین وطن کی کمیونٹی کے لیے محبت سے بنایا گیا',
-  footer_disclaimer: 'سرکاری ذرائع سے تصدیق شدہ معلومات۔ قانونی مشورہ نہیں ہے۔',
+  footer_disclaimer: 'ہر اندراج میں دستیاب ہونے پر ذریعہ اور تاریخ دکھائی جاتی ہے۔ یہ قانونی مشورہ نہیں ہے۔',
   footer_rights: 'Manos Abiertas © 2025 · مفت اور کھلی رسائی',
 };
 
@@ -848,11 +848,11 @@ const fa: UITranslations = {
   office_title: 'دوره کامل آفیس',
   office_subtitle: 'Word، Excel و PowerPoint را از صفر بیاموزید',
   resources_title: 'فهرست منابع',
-  resources_subtitle: 'بیش از ۳۰۰۰ لینک تأیید شده: دولت، سازمان‌های غیردولتی، کار، سلامت و بیشتر',
+  resources_subtitle: 'فهرست منابع با ذکر منبع و وضعیت بازبینی قابل مشاهده',
   rights_title: 'حقوق و کمک',
   rights_subtitle: 'هر آنچه برای زندگی با عزت در اسپانیا باید بدانید',
   footer_madeWith: 'با عشق برای جامعه مهاجر ساخته شده',
-  footer_disclaimer: 'اطلاعات تأیید شده از منابع رسمی. مشاوره حقوقی نیست.',
+  footer_disclaimer: 'هر مورد در صورت وجود، منبع و تاریخ را نشان می‌دهد. این مشاوره حقوقی نیست.',
   footer_rights: 'Manos Abiertas © 2025 · دسترسی آزاد و رایگان',
 };
 
@@ -881,11 +881,11 @@ const bn: UITranslations = {
   office_title: 'সম্পূর্ণ অফিস কোর্স',
   office_subtitle: 'Word, Excel এবং PowerPoint শুরু থেকে শিখুন',
   resources_title: 'সম্পদ ডিরেক্টরি',
-  resources_subtitle: '৩০০০+ যাচাইকৃত লিংক: সরকার, এনজিও, চাকরি, স্বাস্থ্য এবং আরও',
+  resources_subtitle: 'উৎস ও দৃশ্যমান পর্যালোচনা অবস্থাসহ রিসোর্স ক্যাটালগ',
   rights_title: 'অধিকার ও সহায়তা',
   rights_subtitle: 'স্পেনে মর্যাদার সাথে বাঁচতে যা জানা দরকার',
   footer_madeWith: 'অভিবাসী সম্প্রদায়ের জন্য ভালোবাসা দিয়ে তৈরি',
-  footer_disclaimer: 'সরকারি সূত্র থেকে যাচাইকৃত তথ্য। আইনি পরামর্শ নয়।',
+  footer_disclaimer: 'প্রতিটি এন্ট্রিতে উপলভ্য থাকলে উৎস ও তারিখ দেখানো হয়। এটি আইনি পরামর্শ নয়।',
   footer_rights: 'Manos Abiertas © 2025 · মুক্ত ও বিনামূল্যে প্রবেশাধিকার',
 };
 
@@ -914,11 +914,11 @@ const vi: UITranslations = {
   office_title: 'Khóa học Office đầy đủ',
   office_subtitle: 'Làm chủ Word, Excel và PowerPoint từ con số không',
   resources_title: 'Danh mục tài nguyên',
-  resources_subtitle: 'Hơn 3000 liên kết đã xác minh: chính phủ, tổ chức phi chính phủ, việc làm, y tế và hơn thế nữa',
+  resources_subtitle: 'Danh mục tài nguyên có nguồn và trạng thái đánh giá hiển thị',
   rights_title: 'Quyền lợi & Trợ giúp',
   rights_subtitle: 'Mọi điều bạn cần biết để sống ở Tây Ban Nha với phẩm giá',
   footer_madeWith: 'Được tạo bằng tình yêu cho cộng đồng người nhập cư',
-  footer_disclaimer: 'Thông tin đã xác minh từ các nguồn chính thức. Không phải là tư vấn pháp lý.',
+  footer_disclaimer: 'Mỗi mục hiển thị nguồn và ngày khi có. Không phải là tư vấn pháp lý.',
   footer_rights: 'Manos Abiertas © 2025 · Truy cập miễn phí và mở',
 };
 
@@ -947,11 +947,11 @@ const tl: UITranslations = {
   office_title: 'Kumpletong kurso sa Office',
   office_subtitle: 'Alamin ang Word, Excel at PowerPoint mula sa simula',
   resources_title: 'Direktoryo ng mapagkukunan',
-  resources_subtitle: 'Higit sa 3000 napatunayang link: gobyerno, NGO, trabaho, kalusugan at iba pa',
+  resources_subtitle: 'Katalogo ng mga mapagkukunan na may pinagmulan at nakikitang estado ng pagsusuri',
   rights_title: 'Karapatan at Tulong',
   rights_subtitle: 'Lahat ng kailangan mong malaman upang mabuhay nang may dignidad sa Espanya',
   footer_madeWith: 'Ginawa nang may pagmamahal para sa komunidad ng mga imigrante',
-  footer_disclaimer: 'Na-verify na impormasyon mula sa mga opisyal na mapagkukunan. Hindi ito legal na payo.',
+  footer_disclaimer: 'Ipinapakita ng bawat tala ang pinagmulan at petsa kapag mayroon. Hindi ito legal na payo.',
   footer_rights: 'Manos Abiertas © 2025 · Libre at bukas na pag-access',
 };
 
@@ -980,15 +980,15 @@ const sw: UITranslations = {
   office_title: 'Kozi kamili ya Office',
   office_subtitle: 'Jifunze Word, Excel na PowerPoint kutoka mwanzo',
   resources_title: 'Saraka ya rasilimali',
-  resources_subtitle: 'Zaidi ya viungo 3000 vilivyothibitishwa: serikali, mashirika yasiyo ya kiserikali, kazi, afya na zaidi',
+  resources_subtitle: 'Orodha ya rasilimali yenye vyanzo na hali ya ukaguzi inayoonekana',
   rights_title: 'Haki na Msaada',
   rights_subtitle: 'Kila unachohitaji kujua ili kuishi Uhispania kwa heshima',
   footer_madeWith: 'Imefanywa kwa upendo kwa jamii ya wahamiaji',
-  footer_disclaimer: 'Taarifa zilizothibitishwa kutoka kwa vyanzo rasmi. Sio ushauri wa kisheria.',
+  footer_disclaimer: 'Kila ingizo huonyesha chanzo na tarehe vinapopatikana. Sio ushauri wa kisheria.',
   footer_rights: 'Manos Abiertas © 2025 · Upatikanaji wa bure na wazi',
 };
 
-export const translations: Record<string, UITranslations> = {
+export const translations: Partial<Record<LanguageCode, UITranslations>> = {
   es,
   en,
   ca,
@@ -1017,6 +1017,68 @@ export const translations: Record<string, UITranslations> = {
   sw,
 };
 
+export type TranslationStatus = 'complete' | 'partial' | 'beta';
+
+export interface TranslationCoverage {
+  code: LanguageCode;
+  status: TranslationStatus;
+  dictionaryAvailable: boolean;
+  translatedKeyCount: number;
+  totalKeyCount: number;
+  percentage: number;
+  fallbackCode: 'es' | 'en' | null;
+}
+
+const SPANISH_BASED_DICTIONARIES = new Set<LanguageCode>(['ca', 'qu']);
+
+function getFallbackCode(lang: LanguageCode): 'es' | 'en' {
+  return SPANISH_BASED_DICTIONARIES.has(lang) || !translations[lang] ? 'es' : 'en';
+}
+
+export function getTranslationCoverage(lang: LanguageCode): TranslationCoverage {
+  const totalKeyCount = Object.keys(es).length;
+
+  if (lang === 'es' || lang === 'en') {
+    return {
+      code: lang,
+      status: 'complete',
+      dictionaryAvailable: true,
+      translatedKeyCount: totalKeyCount,
+      totalKeyCount,
+      percentage: 100,
+      fallbackCode: null,
+    };
+  }
+
+  const dictionary = translations[lang];
+  const fallbackCode = getFallbackCode(lang);
+  if (!dictionary) {
+    return {
+      code: lang,
+      status: 'beta',
+      dictionaryAvailable: false,
+      translatedKeyCount: 0,
+      totalKeyCount,
+      percentage: 0,
+      fallbackCode,
+    };
+  }
+
+  const fallback = fallbackCode === 'es' ? es : en;
+  const translatedKeyCount = (Object.keys(es) as Array<keyof UITranslations>)
+    .filter((key) => dictionary[key] !== fallback[key]).length;
+
+  return {
+    code: lang,
+    status: 'partial',
+    dictionaryAvailable: true,
+    translatedKeyCount,
+    totalKeyCount,
+    percentage: Math.round((translatedKeyCount / totalKeyCount) * 100),
+    fallbackCode,
+  };
+}
+
 export function getTranslation(lang: LanguageCode): UITranslations {
-  return translations[lang] || translations[lang.split('-')[0]] || es;
+  return translations[lang] ?? es;
 }

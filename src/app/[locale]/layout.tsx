@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { LANGUAGES, type LanguageCode } from '@/i18n/languages';
-import { translations } from '@/i18n/translations';
+import { getTranslation } from '@/i18n/translations';
 import { ManoAbiertoLocaleProvider } from '@/components/manos-abiertas/locale-provider';
 
 // Generate static params for all supported locales
@@ -26,7 +26,7 @@ export async function generateMetadata({
   }
 
   const lang = LANGUAGES.find((l) => l.code === locale);
-  const t = translations[locale] || translations.es;
+  const t = getTranslation(locale);
 
   return {
     title: {
@@ -66,14 +66,14 @@ export default async function LocaleLayout({
   }
 
   const language = LANGUAGES.find((l) => l.code === locale);
-  const t = translations[locale] || translations.es;
+  const t = getTranslation(locale);
   const isRTL = language?.rtl ?? false;
 
   return (
-    <html lang={locale} dir={isRTL ? 'rtl' : 'ltr'} suppressHydrationWarning>
-      <ManoAbiertoLocaleProvider locale={locale} translations={t}>
+    <ManoAbiertoLocaleProvider locale={locale} translations={t} dir={isRTL ? 'rtl' : 'ltr'}>
+      <div lang={locale} dir={isRTL ? 'rtl' : 'ltr'}>
         {children}
-      </ManoAbiertoLocaleProvider>
-    </html>
+      </div>
+    </ManoAbiertoLocaleProvider>
   );
 }

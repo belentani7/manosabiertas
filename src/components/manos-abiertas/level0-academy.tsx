@@ -69,9 +69,16 @@ export function Level0Academy() {
             {/* Progress dots */}
             <div className="hidden sm:flex items-center gap-1">
               {selectedCourse.lessons.map((l, i) => (
-                <button key={l.id} onClick={() => setSelectedLesson(selectedCourse.lessons[i])}
-                  className={cn('h-1.5 w-6 rounded-full transition-all',
+                <button
+                  key={l.id}
+                  onClick={() => setSelectedLesson(selectedCourse.lessons[i])}
+                  className="flex min-h-11 min-w-11 items-center justify-center"
+                  aria-label={`Ir a lección ${i + 1}: ${l.title}`}
+                  aria-current={i === lessonIdx ? 'step' : undefined}
+                >
+                  <span className={cn('h-1.5 w-6 rounded-full transition-all',
                     i < lessonIdx ? 'bg-white/80' : i === lessonIdx ? 'bg-white' : 'bg-white/20')} />
+                </button>
               ))}
             </div>
           </div>

@@ -9,6 +9,9 @@ import { Badge } from '@/components/ui/badge';
 import { useAppStore } from '@/stores/app-store';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
+import { useRemoteAIConsent } from '@/hooks/use-remote-ai-consent';
+import { withRemoteAIConsent } from '@/lib/remote-ai-consent';
+import { RemoteAIConsent } from './remote-ai-consent';
 
 interface AIPlaygroundProps {
   /** Title for the playground section */
@@ -34,6 +37,7 @@ export function AIPlayground({
   defaultPrompt,
 }: AIPlaygroundProps) {
   const { language } = useAppStore();
+  const { remoteAIConsent } = useRemoteAIConsent();
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState(defaultPrompt || '');
   const [loading, setLoading] = useState(false);
@@ -59,14 +63,14 @@ export function AIPlayground({
       const resp = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+        body: JSON.stringify(withRemoteAIConsent({
           messages: [
             { role: 'assistant', content: systemMsg },
             ...messages.map((m) => ({ role: m.role, content: m.content })),
             { role: 'user', content: text.trim() },
           ],
           language,
-        }),
+        }, remoteAIConsent)),
       });
 
       if (!resp.ok) throw new Error('Error en la IA');
@@ -193,6 +197,7 @@ export function AIPlayground({
               )}
 
               {/* Input */}
+              <RemoteAIConsent compact />
               <div className="flex gap-2 items-end">
                 <Textarea
                   value={input}
@@ -207,7 +212,7 @@ export function AIPlayground({
                   size="icon"
                   onClick={() => sendPrompt(input)}
                   disabled={!input.trim() || loading}
-                  className="h-9 w-9 flex-shrink-0 gradient-brand text-white"
+                  className="h-11 w-11 flex-shrink-0 gradient-brand text-white"
                   aria-label="Enviar prompt"
                 >
                   {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}

@@ -1,10 +1,14 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { z } from 'zod';
 import { invokeAIText } from '@/lib/ai-provider';
+import { apiError, apiJson, enforceRateLimit, hasRemoteAIConsent, readJsonBody, reportServerError } from '@/lib/api-security';
 import { getOfflineTutorReply } from '@/lib/offline-tutor';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
+
+const MAX_BODY_BYTES = 256_000;
+const RATE_LIMIT = { limit: 12, windowMs: 5 * 60_000 };
 
 interface ChatMessage {
   role: 'user' | 'assistant';
@@ -87,7 +91,7 @@ Eres parte de una plataforma con:
 - 8 cursos de IA (ChatGPT, Gemini, Copilot, Claude, DeepSeek, Qwen, Perplexity, Meta AI)
 - Constructor de CV con IA
 - Curso completo de Office (Word, Excel, PowerPoint)
-- 3.647 recursos verificados
+- 3.686 recursos con fuente y estado de revisión visible
 - 61 artículos sobre derechos
 - 41 contactos de emergencia`;
 
@@ -95,8 +99,15 @@ export async function POST(req: NextRequest) {
   let fallbackQuestion = '';
   let fallbackLanguage = 'es';
   try {
-    const parsed = chatRequestSchema.safeParse(await req.json());
-    if (!parsed.success) return NextResponse.json({ ok: false, error: 'Solicitud no válida' }, { status: 400 });
+    const limited = await enforceRateLimit(req, 'ai-chat', RATE_LIMIT);
+    if (limited) return limited;
+
+    const json = await readJsonBody(req, MAX_BODY_BYTES);
+    if (!json.ok) return json.response;
+
+    const remoteConsent = hasRemoteAIConsent(json.data);
+    const parsed = chatRequestSchema.safeParse(json.data);
+    if (!parsed.success) return apiError('VALIDATION_ERROR', 'Solicitud no válida', 400);
     const body: ChatRequest = parsed.data;
     const lang = body.language || 'es';
     fallbackQuestion = body.messages.at(-1)?.content || '';
@@ -111,17 +122,27 @@ export async function POST(req: NextRequest) {
     const systemPrompt = messages[0].content;
     const userPrompt = messages.slice(1).map((m) => `${m.role === 'user' ? 'Usuario' : 'Asistente'}: ${m.content}`).join('\n\n');
 
-    const result = await invokeAIText(systemPrompt, userPrompt, {
-      offline: () => getOfflineTutorReply(fallbackQuestion, fallbackLanguage),
-    });
+    const result = remoteConsent
+      ? await invokeAIText(systemPrompt, userPrompt, {
+        offline: () => getOfflineTutorReply(fallbackQuestion, fallbackLanguage),
+      })
+      : {
+        text: getOfflineTutorReply(fallbackQuestion, fallbackLanguage),
+        provider: 'offline' as const,
+      };
 
     if (!result.text) {
-      return NextResponse.json({ ok: true, degraded: true, provider: 'local', text: getOfflineTutorReply(fallbackQuestion, fallbackLanguage) });
+      return apiJson({ ok: true, degraded: true, provider: 'local', text: getOfflineTutorReply(fallbackQuestion, fallbackLanguage) });
     }
 
-    return NextResponse.json({ text: result.text, ok: true, provider: result.provider });
+    return apiJson({
+      text: result.text,
+      ok: true,
+      provider: result.provider === 'offline' ? 'local' : result.provider,
+      degraded: result.provider === 'offline',
+    });
   } catch (error: unknown) {
-    console.error('Chat API error:', error);
-    return NextResponse.json({ ok: true, degraded: true, provider: 'local', text: getOfflineTutorReply(fallbackQuestion, fallbackLanguage) });
+    reportServerError('chat-api', error);
+    return apiJson({ ok: true, degraded: true, provider: 'local', text: getOfflineTutorReply(fallbackQuestion, fallbackLanguage) });
   }
 }

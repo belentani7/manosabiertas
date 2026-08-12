@@ -27,7 +27,7 @@ export function StaticHomeFallback() {
             <li><a href="#/learn-ai">Aprende Inteligencia Artificial</a> — ChatGPT, Gemini, Copilot y DeepSeek paso a paso.</li>
             <li><a href="#/cv">Crea tu Currículum</a> — formato europeo (Europass), compatible con InfoJobs y LinkedIn.</li>
             <li><a href="#/office">Curso de Office</a> — Word, Excel y PowerPoint desde cero.</li>
-            <li><a href="#/resources">Recursos</a> — más de 3000 recursos verificados.</li>
+            <li><a href="#/resources">Recursos</a> — catálogo con fuente y estado de revisión visible.</li>
             <li><a href="#/rights">Derechos y Ayudas</a> — NIE, extranjería, SMI y trámites.</li>
             <li><a href="#/tools">Herramientas</a> — gestor de documentos y plantillas EX-01 y EX-15.</li>
             <li><a href="#/events">Eventos</a>, <a href="#/courses">Cursos</a>, <a href="#/community">Comunidad</a> y <a href="#/contacts">Contacto</a>.</li>

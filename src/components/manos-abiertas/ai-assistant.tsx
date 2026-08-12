@@ -10,6 +10,9 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { useAppStore } from '@/stores/app-store';
 import { cn } from '@/lib/utils';
 import { getOfflineTutorReply } from '@/lib/offline-tutor';
+import { useRemoteAIConsent } from '@/hooks/use-remote-ai-consent';
+import { withRemoteAIConsent } from '@/lib/remote-ai-consent';
+import { RemoteAIConsent } from './remote-ai-consent';
 
 interface Message {
   id: string;
@@ -31,6 +34,7 @@ const STORAGE_KEY = 'manos-abiertas-chat';
 
 export function AIAssistant() {
   const { language } = useAppStore();
+  const { remoteAIConsent } = useRemoteAIConsent();
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -101,10 +105,10 @@ export function AIAssistant() {
       const resp = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+        body: JSON.stringify(withRemoteAIConsent({
           messages: [...messages, userMsg].map((m) => ({ role: m.role, content: m.content })),
           language,
-        }),
+        }, remoteAIConsent)),
         signal: controller.signal,
       });
       window.clearTimeout(timeout);
@@ -128,7 +132,7 @@ export function AIAssistant() {
     } finally {
       setLoading(false);
     }
-  }, [messages, loading, language]);
+  }, [messages, loading, language, remoteAIConsent]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -209,7 +213,7 @@ export function AIAssistant() {
                     size="icon"
                     variant="ghost"
                     onClick={clearChat}
-                    className="h-7 w-7 text-white hover:bg-white/20"
+                    className="h-11 w-11 text-white hover:bg-white/20"
                     aria-label="Limpiar conversación"
                     title="Limpiar conversación"
                   >
@@ -220,7 +224,7 @@ export function AIAssistant() {
                   size="icon"
                   variant="ghost"
                   onClick={() => setOpen(false)}
-                  className="h-7 w-7 text-white hover:bg-white/20"
+                  className="h-11 w-11 text-white hover:bg-white/20"
                   aria-label="Cerrar"
                 >
                   <X className="h-4 w-4" />
@@ -302,6 +306,7 @@ export function AIAssistant() {
 
             {/* Input */}
             <div className="p-3 border-t border-border bg-card flex-shrink-0">
+              <RemoteAIConsent compact className="mb-2" />
               <div className="flex gap-2 items-end">
                 <Textarea
                   ref={inputRef}
@@ -317,7 +322,7 @@ export function AIAssistant() {
                   size="icon"
                   onClick={() => sendMessage(input)}
                   disabled={!input.trim() || loading}
-                  className="h-10 w-10 flex-shrink-0 gradient-brand text-white"
+                  className="h-11 w-11 flex-shrink-0 gradient-brand text-white"
                   aria-label="Enviar"
                 >
                   {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}

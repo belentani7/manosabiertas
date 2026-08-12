@@ -45,5 +45,5 @@ export function SystemAwareness() {
   }[status];
   const Icon = copy.icon;
 
-  return <div className="flex flex-wrap items-center gap-2" aria-live="polite"><Badge variant="outline" className={`gap-1.5 ${copy.className}`}><Icon className={`h-3.5 w-3.5 ${status === 'checking' ? 'animate-spin' : ''}`} />{copy.label}</Badge>{status === 'local' && <span className="text-[11px] text-muted-foreground">Tutor offline y datos locales disponibles</span>}{status === 'offline' && <Wifi className="h-3.5 w-3.5 text-sky-600" aria-label="Conexión ausente" />}<Button type="button" variant="ghost" size="sm" className="h-7 px-2 text-[11px]" onClick={() => void check()}>Diagnosticar</Button></div>;
+  return <div className="flex flex-wrap items-center gap-2" aria-live="polite"><Badge variant="outline" className={`gap-1.5 ${copy.className}`}><Icon className={`h-3.5 w-3.5 ${status === 'checking' ? 'animate-spin' : ''}`} />{copy.label}</Badge>{status === 'local' && <span className="text-[11px] text-muted-foreground">Tutor offline y datos locales disponibles</span>}{status === 'offline' && <Wifi className="h-3.5 w-3.5 text-sky-600" aria-label="Conexión ausente" />}<Button type="button" variant="ghost" size="sm" className="h-11 px-2 text-[11px]" onClick={() => void check()}>Diagnosticar</Button></div>;
 }

@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Search, FileText, ExternalLink, Phone, ChevronLeft, ChevronRight, AlertTriangle, Heart, BookOpen } from 'lucide-react';
+import { Shield, Search, FileText, ExternalLink, Phone, ChevronLeft, ChevronRight, AlertTriangle, BookOpen, MapPin } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,6 +14,7 @@ import { SimpleMarkdown as SharedMarkdown } from './simple-markdown';
 import { TTSButton, TTSPlayer } from './tts-button';
 import { LegalGlossary } from './legal-glossary';
 import { AIStudyTools } from './ai-study-tools';
+import { OfficeMap } from './office-map';
 import { getTranslation } from '@/i18n/translations';
 import { cn } from '@/lib/utils';
 
@@ -23,7 +24,7 @@ export function RightsSection() {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<string>('all');
   const [selectedArticle, setSelectedArticle] = useState<GuideArticle | null>(null);
-  const [view, setView] = useState<'articles' | 'emergency'>('articles');
+  const [view, setView] = useState<'articles' | 'offices' | 'emergency'>('articles');
 
   const filtered = useMemo(() => {
     return RIGHTS_ARTICLES.filter((a) => {
@@ -133,19 +134,32 @@ export function RightsSection() {
         <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base">{t.rights_subtitle}</p>
       </div>
 
-      {/* Toggle articles / emergency */}
+      {/* Toggle guides / offices / emergency */}
       <div className="flex justify-center mb-6">
-        <div className="inline-flex p-1 bg-muted rounded-lg">
+        <div className="inline-flex flex-wrap justify-center p-1 bg-muted rounded-lg" aria-label="Secciones de derechos">
           <button
+            type="button"
             onClick={() => setView('articles')}
-            className={cn('px-4 py-1.5 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5', view === 'articles' ? 'bg-card shadow-sm text-primary' : 'text-muted-foreground')}
+            className={cn('min-h-11 px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transition-none', view === 'articles' ? 'bg-card shadow-sm text-primary' : 'text-muted-foreground')}
+            aria-pressed={view === 'articles'}
           >
             <BookOpen className="h-4 w-4" />
             Guías ({RIGHTS_ARTICLES.length})
           </button>
           <button
+            type="button"
+            onClick={() => setView('offices')}
+            className={cn('min-h-11 px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transition-none', view === 'offices' ? 'bg-card shadow-sm text-primary' : 'text-muted-foreground')}
+            aria-pressed={view === 'offices'}
+          >
+            <MapPin className="h-4 w-4" />
+            Oficinas
+          </button>
+          <button
+            type="button"
             onClick={() => setView('emergency')}
-            className={cn('px-4 py-1.5 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5', view === 'emergency' ? 'bg-card shadow-sm text-destructive' : 'text-muted-foreground')}
+            className={cn('min-h-11 px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transition-none', view === 'emergency' ? 'bg-card shadow-sm text-destructive' : 'text-muted-foreground')}
+            aria-pressed={view === 'emergency'}
           >
             <Phone className="h-4 w-4" />
             Emergencias ({EMERGENCY_CONTACTS.length})
@@ -230,6 +244,8 @@ export function RightsSection() {
             </Card>
           )}
         </>
+      ) : view === 'offices' ? (
+        <OfficeMap />
       ) : (
         <EmergencyContacts />
       )}

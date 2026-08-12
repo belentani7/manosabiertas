@@ -98,7 +98,7 @@ export function NavBar() {
           </button>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-0.5 flex-1 justify-center max-w-3xl">
+          <nav className="hidden 2xl:flex items-center gap-0.5 flex-1 justify-center max-w-3xl">
             {NAV_ITEMS.map((item) => {
               const Icon = item.icon;
               const active = activeSection === item.id;
@@ -134,7 +134,7 @@ export function NavBar() {
             <Button
               variant="ghost"
               size="icon"
-              className="lg:hidden h-11 w-11"
+              className="2xl:hidden h-11 w-11"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Menú"
             >
@@ -152,7 +152,7 @@ export function NavBar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={reduceMotion ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
             transition={reduceMotion ? { duration: 0 } : undefined}
-            className="lg:hidden overflow-hidden border-t border-border glass"
+            className="2xl:hidden overflow-hidden border-t border-border glass"
           >
             <nav className="container mx-auto max-w-7xl px-4 py-3 grid grid-cols-2 gap-1.5">
               {NAV_ITEMS.map((item) => {
