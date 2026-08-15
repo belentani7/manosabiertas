@@ -110,8 +110,8 @@ El NIE se suele entregar en un plazo de **5 a 10 días hábiles**. Es un documen
     ],
     officialLinks: [
       { label: 'Sede Electrónica — Cita previa Extranjería', url: 'https://sede.administracionespublicas.gob.es/icpplus/index.html' },
-      { label: 'Formulario EX-15 (PDF)', url: 'https://extranjeros.inclusion.gob.es/es/Solicitudes/forms/ex15.html' },
-      { label: 'Tasa 790/012', url: 'https://sede.policia.gob.es:38089/Tasa790_012/Action' },
+      { label: 'Formulario EX-15 (PDF)', url: 'https://www.inclusion.gob.es/web/migraciones/modelos-generales' },
+      { label: 'Tasa 790/012', url: 'https://sede.policia.gob.es/' },
     ],
   },
   {
@@ -153,8 +153,8 @@ Las tasas se abonan con el **modelo 790 código 052** (15,76 € por tarjeta en 
       'Modelo 790/052: 15,76 € por tarjeta (2024)',
     ],
     officialLinks: [
-      { label: 'Portal de Inmigración — Modelos EX', url: 'https://extranjeros.inclusion.gob.es/es/Solicitudes/' },
-      { label: 'Tasa 790/052', url: 'https://sede.administracionespublicas.gob.es/oficinas-tasa-extranjeria/' },
+      { label: 'Portal de Inmigración — Modelos EX', url: 'https://www.inclusion.gob.es/web/migraciones/informacion-util/modelos-de-solicitud' },
+      { label: 'Tasa 790/052', url: 'https://sede.policia.gob.es/' },
     ],
   },
   {
@@ -190,7 +190,7 @@ Cualquier persona no comunitaria que se encuentre en territorio español o en la
       'Resolución: máximo 6 meses (prorrogable)',
     ],
     officialLinks: [
-      { label: 'Oficina de Asilo y Refugio (OAR)', url: 'https://www.inclusion.gob.es/web/migraciones/asilo/oficina-de-asilo-y-refugio' },
+      { label: 'Oficina de Asilo y Refugio (OAR)', url: 'https://www.interior.gob.es/opencms/es/servicios-al-ciudadano/tramites-y-gestiones/oficina-de-asilo-y-refugio/' },
       { label: 'CEAR — Comisión Española de Ayuda al Refugiado', url: 'https://www.cear.es/' },
       { label: 'ACNUR España', url: 'https://www.acnur.org/es-es/espana' },
     ],
@@ -231,8 +231,8 @@ La autorización concede **residencia y trabajo por cuenta ajena** durante **1 a
       'Concede residencia y trabajo por 1 año',
     ],
     officialLinks: [
-      { label: 'Arraigo laboral — Portal Inmigración', url: 'https://extranjeros.inclusion.gob.es/es/InformacionInteres/Arraigo/' },
-      { label: 'Formulario EX-10', url: 'https://extranjeros.inclusion.gob.es/es/Solicitudes/forms/ex10.html' },
+      { label: 'Arraigo laboral — Portal Inmigración', url: 'https://www.inclusion.gob.es/web/migraciones/situacion-excepcional-o-de-irregularidad' },
+      { label: 'Formulario EX-10', url: 'https://www.inclusion.gob.es/web/migraciones/modelos-generales' },
     ],
   },
   {
@@ -268,7 +268,7 @@ La autorización concede **residencia y trabajo por cuenta ajena** durante **1 a
       'Formulario EX-10 + tasa 790/052',
     ],
     officialLinks: [
-      { label: 'Portal Inmigración — Arraigo', url: 'https://extranjeros.inclusion.gob.es/es/InformacionInteres/Arraigo/' },
+      { label: 'Portal Inmigración — Arraigo', url: 'https://www.inclusion.gob.es/web/migraciones/situacion-excepcional-o-de-irregularidad' },
       { label: 'RD 610/2024 — Reforma extranjería', url: 'https://www.boe.es/buscar/act.php?id=BOE-A-2024-10518' },
     ],
   },
@@ -307,8 +307,8 @@ No requiere estar residiendo en España durante un periodo mínimo previo (excep
       'No requiere periodo previo de estancia en algunos casos',
     ],
     officialLinks: [
-      { label: 'Portal Inmigración — Arraigo familiar', url: 'https://extranjeros.inclusion.gob.es/es/InformacionInteres/Arraigo/' },
-      { label: 'Formulario EX-10', url: 'https://extranjeros.inclusion.gob.es/es/Solicitudes/forms/ex10.html' },
+      { label: 'Portal Inmigración — Arraigo familiar', url: 'https://www.inclusion.gob.es/web/migraciones/situacion-excepcional-o-de-irregularidad' },
+      { label: 'Formulario EX-10', url: 'https://www.inclusion.gob.es/web/migraciones/modelos-generales' },
     ],
   },
   {
@@ -352,7 +352,7 @@ Hasta **2 años** desde la presentación (puede prorrogarse). Tras la resolució
       'Resolución: hasta 2 años',
     ],
     officialLinks: [
-      { label: 'Sede electrónica — Nacionalidad por residencia', url: 'https://www.mjusticia.gob.es/es/ciudadania/nacionalidad/nacionalidad-residencia' },
+      { label: 'Sede electrónica — Nacionalidad por residencia', url: 'https://www.mjusticia.gob.es/es/ciudadania/nacionalidad/que-es-nacionalidad/como-adquiere-nacionalidad/residencia' },
       { label: 'Cervantes — Examen DELE', url: 'https://examenes.cervantes.es/es/dele' },
       { label: 'CCSE — Instituto Cervantes', url: 'https://examenes.cervantes.es/es/ccse' },
     ],
@@ -394,7 +394,7 @@ Andorra, Argentina, Bolivia, Brasil, Chile, Colombia, Costa Rica, Cuba, Dominica
     ],
     officialLinks: [
       { label: 'Nacionalidad por residencia — Justicia', url: 'https://www.mjusticia.gob.es/es/ciudadania/nacionalidad' },
-      { label: 'CCSE — Convocatorias', url: 'https://examenes.cervantes.es/es/ccse/convocatorias' },
+      { label: 'CCSE — Convocatorias', url: 'https://examenes.cervantes.es/es/ccse' },
     ],
   },
   {
@@ -430,7 +430,7 @@ El Registro Civil dispone de **6 meses** para resolver.`,
       'Tasa 790/026 (100 €) si mayor de edad',
     ],
     officialLinks: [
-      { label: 'Nacionalidad por opción — Justicia', url: 'https://www.mjusticia.gob.es/es/ciudadania/nacionalidad/nacionalidad-opcion' },
+      { label: 'Nacionalidad por opción — Justicia', url: 'https://www.mjusticia.gob.es/es/ciudadania/nacionalidad/que-es-nacionalidad/como-adquiere-nacionalidad/opcion' },
     ],
   },
   {
@@ -472,7 +472,7 @@ Es un sistema de identificación común para las administraciones públicas. Tie
     ],
     officialLinks: [
       { label: 'Sede FNMT — Certificado digital', url: 'https://www.cert.fnmt.gob.es/' },
-      { label: 'Cl@ve — Administración', url: 'https://clave.gob.es/clave-home/clave.html' },
+      { label: 'Cl@ve — Administración', url: 'https://clave.gob.es/clave_Home/clave.html' },
     ],
   },
   {
@@ -513,7 +513,7 @@ En el **Ayuntamiento** del municipio donde resides (oficinas de atención al ciu
       'Sin contrato de alquiler: posible informe de servicios sociales',
     ],
     officialLinks: [
-      { label: 'Buscador de Ayuntamientos (PAe)', url: 'https://administracion.gob.es/pagFront/ayuntamientos/buscarAyuntamiento.htm' },
+      { label: 'Buscador de Ayuntamientos (PAe)', url: 'https://administracion.gob.es/' },
     ],
   },
   {
@@ -556,8 +556,8 @@ Desde 2015 se sustituye por **registro electrónico**, aunque sigue emitiéndose
       'Libro de familia: ahora registro electrónico',
     ],
     officialLinks: [
-      { label: 'Registro Civil — Ministerio de Justicia', url: 'https://www.mjusticia.gob.es/es/ciudadania/registro-civil' },
-      { label: 'Sede electrónica Registro Civil', url: 'https://www.mjusticia.gob.es/es/sede-electronica-cita-previa' },
+      { label: 'Registro Civil — Ministerio de Justicia', url: 'https://www.mjusticia.gob.es/es/ciudadania/estado-civil/registro-civil' },
+      { label: 'Sede electrónica Registro Civil', url: 'https://www.mjusticia.gob.es/es/ciudadania/cita-previa' },
     ],
   },
   {
@@ -597,7 +597,7 @@ Modelo 790 código 026 (100 € en 2024).`,
       'Tasa 790/026: 100 €',
     ],
     officialLinks: [
-      { label: 'Recuperación de nacionalidad — Justicia', url: 'https://www.mjusticia.gob.es/es/ciudadania/nacionalidad/recuperacion' },
+      { label: 'Recuperación de nacionalidad — Justicia', url: 'https://www.mjusticia.gob.es/es/ciudadania/nacionalidad/que-es-nacionalidad/como-recupera-nacionalidad' },
     ],
   },
   {
@@ -637,8 +637,8 @@ Los extranjeros tienen derecho a **asistencia letrada gratuita** en los procedim
       'Justicia gratuita: derecho en procedimientos de expulsión',
     ],
     officialLinks: [
-      { label: 'Justicia Gratuita — Ministerio de Justicia', url: 'https://www.mjusticia.gob.es/es/ciudadania/justicia-gratuita' },
-      { label: 'Ley 4/2000 — Extranjería', url: 'https://www.boe.es/buscar/act.php?id=BOE-A-2000-0544' },
+      { label: 'Justicia Gratuita — Ministerio de Justicia', url: 'https://www.mjusticia.gob.es/es/ciudadania/tramites/asistencia-juridica-gratuita' },
+      { label: 'Ley 4/2000 — Extranjería', url: 'https://www.boe.es/eli/es/lo/2000/01/11/4/con' },
     ],
   },
   {
@@ -675,8 +675,8 @@ Si un familiar **no comunitario** (cónyuge, pareja, hijo menor de 21 o a cargo,
       'Familiares no UE: tarjeta familiar (EX-19)',
     ],
     officialLinks: [
-      { label: 'Ciudadanos UE — Inmigración', url: 'https://extranjeros.inclusion.gob.es/es/ciudadanosunion/' },
-      { label: 'Formulario EX-18', url: 'https://extranjeros.inclusion.gob.es/es/Solicitudes/forms/ex18.html' },
+      { label: 'Ciudadanos UE — Inmigración', url: 'https://www.inclusion.gob.es/web/migraciones/ciudadano-de-la-union-europea' },
+      { label: 'Formulario EX-18', url: 'https://www.inclusion.gob.es/web/migraciones/modelos-generales' },
     ],
   },
 
@@ -723,7 +723,7 @@ Si vienes de otro país UE con la **Tarjeta Sanitaria Europea (TSE)**, tienes de
       'Renovación periódica según CCAA',
     ],
     officialLinks: [
-      { label: 'Ministerio de Sanidad — Tarjeta sanitaria', url: 'https://www.sanidad.gob.es/areas/ciudadania/tarjetaSanitaria/home.htm' },
+      { label: 'Ministerio de Sanidad — Tarjeta sanitaria', url: 'https://www.sanidad.gob.es/areas/saludDigital/tarjetaSanitariaSNS/home.htm' },
       { label: 'Tarjeta Sanitaria Europea', url: 'https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/Ciudadanos/Inicio/Prestaciones/Prestacion10910' },
     ],
     emergencyPhone: '112',
@@ -766,7 +766,7 @@ Si vienes de otro país UE con la **Tarjeta Sanitaria Europea (TSE)**, tienes de
     ],
     officialLinks: [
       { label: 'RD 7/2018 — Sanidad universal', url: 'https://www.boe.es/buscar/act.php?id=BOE-A-2018-3249' },
-      { label: 'Ministerio de Sanidad — Ciudadanos', url: 'https://www.sanidad.gob.es/areas/ciudadania/home.htm' },
+      { label: 'Ministerio de Sanidad — Ciudadanos', url: 'https://www.sanidad.gob.es/servCiudadanos/home.htm' },
     ],
     emergencyPhone: '112',
   },
@@ -814,7 +814,6 @@ Si vienes de otro país UE con la **Tarjeta Sanitaria Europea (TSE)**, tienes de
       'Atención domiciliaria si no puedes desplazarte',
     ],
     officialLinks: [
-      { label: 'Cita previa sanidad — Buscador CCAA', url: 'https://www.sanidad.gob.es/areas/ciudadania/citaPrevia/home.htm' },
     ],
     emergencyPhone: '900 200 220',
   },
@@ -860,7 +859,7 @@ Si vienes de otro país UE con la **Tarjeta Sanitaria Europea (TSE)**, tienes de
     ],
     officialLinks: [
       { label: '112 España', url: 'https://www.112.es/' },
-      { label: '061 — Sanidad', url: 'https://www.sanidad.gob.es/areas/ciudadania/urgencias/home.htm' },
+      { label: '061 — Sanidad', url: 'https://www.sanidad.gob.es/profesionales/prestacionesSanitarias/CarteraDeServicios/ContenidoCS/4AtencionDeUrgencia/AU-AtencionUrgencia.htm' },
     ],
     emergencyPhone: '112',
   },
@@ -951,7 +950,6 @@ Si vienes de otro país UE con la **Tarjeta Sanitaria Europea (TSE)**, tienes de
       'Inscribir al recién nacido en Registro Civil (8 días)',
     ],
     officialLinks: [
-      { label: 'Embarazo y maternidad — Sanidad', url: 'https://www.sanidad.gob.es/areas/ciudadania/embarazo/home.htm' },
       { label: 'Prestación de maternidad — Seguridad Social', url: 'https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/PrestacionesPensionesTrabajadores/10981_12' },
     ],
     emergencyPhone: '112',
@@ -999,7 +997,7 @@ Si vienes de otro país UE con la **Tarjeta Sanitaria Europea (TSE)**, tienes de
       'Cartilla infantil electrónica en muchas CCAA',
     ],
     officialLinks: [
-      { label: 'Calendario vacunal — Ministerio de Sanidad', url: 'https://www.sanidad.gob.es/areas/promocionPrevencion/vacunaciones/calendarios/home.htm' },
+      { label: 'Calendario vacunal — Ministerio de Sanidad', url: 'https://www.sanidad.gob.es/areas/promocionPrevencion/vacunaciones/calendario/home.htm' },
     ],
   },
   {
@@ -1049,7 +1047,7 @@ Para personas con **65% o más de discapacidad**, en edad de trabajar, sin cotiz
     ],
     officialLinks: [
       { label: 'Incapacidad — Seguridad Social', url: 'https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/PrestacionesPensionesTrabajadores/10981_19' },
-      { label: 'IMSERSO — Invalidez no contributiva', url: 'https://www.imserso.es/imserso_01/documentacion/pensiones/jubilacion_e_incapacidad/index.htm' },
+      { label: 'IMSERSO — Invalidez no contributiva', url: 'https://imserso.es/pnc-prestaciones-subvenciones' },
     ],
   },
 
@@ -1254,7 +1252,6 @@ Para personas con **65% o más de discapacidad**, en edad de trabajar, sin cotiz
       'PAH, Cáritas: apoyo social y jurídico',
     ],
     officialLinks: [
-      { label: 'Servicios Sociales — Buscador', url: 'https://www.mjusticia.gob.es/es/ciudadania/servicios-sociales' },
       { label: 'Plataforma de Afectados por la Hipoteca (PAH)', url: 'https://afectadosporlahipoteca.com/' },
     ],
     emergencyPhone: '016',
@@ -1307,7 +1304,7 @@ El Banco de España supervisa la transparencia del mercado hipotecario. Si crees
       'Gastos compraventa: 10-12% adicional (ITP/IVA + notaría)',
     ],
     officialLinks: [
-      { label: 'Banco de España — Hipotecas', url: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/relacionados/prestamos_e_hipo/prestamos_e_hipo_1/Hipotecas_1.html' },
+      { label: 'Banco de España — Hipotecas', url: 'https://clientebancario.bde.es/pcb/es/' },
       { label: 'Comparador hipotecas — HelpMyCash', url: 'https://www.helpmycash.com/hipotecas/' },
     ],
   },
@@ -1361,7 +1358,7 @@ El Banco de España supervisa la transparencia del mercado hipotecario. Si crees
     ],
     officialLinks: [
       { label: 'Idealista — Alquiler habitaciones', url: 'https://www.idealista.com/alquiler-habitaciones' },
-      { label: 'OCU — Estafas alquiler', url: 'https://www.ocu.org/vivienda/alquiler/consejos/estafas-alquiler' },
+      { label: 'OCU — Estafas alquiler', url: 'https://www.ocu.org/' },
     ],
   },
   {
@@ -1408,7 +1405,7 @@ El Banco de España supervisa la transparencia del mercado hipotecario. Si crees
       'Prohibido corte por impago en hogares vulnerables',
     ],
     officialLinks: [
-      { label: 'Bono social eléctrico — CNMC', url: 'https://www.cnmc.es/sector-electricidad/bono-social/22491' },
+      { label: 'Bono social eléctrico — CNMC', url: 'https://sede.cnmc.gob.es/' },
       { label: 'Bono social — Ministerio transición ecológica', url: 'https://www.miteco.gob.es/es/electricidad-y-gas/consumidores/bono-social.html' },
     ],
   },
@@ -1459,8 +1456,8 @@ El Banco de España supervisa la transparencia del mercado hipotecario. Si crees
       'OMIC: Oficina Municipal de Información al Consumidor',
     ],
     officialLinks: [
-      { label: 'Agencia Española de Consumo, Seguridad Alimentaria y Nutrición (AESAN)', url: 'https://www.aesan.gob.es/AECOSAN/web/subhome/aecosan_inicio.htm' },
-      { label: 'CNMC — Consumidores', url: 'https://www.cnmc.es/sections/consumidores' },
+      { label: 'Agencia Española de Consumo, Seguridad Alimentaria y Nutrición (AESAN)', url: 'https://www.aesan.gob.es/' },
+      { label: 'CNMC — Consumidores', url: 'https://comparador.cnmc.gob.es/' },
     ],
     emergencyPhone: '900 000 199',
   },
@@ -1526,7 +1523,7 @@ Solo se permite en estos casos:
     ],
     officialLinks: [
       { label: 'Estatuto de los Trabajadores', url: 'https://www.boe.es/buscar/act.php?id=BOE-A-1995-15638' },
-      { label: 'SEPE — Tipos de contratos', url: 'https://www.sepe.es/HomeSepe/empresas/contratacion/contratos.html' },
+      { label: 'SEPE — Tipos de contratos', url: 'https://www.sepe.es/HomeSepe/empresas/Contratos-de-trabajo.html' },
     ],
   },
   {
@@ -1698,7 +1695,7 @@ Si cobras por debajo del SMI:
       'Acceso a cursos y ofertas de empleo gratuitas',
     ],
     officialLinks: [
-      { label: 'SEPE — Inscripción demandantes', url: 'https://www.sepe.es/HomeSepe/ciudadanos/prestacion-demanda/demanda.html' },
+      { label: 'SEPE — Inscripción demandantes', url: 'https://sede.sepe.gob.es/portalSede/procedimientos-y-servicios/personas/empleo/tramites-demanda' },
       { label: 'Sede electrónica SEPE', url: 'https://sede.sepe.es/' },
     ],
     emergencyPhone: '901 119 999',
@@ -1763,8 +1760,8 @@ Cuando se agota el paro y no tienes derecho a más, puedes solicitar:
       'Solicitud en 15 días hábiles desde el desempleo',
     ],
     officialLinks: [
-      { label: 'SEPE — Prestación contributiva', url: 'https://www.sepe.es/HomeSepe/ciudadanos/prestacion-demanda/pagos-y-duracion/pagos-duracion-prestacion-contributiva.html' },
-      { label: 'SEPE — Subsidios por desempleo', url: 'https://www.sepe.es/HomeSepe/ciudadanos/prestacion-demanda/subsidios.html' },
+      { label: 'SEPE — Prestación contributiva', url: 'https://www.sepe.es/HomeSepe/prestaciones-desempleo/duracion-prestacion-contributiva.html' },
+      { label: 'SEPE — Subsidios por desempleo', url: 'https://www.sepe.es/HomeSepe/prestaciones-desempleo/subsidio-desempleo.html' },
     ],
     emergencyPhone: '901 119 999',
   },
@@ -1823,7 +1820,7 @@ Cuando se agota el paro y no tienes derecho a más, puedes solicitar:
       'Compatible con IMV',
     ],
     officialLinks: [
-      { label: 'SEPE — RAI', url: 'https://www.sepe.es/HomeSepe/ciudadanos/prestacion-demanda/pagos-y-duracion/pagos-duracion-renta-activa-insercion.html' },
+      { label: 'SEPE — RAI', url: 'https://www.sepe.es/HomeSepe/prestaciones-desempleo/subsidio-desempleo.html' },
     ],
     emergencyPhone: '901 119 999',
   },
@@ -1947,8 +1944,8 @@ Si no cumples ninguna, eres **no residente**.
       'Convenios doble imposición con 90+ países',
     ],
     officialLinks: [
-      { label: 'AEAT — IRPF no residentes', url: 'https://www.agenciatributaria.es/AEAT.internet/Inicio_es_ES/La_Agencia_Tributaria/Modalidades_gestion/Campanas_anuales/Renta_y_Patrimonio/Campana_IRNR__IRPF_no_residentes_/Campana_IRNR.shtml' },
-      { label: 'Modelo 210', url: 'https://www.agenciatributaria.es/AEAT.internet/Modelos_formularios/declaracion/M210.html' },
+      { label: 'AEAT — IRPF no residentes', url: 'https://sede.agenciatributaria.gob.es/Sede/procedimientoini/G213.shtml' },
+      { label: 'Modelo 210', url: 'https://sede.agenciatributaria.gob.es/Sede/procedimientoini/GF00.shtml' },
     ],
   },
   {
@@ -2127,7 +2124,7 @@ Si no cumples ninguna, eres **no residente**.
       'ONG: ACCEM, CEAR, Cruz Roja, Cáritas',
     ],
     officialLinks: [
-      { label: 'Buscador de centros adultos — Educativa', url: 'https://www.educacion.gob.es/centros/busquedaAction.do' },
+      { label: 'Buscador de centros adultos — Educativa', url: 'https://www.educacion.gob.es/' },
       { label: 'Red In migración — AulasEXT', url: 'https://sede.educacion.gob.es/catalogo/deFormacionContinua/aulas-ext.html' },
     ],
   },
@@ -2518,7 +2515,7 @@ Las familias inmigrantes que escolarizan a sus hijos por primera vez deben pasar
     ],
     officialLinks: [
       { label: 'Ministerio de Educación — Atención a la diversidad', url: 'https://www.educacion.gob.es/educacion-menus/areas-educacion/profesores-educacion-diversidad.html' },
-      { label: 'Comisión Escolarización (CCAA)', url: 'https://www.educacion.gob.es/centros/busquedaAction.do' },
+      { label: 'Comisión Escolarización (CCAA)', url: 'https://www.educacion.gob.es/' },
     ],
   },
 
@@ -2588,8 +2585,8 @@ Las familias inmigrantes que escolarizan a sus hijos por primera vez deben pasar
       'Vigencia igual a la del reagrupante',
     ],
     officialLinks: [
-      { label: 'Reagrupación familiar — Inmigración', url: 'https://extranjeros.inclusion.gob.es/es/familias/' },
-      { label: 'Formulario EX-02', url: 'https://extranjeros.inclusion.gob.es/es/Solicitudes/forms/ex02.html' },
+      { label: 'Reagrupación familiar — Inmigración', url: 'https://www.inclusion.gob.es/web/migraciones/reagrupacion-familiar-traer-a-sus-familiares-' },
+      { label: 'Formulario EX-02', url: 'https://www.inclusion.gob.es/web/migraciones/modelos-generales' },
     ],
   },
   {
@@ -2796,7 +2793,7 @@ Las familias inmigrantes que escolarizan a sus hijos por primera vez deben pasar
     ],
     officialLinks: [
       { label: 'Ministerio de Educación — Educación Infantil', url: 'https://www.educacion.gob.es/educacion-menus/areas-educacion/estudiantes/no-universitarios/educacion-infantil.html' },
-      { label: 'Buscador escuelas infantiles', url: 'https://www.educacion.gob.es/centros/busquedaAction.do' },
+      { label: 'Buscador escuelas infantiles', url: 'https://www.educacion.gob.es/' },
     ],
   },
   {
@@ -2886,7 +2883,7 @@ Las familias inmigrantes que escolarizan a sus hijos por primera vez deben pasar
     ],
     officialLinks: [
       { label: 'Delegación del Gobierno contra la Violencia de Género', url: 'https://violenciagenero.igualdad.gob.es/' },
-      { label: 'Portal 016', url: 'https://violenciagenero.igualdad.gob.es/informacionUtil/016/home.htm' },
+      { label: 'Portal 016', url: 'https://violenciagenero.igualdad.gob.es/informacion-3/recursos/telefono016/' },
       { label: 'Fundación Mujeres', url: 'https://wwwfundacionmujeres.es/' },
     ],
     emergencyPhone: '016',
@@ -2959,7 +2956,7 @@ Las familias inmigrantes que escolarizan a sus hijos por primera vez deben pasar
       'Beneficio de la duda: en caso de duda, se considera menor',
     ],
     officialLinks: [
-      { label: 'Defensor del Pueblo — MENA', url: 'https://www.defensordelpueblo.es/menores-migrantes/' },
+      { label: 'Defensor del Pueblo — MENA', url: 'https://www.defensordelpueblo.es/' },
       { label: 'UNICEF España — Migración', url: 'https://www.unicef.es/trabajo/infancia-y-migracion' },
     ],
     emergencyPhone: '900 502 502',
@@ -3022,7 +3019,7 @@ Las familias inmigrantes que escolarizan a sus hijos por primera vez deben pasar
     ],
     officialLinks: [
       { label: 'RD 671/2017 — Cuenta básica', url: 'https://www.boe.es/buscar/act.php?id=BOE-A-2017-8014' },
-      { label: 'Banco de España — Cuentas básicas', url: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/relacionados/cuentas/cuenta_basica/index.html' },
+      { label: 'Banco de España — Cuentas básicas', url: 'https://clientebancario.bde.es/pcb/es/' },
     ],
   },
   {
@@ -3080,7 +3077,7 @@ Algunas entidades tienen productos específicos:
       'Reclamaciones: Banco de España',
     ],
     officialLinks: [
-      { label: 'Banco de España — Reclamaciones', url: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/atencion-ciudadano/reclamaciones/index.html' },
+      { label: 'Banco de España — Reclamaciones', url: 'https://clientebancario.bde.es/pcb/es/' },
       { label: 'MicroBank', url: 'https://www.microbanklacaixa.com/' },
     ],
   },
@@ -3293,8 +3290,8 @@ Algunas entidades tienen productos específicos:
       'Certificado de residencia fiscal: para convenios doble imposición',
     ],
     officialLinks: [
-      { label: 'AEAT — NIF no residentes', url: 'https://www.agenciatributaria.es/AEAT.internet/Inicio_es_ES/La_Agencia_Tributaria/Tramites/NIF_de_no_residentes/NIF_de_no_residentes.shtml' },
-      { label: 'Modelo 030', url: 'https://www.agenciatributaria.es/AEAT.internet/Inicio_es_ES/La_Agencia_Tributaria/Modelos_formularios/declaracion/M030.shtml' },
+      { label: 'AEAT — NIF no residentes', url: 'https://sede.agenciatributaria.gob.es/Sede/procedimientoini/G322.shtml' },
+      { label: 'Modelo 030', url: 'https://sede.agenciatributaria.gob.es/Sede/procedimientoini/G322.shtml' },
     ],
   },
   {
@@ -3378,8 +3375,8 @@ Personas físicas, no residentes en España, que obtengan rentas en territorio e
       'Convenios doble imposición con 90+ países',
     ],
     officialLinks: [
-      { label: 'AEAT — Modelo 210', url: 'https://www.agenciatributaria.es/AEAT.internet/Inicio_es_ES/La_Agencia_Tributaria/Modalidades_gestion/Campanas_anuales/Renta_y_Patrimonio/Campana_IRNR__IRPF_no_residentes_/Campana_IRNR.shtml' },
-      { label: 'Instrucciones modelo 210 (PDF)', url: 'https://www.agenciatributaria.es/AEAT.internet/Inicio_es_ES/La_Agencia_Tributaria/Modelos_formularios/declaracion/M210/I210.pdf' },
+      { label: 'AEAT — Modelo 210', url: 'https://sede.agenciatributaria.gob.es/Sede/procedimientoini/G213.shtml' },
+      { label: 'Instrucciones modelo 210 (PDF)', url: 'https://sede.agenciatributaria.gob.es/Sede/procedimientoini/GF00.shtml' },
     ],
   },
   {
@@ -3468,8 +3465,8 @@ Personas físicas, no residentes en España, que obtengan rentas en territorio e
       'Libros de registro obligatorios desde 2017',
     ],
     officialLinks: [
-      { label: 'AEAT — IVA autónomos', url: 'https://www.agenciatributaria.es/AEAT.internet/Inicio_es_ES/La_Agencia_Tributaria/Tramites/Acciones_censales/Tributos_censales/IVA.shtml' },
-      { label: 'Modelo 303', url: 'https://www.agenciatributaria.es/AEAT.internet/Inicio_es_ES/La_Agencia_Tributaria/Modelos_formularios/declaracion/M303.shtml' },
+      { label: 'AEAT — IVA autónomos', url: 'https://sede.agenciatributaria.gob.es/Sede/iva.html' },
+      { label: 'Modelo 303', url: 'https://sede.agenciatributaria.gob.es/Sede/procedimientoini/G414.shtml' },
     ],
   },
 ];
