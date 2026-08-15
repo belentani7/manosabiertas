@@ -75,3 +75,7 @@ server.log
 
 # Local Netlify folder
 .netlify
+
+# AI agent auto-generated files
+/AGENTS.md
+/CLAUDE.md
