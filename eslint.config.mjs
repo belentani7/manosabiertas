@@ -48,6 +48,8 @@ const eslintConfig = [...nextCoreWebVitals, ...nextTypescript, {
     "node_modules/**",
     "node_modules.*/**",
     ".next/**",
+    ".netlify/**",
+    ".netlify",
     "out/**",
     "build/**",
     "public/tool-guides/**",

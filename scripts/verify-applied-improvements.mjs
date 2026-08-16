@@ -51,13 +51,26 @@ function safeProjectPath(value) {
 }
 
 function changedPaths() {
+  const paths = new Set();
+  try {
+    const branchOutput = execFileSync(
+      'git',
+      ['diff', '--name-only', 'main...HEAD'],
+      { cwd: root, encoding: 'utf8' },
+    );
+    for (const value of branchOutput.split(/\r?\n/).filter(Boolean)) {
+      paths.add(normalizePath(value));
+    }
+  } catch {
+    // A checkout without the local baseline can still validate its worktree.
+  }
+
   const output = execFileSync(
     'git',
     ['status', '--porcelain=v1', '-z', '--untracked-files=all'],
     { cwd: root, encoding: 'utf8' },
   );
   const records = output.split('\0').filter(Boolean);
-  const paths = new Set();
   for (let index = 0; index < records.length; index += 1) {
     const record = records[index];
     const status = record.slice(0, 2);

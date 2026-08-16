@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 const PROJECT_ROOT = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const SOURCE_ROOTS = [
   join(PROJECT_ROOT, 'src', 'app'),
+  join(PROJECT_ROOT, 'src', 'components', 'academy'),
   join(PROJECT_ROOT, 'src', 'components', 'manos-abiertas'),
 ];
 const SOURCE_EXTENSIONS = new Set(['.js', '.jsx', '.ts', '.tsx']);

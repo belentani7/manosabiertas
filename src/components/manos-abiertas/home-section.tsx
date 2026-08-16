@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Sparkles, FileText, BookOpen, Database, Shield, Phone, Globe, Heart, Users, GraduationCap, ChevronRight, Star, Wrench, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -16,6 +17,7 @@ import { FirstSteps } from './first-steps';
 import { AnimatedCounter } from './animated-counter';
 import { RecentlyViewed } from './recently-viewed';
 import { PersonalRoute } from './personal-route';
+import { getAcademyPath } from '@/lib/academy-navigation';
 
 export function HomeSection() {
   const { language, setActiveSection } = useAppStore();
@@ -153,6 +155,12 @@ export function HomeSection() {
               >
                 <Sparkles className="h-5 w-5 text-primary" />
                 {t.hero_cta_learn}
+              </Button>
+              <Button asChild size="lg" variant="outline" className="gap-2 h-12 px-7">
+                <Link href={getAcademyPath(language)}>
+                  <GraduationCap className="h-5 w-5 text-primary" />
+                  Academia Abierta
+                </Link>
               </Button>
             </div>
 

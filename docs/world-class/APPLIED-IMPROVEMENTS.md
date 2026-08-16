@@ -17,7 +17,7 @@ La fuente canónica es [`applied-improvements.jsonl`](./applied-improvements.jso
 - `id`: secuencia estable `MA-APPLIED-NNN`.
 - `descripcion`: comportamiento o artefacto concreto, contado una sola vez.
 - `categoria`: dominio principal de la mejora.
-- `archivos`: archivos existentes y presentes en el diff actual.
+- `archivos`: archivos existentes y presentes en `main...HEAD` o en el worktree actual.
 - `evidencia`: comando, test o inspección con resultado explícito.
 - `estado`: `verified` solo con prueba o comando exitoso; `applied` cuando la evidencia disponible es inspección o existe un gate pendiente.
 
@@ -28,6 +28,8 @@ node scripts/verify-applied-improvements.mjs
 ```
 
 El verificador comprueba:
+
+- el rango de la rama de recuperación desde el `main` local y los cambios todavía no confirmados;
 
 1. JSONL válido y esquema exacto.
 2. IDs únicos, secuenciales y estados permitidos.

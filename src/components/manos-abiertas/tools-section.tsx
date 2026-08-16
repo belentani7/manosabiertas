@@ -16,13 +16,15 @@ import { GAMIFICATION_BADGES } from '@/data/tools-data';
 import { useProgress } from '@/hooks/use-progress';
 import { cn } from '@/lib/utils';
 import { LocalDataPanel } from './local-data-panel';
+import { ToolSimulatorsGallery } from './tool-simulators';
 
-type ToolTab = 'documents' | 'processes' | 'templates' | 'cost' | 'reminders' | 'badges' | 'data';
+type ToolTab = 'documents' | 'processes' | 'templates' | 'simulators' | 'cost' | 'reminders' | 'badges' | 'data';
 
 const TOOLS: { id: ToolTab; emoji: string; icon: typeof FolderOpen; title: string; desc: string; color: string }[] = [
   { id: 'documents', emoji: '📋', icon: FolderOpen, title: 'Checklist de documentos', desc: 'Trámites esenciales para regularizarte', color: 'from-amber-400 to-orange-500' },
   { id: 'processes', emoji: '🗺️', icon: MapPin, title: 'Guías visuales', desc: 'Procesos paso a paso con diagramas', color: 'from-blue-400 to-cyan-500' },
   { id: 'templates', emoji: '📄', icon: FileText, title: 'Plantillas', desc: 'Cartas, CV, reclamaciones listas para usar', color: 'from-purple-400 to-violet-500' },
+  { id: 'simulators', emoji: '🖥️', icon: Wrench, title: 'Simuladores', desc: 'Practica Windows, Linux, IA y Office sin miedo', color: 'from-cyan-400 to-blue-500' },
   { id: 'cost', emoji: '💰', icon: Calculator, title: 'Coste de vida y moneda', desc: 'Calcula gastos y convierte divisas', color: 'from-emerald-400 to-teal-500' },
   { id: 'reminders', emoji: '🔔', icon: Bell, title: 'Recordatorios', desc: 'No pierdas plazos importantes', color: 'from-rose-400 to-pink-500' },
   { id: 'badges', emoji: '🏆', icon: Trophy, title: 'Tus logros', desc: 'Insignias desbloqueadas', color: 'from-indigo-400 to-purple-500' },
@@ -46,17 +48,19 @@ export function ToolsSection() {
       </div>
 
       {/* Tool selector */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3 mb-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-3 mb-6">
         {TOOLS.map((tool, i) => {
           const Icon = tool.icon;
           const active = activeTool === tool.id;
           return (
             <motion.button
+              type="button"
               key={tool.id}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
               onClick={() => setActiveTool(tool.id)}
+              aria-pressed={active}
               className="group text-left"
             >
               <Card className={cn(
@@ -94,6 +98,7 @@ export function ToolsSection() {
         {activeTool === 'documents' && <DocumentChecklist />}
         {activeTool === 'processes' && <ProcessInfographics />}
         {activeTool === 'templates' && <DocumentTemplates />}
+        {activeTool === 'simulators' && <ToolSimulatorsGallery />}
         {activeTool === 'cost' && <CostOfLifeTools />}
         {activeTool === 'reminders' && <SmartReminders />}
         {activeTool === 'badges' && <BadgesDisplay />}

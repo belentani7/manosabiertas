@@ -15,6 +15,18 @@ El canon ya contiene material didactico integrado en codigo:
 - `src/components/manos-abiertas/level0-academy.tsx`: lector paso a paso con progreso local.
 - `src/components/manos-abiertas/learn-ai-section.tsx`: aprendizaje de IA.
 
+## Integracion en esta iteracion
+
+- `src/data/recovered-courses.ts`: paquete recuperado y trazable desde Downloads.
+- `src/data/downloads-vault.ts`: selección pública saneada de fuentes didácticas, sin rutas locales ni material privado.
+- `src/data/downloads-zip-index.ts`: índice técnico local ignorado por Git y excluido de la aplicación pública.
+- `src/components/manos-abiertas/downloads-vault-section.tsx`: biblioteca pública curada con estados de revisión.
+- `src/components/manos-abiertas/downloads-zip-section.tsx`: aviso público de separación; el inventario técnico no se importa en la aplicación.
+- `src/components/manos-abiertas/courses-library-section.tsx`: pestaña `Recuperados` con procedencia visible.
+- `docs/from-downloads/README.md`: mapa de fuente a destino para auditoria posterior.
+- `docs/from-downloads/downloads-vault.md`: resumen auditable de la bóveda.
+- `docs/from-downloads/zip-index.md`: snapshot técnico local ignorado por Git.
+
 ## Material didactico fuente pendiente de integracion
 
 Fuente principal separada: carpeta local de trabajo `manos abiertas deploy`, fuera del repositorio publico.

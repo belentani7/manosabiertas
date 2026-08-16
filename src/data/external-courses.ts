@@ -7,13 +7,15 @@ export type CourseCategory =
   | 'construction' | 'finance' | 'marketing' | 'programming'
   | 'soft-skills' | 'legal' | 'education';
 
+export type CourseReviewStatus = 'pending-editorial' | 'pending-license' | 'pending-source';
+
 export interface ExternalCourse {
   id: string;
   title: string;
   description: string;
   provider: string;
   providerType: 'government' | 'university' | 'platform' | 'ngo' | 'private';
-  url: string;
+  url: string | null;
   duration: string;
   level: 'beginner' | 'intermediate' | 'advanced';
   category: CourseCategory;
@@ -23,6 +25,8 @@ export interface ExternalCourse {
   emoji: string;
   tags: string[];
   skills: string[];
+  sourceLabel?: string;
+  reviewStatus?: CourseReviewStatus;
 }
 
 export const COURSE_CATEGORIES: { value: CourseCategory; label: string; emoji: string; color: string }[] = [

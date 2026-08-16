@@ -30,7 +30,7 @@ export async function callConfiguredProvider(
 ): Promise<ProviderResult | null> {
   const groqKey = process.env.GROQ_API_KEY;
   if (groqKey) {
-    return callCompatibleProvider('groq', groqKey, process.env.GROQ_BASE_URL || 'https://api.groq.com/openai/v1', process.env.GROQ_MODEL || 'llama-3.1-8b-instant', messages, maxTokens);
+    return callCompatibleProvider('groq', groqKey, process.env.GROQ_BASE_URL || 'https://api.groq.com/openai/v1', process.env.GROQ_MODEL || 'openai/gpt-oss-20b', messages, maxTokens);
   }
 
   const nvidiaKey = process.env.NVIDIA_API_KEY || process.env.NVIDIA_NIM_API_KEY || process.env.NVIDIA_ALT_KEY;

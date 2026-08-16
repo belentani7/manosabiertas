@@ -5,7 +5,7 @@
 Configurar en el entorno local o en Netlify, nunca dentro del código:
 
 - `GROQ_API_KEY`
-- `GROQ_MODEL` opcional; valor ligero por defecto: `llama-3.1-8b-instant`
+- `GROQ_MODEL` opcional; valor por defecto: `openai/gpt-oss-20b`
 - `GROQ_BASE_URL` opcional; por defecto: `https://api.groq.com/openai/v1`
 - `NVIDIA_API_KEY`, `NVIDIA_NIM_API_KEY` o `NVIDIA_ALT_KEY`
 - `NVIDIA_MODEL` opcional; valor ligero por defecto: `meta/llama-3.3-70b-instruct`
@@ -28,6 +28,7 @@ El código solo devuelve el nombre del proveedor y nunca el valor de una clave. 
 
 - [Groq OpenAI compatibility](https://console.groq.com/docs/openai)
 - [Groq chat completions](https://console.groq.com/docs/api-reference)
+- [Groq model deprecations](https://console.groq.com/docs/deprecations)
 - [NVIDIA NIM LLM APIs](https://docs.api.nvidia.com/nim/reference/llm-apis)
 - [fal.ai model APIs](https://fal.ai/docs/documentation/model-apis/overview)
 - [Stability AI API](https://platform.stability.ai/docs/api-reference)

@@ -17,6 +17,6 @@ test('static accessibility gate passes for app and Manos Abiertas components', (
 
   const audit = JSON.parse(result.stdout);
   assert.equal(audit.filesScanned > 0, true);
-  assert.deepEqual(audit.roots, ['src/app', 'src/components/manos-abiertas']);
+  assert.deepEqual(audit.roots, ['src/app', 'src/components/academy', 'src/components/manos-abiertas']);
   assert.equal(audit.findings.length, 0);
 });

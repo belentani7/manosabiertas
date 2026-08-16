@@ -499,6 +499,113 @@ Se imprime desde casi cualquier programa: Word, Excel, páginas web, fotos.`,
       },
     ],
   },
+  {
+    id: 'nivel1-linux',
+    title: 'Linux sin Miedo',
+    description: 'Aprende a orientarte, organizar archivos, instalar aplicaciones y usar una terminal de práctica en un escritorio Linux.',
+    emoji: '🐧',
+    color: 'from-slate-600 to-emerald-600',
+    level: 1,
+    targetAge: 'Personas que ya usan ratón y teclado',
+    duration: '2 horas y 15 minutos',
+    lessons: [
+      {
+        id: 'linux-1',
+        title: 'Conocer el escritorio Linux',
+        duration: '20 min',
+        emoji: '🖥️',
+        content: `Linux es un sistema operativo, igual que Windows o Android. Distribuciones como Linux Mint y Ubuntu preparan el escritorio, las aplicaciones y las actualizaciones para que puedas usarlos juntos.
+
+Los nombres y colores pueden cambiar, pero casi todos los escritorios tienen un menú de aplicaciones, un panel, un área de notificaciones y una carpeta personal.`,
+        steps: [
+          'Localiza el menú de aplicaciones. Puede llamarse Menú, Actividades o Mostrar aplicaciones.',
+          'Abre el gestor de archivos y reconoce tu Carpeta personal.',
+          'Busca el área de red, sonido, batería y apagado.',
+          'Abre una aplicación y practica minimizarla, maximizarla y cerrarla.',
+          'Vuelve al escritorio sin apagar el equipo.',
+        ],
+        tip: 'Practica primero en el simulador de Herramientas. La simulación no instala ni modifica nada en tu ordenador.',
+        encouragement: 'Ya conoces la lógica principal: menú, ventanas, archivos y estado. El aspecto cambia; la idea permanece.',
+        practice: 'Abre el simulador Linux, entra en Actividades y localiza Archivos, Terminal y Configuración.',
+      },
+      {
+        id: 'linux-2',
+        title: 'Archivos, carpetas y memoria USB',
+        duration: '25 min',
+        emoji: '📁',
+        content: `Tu Carpeta personal guarda Documentos, Descargas, Imágenes y otras carpetas. Una memoria USB aparece como una unidad externa y debe expulsarse antes de retirarla.
+
+Linux distingue mayúsculas y minúsculas: "CV.pdf" y "cv.pdf" pueden ser dos archivos diferentes.`,
+        steps: [
+          'Abre la Carpeta personal y crea una carpeta llamada Practica-Linux.',
+          'Dentro, crea las carpetas Documentos, Fotos y Copias.',
+          'Copia un archivo de prueba y pégalo en Copias.',
+          'Renombra la copia con una fecha clara, por ejemplo CV-2026-08.pdf.',
+          'Si conectas una memoria USB, usa Expulsar antes de retirarla.',
+        ],
+        tip: 'No uses la Papelera como archivo. Organiza primero y vacíala solo cuando hayas revisado lo que contiene.',
+        encouragement: 'Copiar, mover y renombrar son las mismas habilidades que ya conoces de otros sistemas.',
+        practice: 'Crea la estructura Practica-Linux/Documentos/Copias y mueve un archivo de prueba entre carpetas.',
+      },
+      {
+        id: 'linux-3',
+        title: 'Aplicaciones y alternativas libres',
+        duration: '25 min',
+        emoji: '🧰',
+        content: `La tienda o gestor de software permite buscar aplicaciones desde una fuente central. Para tareas habituales puedes usar Firefox, LibreOffice, VLC, GIMP o aplicaciones web.
+
+Instala solo desde la tienda del sistema o la web oficial del proyecto. Revisa el nombre del desarrollador y los permisos antes de aceptar.`,
+        steps: [
+          'Abre la tienda o gestor de software.',
+          'Busca LibreOffice y lee su descripción sin instalar todavía.',
+          'Comprueba el nombre, la fuente, el tamaño y los permisos disponibles.',
+          'Busca una aplicación ya instalada desde el menú y añádela a favoritos.',
+          'Aprende a cerrarla y a quitarla de favoritos sin desinstalarla.',
+        ],
+        tip: 'Una aplicación gratuita no necesita claves descargadas desde foros ni instaladores de sitios desconocidos.',
+        encouragement: 'Elegir una fuente segura es más importante que memorizar dónde está cada botón.',
+        practice: 'Haz una lista de tres tareas y una alternativa libre para cada una: escribir, editar imágenes y reproducir vídeo.',
+      },
+      {
+        id: 'linux-4',
+        title: 'Terminal segura para principiantes',
+        duration: '30 min',
+        emoji: '⬛',
+        content: `La terminal permite escribir instrucciones. No hace falta usarla para todo, pero conocer comandos de lectura ayuda a comprender el sistema.
+
+Empieza con comandos que solo muestran información. Lee cada instrucción antes de ejecutarla y evita copiar comandos que pidan privilegios si no entiendes su efecto.`,
+        steps: [
+          'Abre el simulador Terminal dentro de Herramientas.',
+          'Escribe ayuda y pulsa Enter.',
+          'Ejecuta fecha para ver una respuesta.',
+          'Ejecuta listar para reconocer una lista de carpetas y archivos.',
+          'Escribe limpiar para reiniciar la pantalla de práctica.',
+        ],
+        tip: 'La terminal de Manos Abiertas es una simulación local. Sus comandos no llegan al sistema operativo real.',
+        encouragement: 'La terminal deja de intimidar cuando practicas primero con instrucciones pequeñas y comprensibles.',
+        practice: 'Completa la secuencia ayuda, fecha, listar y limpiar en el simulador.',
+      },
+      {
+        id: 'linux-5',
+        title: 'Actualizaciones, contraseñas y copias',
+        duration: '35 min',
+        emoji: '🛡️',
+        content: `Mantener el sistema actualizado corrige errores y problemas de seguridad. Una contraseña de administración autoriza cambios importantes; no la compartas ni la escribas en mensajes.
+
+Antes de una actualización grande o de cambiar de sistema, guarda una copia de tus documentos importantes en otra unidad fiable.`,
+        steps: [
+          'Abre el gestor de actualizaciones desde el menú.',
+          'Lee la lista y confirma que la conexión y la batería son suficientes.',
+          'Cierra documentos abiertos antes de iniciar cambios importantes.',
+          'Copia tus documentos esenciales en una unidad separada y verifica que se abren.',
+          'Reinicia solo cuando el sistema lo solicite y no interrumpas una actualización en curso.',
+        ],
+        tip: 'Una copia existe cuando puedes abrirla desde el destino. Ver un icono o una barra completa no basta.',
+        encouragement: 'Actualizar con calma y comprobar las copias convierte una tarea técnica en una rutina segura.',
+        practice: 'Diseña una lista de cinco archivos importantes y dónde guardarías una segunda copia verificable.',
+      },
+    ],
+  },
 ];
 
 export function getLevel0Stats() {
