@@ -1,0 +1,42 @@
+{
+  "packageName": "Manos Abiertas — Base Soberana Local",
+  "packageVersion": "2026.08-local-1",
+  "author": "Pedro Belentani",
+  "mode": "offline-first",
+  "capturedAt": "2026-08-18",
+  "localContent": {
+    "masterCurriculum": {
+      "language": "es",
+      "areas": 10,
+      "lessons": 1000,
+      "path": "src/data/curriculum-master-es/",
+      "editorialStatus": "machine-generated-pending-human-review"
+    },
+    "courseCatalog": {
+      "path": "src/data/",
+      "delivery": "bundled-at-build-time"
+    },
+    "offlineTutor": {
+      "path": "src/lib/offline-tutor.ts",
+      "delivery": "bundled-at-build-time"
+    },
+    "applicationAssets": {
+      "path": "public/",
+      "delivery": "bundled-static-assets"
+    }
+  },
+  "optionalRemoteServices": {
+    "ai": "Optional. The app must continue using the local tutor when no provider is configured.",
+    "community": "Optional. Forum synchronization is not part of the sovereign base.",
+    "externalLinks": "Reference links only. They are not required to read the local curriculum."
+  },
+  "mediaPolicy": {
+    "videos": "Optional and intentionally excluded from the base package.",
+    "largeAssets": "May be added as separately licensed local packages."
+  },
+  "reviewPolicy": {
+    "legalHealthAndAdministrativeContent": "Requires periodic human review against current official sources before operational use.",
+    "translations": "Must be reviewed by qualified speakers before publication as final material.",
+    "assets": "Only assets with a compatible license or original project ownership may be bundled."
+  }
+}

@@ -1,0 +1,394 @@
+{
+  "package": "Manos Abiertas — local asset manifest",
+  "version": "2026.08-local-1",
+  "author": "Pedro Belentani",
+  "generatedAt": "2026-08-18",
+  "policy": "Bundled assets are the offline base. External links are optional references and are not required for the local curriculum.",
+  "files": [
+    {
+      "path": "public/apple-touch-icon.png",
+      "bytes": 7985,
+      "sha256": "d42b4ba6243edddb0d7adedcec4a1900415e79cd590139ab0b0f4f14ea1ef1a6"
+    },
+    {
+      "path": "public/ecosystem.html",
+      "bytes": 5436,
+      "sha256": "0e760d90b734588038641b3c9842b9d6da5e0b2cac7643156de4ab3bd5c7e5f8"
+    },
+    {
+      "path": "public/favicon.ico",
+      "bytes": 766,
+      "sha256": "323e9b9cbc6319fb3ac56b5a9b7e2764ed38bb23a181fe385db976358b5ffa1e"
+    },
+    {
+      "path": "public/icon-192.png",
+      "bytes": 3356,
+      "sha256": "9cdbdc09f0df0fdd53156184a5fde6a12703ffa8c6eb5de4900c51d6cfebc3f2"
+    },
+    {
+      "path": "public/icon-512.png",
+      "bytes": 15259,
+      "sha256": "0620f1345ffc5aba307699f456f78bebe55a1927b0d4ea3a9e8f67b2f2abb773"
+    },
+    {
+      "path": "public/logo.svg",
+      "bytes": 1065,
+      "sha256": "8506450e8ef647695d218c4b3245ef573f9c6473783f372eef87fdba9bd47eac"
+    },
+    {
+      "path": "public/manifest.json",
+      "bytes": 1996,
+      "sha256": "85fa332e0ff3f18b3f0385bac69db093df8f46c7376041006ae3eafaf0305467"
+    },
+    {
+      "path": "public/offline-assistants/en/ai.html",
+      "bytes": 3085,
+      "sha256": "9001ee21e40a147a809b76851d6dcf804a768e0a1bece0c1a0e1dc9f1f6cfd23"
+    },
+    {
+      "path": "public/offline-assistants/en/courses.html",
+      "bytes": 3155,
+      "sha256": "61e872a7c70fd38a45dc252caf6de0e26306fa55264fbffbc671d04e5c33533a"
+    },
+    {
+      "path": "public/offline-assistants/en/cv.html",
+      "bytes": 3177,
+      "sha256": "67cded0c708eba4d18cd77d6b79c373a1065b2aadf7ddd8552f29f81f55254b8"
+    },
+    {
+      "path": "public/offline-assistants/en/digital.html",
+      "bytes": 3127,
+      "sha256": "11affdf4b8e36dc890c26effea88f3c7266c92e4e31c82492a0cb15b3c076886"
+    },
+    {
+      "path": "public/offline-assistants/en/rights.html",
+      "bytes": 3184,
+      "sha256": "eedb87b6fdfa225097454014f7eea207f51e71de565fcb7135f0431caef9aab9"
+    },
+    {
+      "path": "public/offline-assistants/es/ai.html",
+      "bytes": 3118,
+      "sha256": "f97c8dadd7628bd986bd7d8ee0040227b263eeae9bc7fe1e8079e1335eaa2f86"
+    },
+    {
+      "path": "public/offline-assistants/es/courses.html",
+      "bytes": 3208,
+      "sha256": "68c0fc9f0bdfdaf91fcbd2d45fe7b073fde70cb2ccffd8dd6925b908f820a931"
+    },
+    {
+      "path": "public/offline-assistants/es/cv.html",
+      "bytes": 3226,
+      "sha256": "ab32c240e8e54cf41eb5cebf910ad620afdb7e0980e474a2559e15b7f1620874"
+    },
+    {
+      "path": "public/offline-assistants/es/digital.html",
+      "bytes": 3150,
+      "sha256": "3c96083f8a07588b79e2b1efd2190616e28216d68decf4463483f971b07b4604"
+    },
+    {
+      "path": "public/offline-assistants/es/rights.html",
+      "bytes": 3183,
+      "sha256": "f0bba12fd20c7bd4eb863b94146351c3d937bd2707d954a4abb9359bf9143f98"
+    },
+    {
+      "path": "public/offline-assistants/fr/ai.html",
+      "bytes": 3134,
+      "sha256": "be6b250569e2d247a397ff31c5e9a1b9e5c7cd43c55c530a2e2ae4720df45675"
+    },
+    {
+      "path": "public/offline-assistants/fr/courses.html",
+      "bytes": 3198,
+      "sha256": "383e1b52d669a8531964f55dbc8c8cae45d073df6e825916595a14d8d40f1c1e"
+    },
+    {
+      "path": "public/offline-assistants/fr/cv.html",
+      "bytes": 3222,
+      "sha256": "2bad8b26112cf54120ee07854f548a1a60d5d5329de319a8448aab0cd189eed4"
+    },
+    {
+      "path": "public/offline-assistants/fr/digital.html",
+      "bytes": 3156,
+      "sha256": "b8f5555c7f805fb5e99536924458d07c42ad825130d12c9d1c333f81b8fea8a8"
+    },
+    {
+      "path": "public/offline-assistants/fr/rights.html",
+      "bytes": 3235,
+      "sha256": "bedbf7ea5faa0d2a661f9bef813ad8624e577df1f13daacfac9fa0b10b775714"
+    },
+    {
+      "path": "public/offline-assistants/manifest.json",
+      "bytes": 1995,
+      "sha256": "da4874111d0854caaadd14db4b6b33a1af897199cf863c60117dce72f7d7ba2a"
+    },
+    {
+      "path": "public/offline-assistants/pt/ai.html",
+      "bytes": 3123,
+      "sha256": "85b0bd4e5bb1947919ab35d02fb024ce2b56c4667debc3f77032886560daf625"
+    },
+    {
+      "path": "public/offline-assistants/pt/courses.html",
+      "bytes": 3199,
+      "sha256": "b11bbc8d91e70de9e572a23e728c2d7aec0fa6379323c59f8a6ea5bac597b61a"
+    },
+    {
+      "path": "public/offline-assistants/pt/cv.html",
+      "bytes": 3217,
+      "sha256": "4a9feb1e15f1d0286936310d06cfe013c14adee7fe1c2b7c3e614eaccb969870"
+    },
+    {
+      "path": "public/offline-assistants/pt/digital.html",
+      "bytes": 3153,
+      "sha256": "eaeede819b1a23c456755820d6187b4a474ed7d2145c3e42b111620d6690c621"
+    },
+    {
+      "path": "public/offline-assistants/pt/rights.html",
+      "bytes": 3216,
+      "sha256": "e110581fa03c4de544b0645748dcb064b7894ae9823eafba514d3d812da69cd3"
+    },
+    {
+      "path": "public/og.png",
+      "bytes": 126273,
+      "sha256": "838cc8fd71525bbf3b29713d7a4b3649734e36577923c537016401eafd00d022"
+    },
+    {
+      "path": "public/robots.txt",
+      "bytes": 231,
+      "sha256": "281d443bacc4c944826871ceaffc6fe2f61b7c96c077a4421dcce3ce8576bd8a"
+    },
+    {
+      "path": "public/screenshot-home-mobile.png",
+      "bytes": 34379,
+      "sha256": "75e902cc4189c1f2162a610751cfc64c20be629ce7ae0dbb8f9bd252098638ba"
+    },
+    {
+      "path": "public/screenshot-home.png",
+      "bytes": 45871,
+      "sha256": "92df9118afd19afdc2540458d29605a34eac0c0fcf7bcb52d443c78e75954d4d"
+    },
+    {
+      "path": "public/sw.js",
+      "bytes": 2187,
+      "sha256": "4a0aafffa22973f555785187a1391f50799b26bb027c80aa8bf156684d41a336"
+    },
+    {
+      "path": "src/data/ai-courses.ts",
+      "bytes": 112765,
+      "sha256": "2e7ce850f474c61c59d5f9d4bb5751ab42427fe42b7bc6b476884165c978e26e"
+    },
+    {
+      "path": "src/data/ai-tools.ts",
+      "bytes": 2936,
+      "sha256": "587e3df4c5ea2301e5b9657a00e03c00242001c926e5db59078ea00f3e330b57"
+    },
+    {
+      "path": "src/data/curriculum-language-status.json",
+      "bytes": 2319,
+      "sha256": "49b9353dfb306abf264eacbacee2ceae44e4fe7ac3ee7845f8980457f10b2cb2"
+    },
+    {
+      "path": "src/data/curriculum-master-es/A1.json",
+      "bytes": 361898,
+      "sha256": "04a3d8ca14729051688847016313a2c2cc5ba25658f8f59c87de57c80252a969"
+    },
+    {
+      "path": "src/data/curriculum-master-es/A10.json",
+      "bytes": 378162,
+      "sha256": "c03fa490c930bfa1bcc317e422dba133da51c7bdc1319e16a2dca9596420c263"
+    },
+    {
+      "path": "src/data/curriculum-master-es/A2.json",
+      "bytes": 336589,
+      "sha256": "020760e532d40d03fb257452434e03f09a26109863cbed1d9b8ecca30b32f540"
+    },
+    {
+      "path": "src/data/curriculum-master-es/A3.json",
+      "bytes": 359832,
+      "sha256": "63356aa65f3015347fec41cc70cd45bb8552c216f1d61f5c1c3ea113ae1bed2d"
+    },
+    {
+      "path": "src/data/curriculum-master-es/A4.json",
+      "bytes": 361901,
+      "sha256": "522e9340426625a708eac7a2dc48ad202b00c87a9d1c2589c828b35d6a2f9a30"
+    },
+    {
+      "path": "src/data/curriculum-master-es/A5.json",
+      "bytes": 345304,
+      "sha256": "8a0e2b5f62eeefabd0e2754034e8c8acf2be20980354c4d2f9ba00ac82dba25c"
+    },
+    {
+      "path": "src/data/curriculum-master-es/A6.json",
+      "bytes": 362426,
+      "sha256": "97b3d57df036d9fe49e21f0ddacec76edb4a5b8bbe343546a93c947048b76016"
+    },
+    {
+      "path": "src/data/curriculum-master-es/A7.json",
+      "bytes": 351184,
+      "sha256": "1410583085cb50ac57a38524769a193b282047965a5772edcb766cc48db1e3fa"
+    },
+    {
+      "path": "src/data/curriculum-master-es/A8.json",
+      "bytes": 359310,
+      "sha256": "bbff48436ee9d1438c8ca66c6da0fa1c40757a620d13bdf28186e807f1a09fdb"
+    },
+    {
+      "path": "src/data/curriculum-master-es/A9.json",
+      "bytes": 347991,
+      "sha256": "87e8bcce752cd17c0abfc16273a59334731d781bf4b4c686943ff88fcb75fb68"
+    },
+    {
+      "path": "src/data/curriculum-master-es/manifest.json",
+      "bytes": 213,
+      "sha256": "09adea82f6faf3a417d383c11d69552e0f5c8a6818a8de2e61fc2ecfb6479103"
+    },
+    {
+      "path": "src/data/cv-templates.ts",
+      "bytes": 44729,
+      "sha256": "56a6d6ce676b2a88f8f6e43cc4c044eb968a7f762d6aed425750f515f966cbd9"
+    },
+    {
+      "path": "src/data/disability-resources.ts",
+      "bytes": 11774,
+      "sha256": "0cb219c96d167daa36babd8cc93005c1609b638bd01689762c621a4a90d55e79"
+    },
+    {
+      "path": "src/data/document-templates.ts",
+      "bytes": 11837,
+      "sha256": "ebb8e056859ed326a1cfd6dfea9979f441a25c98c30ff22a634342cb0f5de52c"
+    },
+    {
+      "path": "src/data/events-data.ts",
+      "bytes": 8881,
+      "sha256": "77307b59561957f7ed233f5bca094f2ea3b08545b345d9a133185ff5a3747fbc"
+    },
+    {
+      "path": "src/data/external-courses.ts",
+      "bytes": 38220,
+      "sha256": "009ff306a95c0f213e34a6d301fba71e8b9d365c50217b410b6e12a82a1c4b3f"
+    },
+    {
+      "path": "src/data/generated-courses/ciberseguridad.ts",
+      "bytes": 18850,
+      "sha256": "717aeb80cc9a1de7cbd47670e16d0484b390e1c8365da0b62c5285aece0bea31"
+    },
+    {
+      "path": "src/data/generated-courses/emprende.ts",
+      "bytes": 21847,
+      "sha256": "8f0648204cd9084ca2ee7e8fa3bf3657b5ec3916e3a83768339e9e8af0ceb8b2"
+    },
+    {
+      "path": "src/data/generated-courses/espanol-diario.ts",
+      "bytes": 26694,
+      "sha256": "cd0dc9fd808a86caf3d85db1dbcc095649da000be6fdbd69161903586d95c4a0"
+    },
+    {
+      "path": "src/data/generated-courses/portugues-vida.ts",
+      "bytes": 28396,
+      "sha256": "432dcc45ed74d7a08a2fdbcba72a5479ac8d6488895f9727fe6dce419a172738"
+    },
+    {
+      "path": "src/data/generated-courses/primeros-30-dias.ts",
+      "bytes": 21297,
+      "sha256": "0cdd4b906a3e3c09d5ac36eb9fea84c2ceb5437bf6ec458f127e67eb2d71e8e9"
+    },
+    {
+      "path": "src/data/global-resources.ts",
+      "bytes": 18145,
+      "sha256": "90520ae737cbcfce024fb5f42e79ef849697956e775130b2f73cf1090e253668"
+    },
+    {
+      "path": "src/data/glossary-data.ts",
+      "bytes": 8964,
+      "sha256": "fd59e2df93b4462e196416bef8152e263b5f1a2b412ee0a889683f9007dadfb8"
+    },
+    {
+      "path": "src/data/home-content.ts",
+      "bytes": 13223,
+      "sha256": "b174aba7104aa067483da118983569d5ce26605f6a75cefddf41b309ba5e1ad6"
+    },
+    {
+      "path": "src/data/level0-courses.ts",
+      "bytes": 27188,
+      "sha256": "4eac11db4d9e0339243d0d4e865d0db1e16a951089101252e156258e8266d0c3"
+    },
+    {
+      "path": "src/data/master-curriculum.ts",
+      "bytes": 2520,
+      "sha256": "1bc078f9608754b3edf53c0ca96b1a63422e6fee44529ef9b109a99c8735fd74"
+    },
+    {
+      "path": "src/data/noia-courses.ts",
+      "bytes": 15044,
+      "sha256": "58126ee4bf9b2356dbb8ba5fd5e46dba0e237f4c2bc0d84061bc03cec16c7a90"
+    },
+    {
+      "path": "src/data/office-course.ts",
+      "bytes": 122053,
+      "sha256": "f413e01d3882fac4442e192fec15aad22b48354e588c0087c8a6d63cea967016"
+    },
+    {
+      "path": "src/data/open-source-hub.ts",
+      "bytes": 26678,
+      "sha256": "a56523d7078f7f9ff06cebc49b05f866ec1f7484a495b2a7d39b8f107de6d06c"
+    },
+    {
+      "path": "src/data/process-guides.ts",
+      "bytes": 11101,
+      "sha256": "3f832a3b8f5a85fd99080e8db370e486aa4f5ce79d9399673d26299382cdf196"
+    },
+    {
+      "path": "src/data/resources.ts",
+      "bytes": 217379,
+      "sha256": "9d28f0e9e51581aff8f5385e47d57ad597d92218970dc81f7ec6744cbd52a2b8"
+    },
+    {
+      "path": "src/data/rights-guide.ts",
+      "bytes": 193521,
+      "sha256": "619b9b16d346169b5e1381022934bb2991b4a3133fea8fe8d71c2119ba2a4336"
+    },
+    {
+      "path": "src/data/sovereign/manifest.json",
+      "bytes": 1589,
+      "sha256": "3de4072a412fc55b095de043cfe8462ebd85310ec99d6e58f903ee4524cb7c0a"
+    },
+    {
+      "path": "src/data/tools-data.ts",
+      "bytes": 10220,
+      "sha256": "5ba8e9febacc4aeeb26e32eb2b2118d321f6fabafbe1ccd2a6f378f6d9384360"
+    },
+    {
+      "path": "src/lib/ai-provider.ts",
+      "bytes": 3762,
+      "sha256": "3a360c53a105383fd58c0b6dd587ef72b5e1bb8c9a7665c895a7cc6e206ff336"
+    },
+    {
+      "path": "src/lib/db.ts",
+      "bytes": 299,
+      "sha256": "ce5d51390121a452bc0a4d5208deaff71c583177773bcbbcd15b0af8ab48e2fc"
+    },
+    {
+      "path": "src/lib/language-resource-bank.ts",
+      "bytes": 948,
+      "sha256": "6786f0e71cd22e31ec2b20a93fa17109ebfff173754ece6f1ca4a53538456576"
+    },
+    {
+      "path": "src/lib/local-data.ts",
+      "bytes": 2955,
+      "sha256": "369ea725cc50703e43a4fc663711da38e99730129439f6daf23837508835b9c8"
+    },
+    {
+      "path": "src/lib/offline-tutor.ts",
+      "bytes": 2314,
+      "sha256": "ca33c898140361fbe672f719c27e234d8b50ae7813837bd22d19f02b0a4df685"
+    },
+    {
+      "path": "src/lib/sovereign-store.ts",
+      "bytes": 687,
+      "sha256": "020381059dc37bde86ce4eeb3a7d8f6b27649ae9dba1a8b4af623a59d0ed6766"
+    },
+    {
+      "path": "src/lib/utils.ts",
+      "bytes": 166,
+      "sha256": "7c8c3dfc0cdd370d44932828eb067ef771c8fe7996693221d5d4b90af6d54f2d"
+    }
+  ]
+}

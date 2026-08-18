@@ -6,6 +6,7 @@
     "dev": "next dev -p 3000",
     "build": "node scripts/generate-pwa-icons.mjs && node scripts/generate-offline-assistants.mjs && next build --webpack && node scripts/copy-build.mjs",
     "generate:assistants": "node scripts/generate-offline-assistants.mjs",
+    "sovereign:verify": "node scripts/verify-sovereign-package.mjs",
     "smoke": "node scripts/smoke-production.mjs",
     "start": "node scripts/start-standalone.mjs",
     "lint": "eslint .",

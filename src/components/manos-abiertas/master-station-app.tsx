@@ -28,6 +28,7 @@ import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
 import { Textarea } from '@/components/ui/textarea';
 import { pvcEngine, type ValidationEnvelope } from '@/domain/pvc-u-engine';
+import { SOVEREIGN_CONFIG } from '@/lib/sovereign-store';
 import { toast } from 'sonner';
 
 type Tool = 'cv' | 'ai' | 'linux' | 'windows';
@@ -185,6 +186,7 @@ export function MasterStationApp() {
               <h2 id="master-station-title" className="text-2xl font-bold tracking-tight md:text-3xl">Estación Manos Abiertas</h2>
               <p className="mt-2 text-sm leading-6 text-slate-300">Un único espacio para aprender informática, inteligencia artificial, currículum y sistemas operativos. Diseñado para la práctica gradual, con modos seguros y lenguaje claro.</p>
               <p className="mt-3 text-xs text-slate-400">Manos Abiertas · visión y autoría del proyecto: Pedro Belentani</p>
+              <p className="mt-2 flex items-center gap-2 text-xs text-emerald-300"><CheckCircle2 className="h-3.5 w-3.5" /> Base local activa: {SOVEREIGN_CONFIG.totalCurriculumPoints} puntos · modo {SOVEREIGN_CONFIG.mode}</p>
             </div>
             <div className="grid grid-cols-2 gap-2 text-center text-xs sm:grid-cols-4">
               <Metric icon={<FileText className="h-4 w-4" />} label="CV" value={`${completion}%`} />

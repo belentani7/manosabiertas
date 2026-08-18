@@ -1,0 +1,16 @@
+{
+  "package": "Manos Abiertas — Base Soberana Local",
+  "checkedAt": "2026-08-18T16:15:00.659Z",
+  "status": "PASS",
+  "curriculum": {
+    "language": "es",
+    "areas": 10,
+    "lessons": 1000
+  },
+  "assets": {
+    "declared": 77,
+    "verified": 77
+  },
+  "remoteServices": "optional-only",
+  "videos": "excluded-from-base"
+}
