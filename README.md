@@ -1,4 +1,24 @@
-# Manos Abiertas
+# Manos Abiertas · Ecosistema Educativo Global y Protocolo Ω-MAX
+
+> **Autoría y Liderazgo**: Pedro Belentani  
+> **Plataforma Oficial**: [mismanosabiertas.netlify.app](https://mismanosabiertas.netlify.app/)  
+> **Repositorio Canónico Unificado**: [github.com/belentani7/manosabiertas](https://github.com/belentani7/manosabiertas)
+
+---
+
+## 🏛️ Propósito y Visión del Proyecto Unificado
+
+**Manos Abiertas** es la plataforma educativa de código abierto definitiva diseñada para la integración socioeducativa, laboral y digital de las comunidades inmigrantes y familias en España. Este repositorio unifica todo el ecosistema en una única fuente oficial:
+
+1. **Currículo Maestro de 1.000 Puntos (Nivel 0 a Experto)**: Organizado en 10 áreas académicas transversales (desde alfabetización digital básica hasta desarrollo web avanzado y ciberseguridad).
+2. **Estación de Herramientas Nativas en la App**:
+   - **CV Maker Pro**: Constructor de currículum con vista previa en tiempo real y exportación corporativa.
+   - **AI Studio**: Tutor conversacional impulsado por IA con guardrails y soporte offline.
+   - **Terminales Seguras (Linux & Windows PowerShell)**: Simuladores didácticos de práctica para entornos operativos.
+3. **Protocolo PVC-U Ω-MAX**: Arquitectura hexagonal estricta con validación determinista en múltiples esferas y sobres de auditoría (*Validation Envelope*).
+4. **Soporte Multilingüe**: Diseñado para cubrir las 39 comunidades lingüísticas más representativas en España con transparencia editorial.
+
+---
 
 ## Português (Brasil)
 
