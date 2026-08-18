@@ -13,6 +13,8 @@ import { EXTERNAL_COURSES, COURSE_CATEGORIES, getCourseStats, type ExternalCours
 import { NoiaCoreAcademy } from './noia-core-academy';
 import { OpenSourceHub } from './open-source-hub';
 import { Level0Academy } from './level0-academy';
+import { MasterCurriculumAcademy } from './master-curriculum-academy';
+import { MasterStationApp } from './master-station-app';
 import { GeneratedCoursesAcademy } from './generated-courses-academy';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
@@ -54,7 +56,7 @@ export function CoursesLibrarySection() {
   const [certOnly, setCertOnly] = useState(false);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [progress, setProgress] = useState<CourseProgress>(loadProgress);
-  const [activeTab, setActiveTab] = useState<'own' | 'level0' | 'external' | 'noia' | 'opensource'>('own');
+  const [activeTab, setActiveTab] = useState<'own' | 'level0' | 'master' | 'visionary' | 'omegamax' | 'external' | 'noia' | 'opensource'>('omegamax');
 
   useEffect(() => {
     try {
@@ -147,6 +149,26 @@ export function CoursesLibrarySection() {
             Nivel 0
           </button>
           <button
+            onClick={() => setActiveTab('master')}
+            className={cn(
+              'min-w-0 px-2 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors flex items-center justify-center gap-1.5',
+              activeTab === 'master' ? 'bg-card shadow-sm text-primary' : 'text-muted-foreground hover:text-foreground'
+            )}
+          >
+            <span className="text-base">🌍</span>
+            Currículo 1.000 puntos
+          </button>
+          <button
+            onClick={() => setActiveTab('omegamax')}
+            className={cn(
+              'min-w-0 px-2 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors flex items-center justify-center gap-1.5 shadow-sm',
+              activeTab === 'omegamax' ? 'bg-indigo-600 text-white shadow-md' : 'bg-card text-foreground hover:bg-muted'
+            )}
+          >
+            <span className="text-base">🛡️</span>
+            Estación integrada
+          </button>
+          <button
             onClick={() => setActiveTab('external')}
             className={cn(
               'min-w-0 px-2 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors flex items-center justify-center gap-1.5',
@@ -181,6 +203,12 @@ export function CoursesLibrarySection() {
 
       {/* Nivel 0 */}
       {activeTab === 'level0' && <Level0Academy />}
+
+      {/* Currículo maestro de 1.000 puntos */}
+      {activeTab === 'master' && <MasterCurriculumAcademy />}
+
+      {/* Estación nativa integrada: CV, IA, Linux y Windows */}
+      {activeTab === 'omegamax' && <MasterStationApp />}
 
       {/* Cursos propios */}
       {activeTab === 'own' && <GeneratedCoursesAcademy />}
