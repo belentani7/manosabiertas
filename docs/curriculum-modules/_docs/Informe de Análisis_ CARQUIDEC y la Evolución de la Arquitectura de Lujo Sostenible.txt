@@ -1,0 +1,70 @@
+﻿Informe de Análisis: CARQUIDEC y la Evolución de la Arquitectura de Lujo Sostenible
+Resumen Ejecutivo
+Este documento presenta una síntesis exhaustiva de la trayectoria, filosofía y hoja de ruta tecnológica de  CARQUIDEC , el estudio de arquitectura fundado por  Hernando Carrillo Sánchez . Con más de 38 años de trayectoria y presencia en los mercados de Colombia, España e Italia, la firma se posiciona en la intersección de la arquitectura de lujo, el diseño bioclimático y la innovación digital.Los puntos clave identificados incluyen:
+* Liderazgo Especializado:  Una dirección basada en una formación continua de alto nivel, integrando certificaciones en  Passivhaus , diseño paramétrico e inteligencia artificial aplicada.
+* Excelencia Operativa:  Un historial de más de 60 proyectos ejecutados, con un enfoque actual en la eficiencia energética (alcanzando hasta un 40% de ahorro) y certificaciones de prestigio como LEED Platinum.
+* Visión Digital Vanguardista:  El estudio ha delineado una estrategia de desarrollo web y de marca inspirada en los mejores estudios del mundo, priorizando el  storytelling  visual, la interactividad avanzada y el minimalismo extremo.
+1. Perfil del Fundador y Trayectoria Profesional
+Hernando Carrillo Sánchez  representa una figura de autoridad en la arquitectura internacional, cuya carrera ha evolucionado desde las técnicas tradicionales hasta la vanguardia tecnológica.
+Formación y Competencias
+El perfil académico de Carrillo Sánchez es multidisciplinar y se actualiza constantemente para integrar nuevas normativas y herramientas:
+* Arquitecto:  Universidad Autónoma del Caribe (1988).
+* Especialista en Arquitectura Bioclimática:  Convention Center, Montería (2005).
+* Passivhaus Designer:  Passivhaus Institut, Darmstadt (2018).
+* Máster en Diseño Paramétrico:  IAAC, Barcelona (2020).
+Evolución de Carrera
+Periodo,Rol / Enfoque,Hitos
+1988 – 1995,Arquitecto Junior,Construcción tradicional caribeña y dibujo técnico artesanal.
+1995 – 2005,Paisajista y Bioclimatismo,"Formación en Japón, Italia y Costa Rica. Integración de elementos naturales (agua-piedra-vegetación)."
+2005 – 2020,Arquitecto Senior / Director Intl.,Expansión a Europa (España e Italia). Fusión de arquitectura tropical y mediterránea. Implementación de BIM.
+2020 – Actual,Fundador de CARQUIDEC,"Liderazgo en diseño paramétrico, lujo y aplicación de Inteligencia Artificial en arquitectura."
+2. CARQUIDEC: Filosofía y Servicios Especializados
+Fundado en 2020 en Barcelona, el estudio CARQUIDEC no solo ofrece diseño arquitectónico, sino que se define como una consultoría integral con una misión clara: "crear arquitectura que provoque emoción".
+Pilares de Diseño
+1. Diseño Paramétrico:  Uso de algoritmos para optimizar formas y estructuras, permitiendo una personalización extrema y eficiencia estructural.
+2. Arquitectura Bioclimática y Sostenible:  Estrategias pasivas de refrigeración, materiales nobles y cumplimiento de estándares internacionales (Passivhaus, LEED).
+3. Lujo y Residencial Premium:  Enfoque en villas contemporáneas y complejos multifamiliares de alta gama.
+4. IA Aplicada:  Integración de Python e Inteligencia Artificial para el análisis de datos paramétricos y la optimización de procesos de diseño.
+Herramientas Tecnológicas
+El estudio maneja un "stack" técnico avanzado que abarca:
+* Modelado y BIM:  Revit, Rhino/Grasshopper, AutoCAD, SketchUp.
+* Visualización:  V-Ray, Corona, Lumion, Enscape, Adobe Suite.
+* Análisis:  EnergyPlus para eficiencia energética.
+3. Análisis de Proyectos Destacados y Reconocimientos
+La cartera de proyectos de CARQUIDEC demuestra una capacidad versátil para manejar diversas escalas y tipologías, manteniendo siempre un estándar de alta eficiencia.
+Proyectos Clave
+* 2024: Complejo Residencial Multifamiliar (Corozal, Colombia):  8,500 m². Implementa diseño paramétrico bioclimático logrando un  40% de ahorro energético  comparado con construcciones convencionales.
+* 2022: Villa Contemporánea de Lujo (Montería, Colombia):  650 m² de construcción y 1,200 m² de jardín. Centrada en el paisajismo sensorial y estrategias pasivas.
+* 2019: Villa Mediterránea de Verano (Valencia, España):  Reinterpretación contemporánea de la arquitectura mediterránea con patios ajardinados.
+* 2018: Remodelación Hotel Boutique (Montería, Colombia):  1,800 m². Renovación integral de 4 estrellas con iluminación escenográfica.
+* 2017: Cine Independiente (Barranquilla, Colombia):  Certificación  LEED Platinum . Diseño acústico paramétrico y tecnología de proyección 4K.
+Premios Internacionales
+* Finalista Premio Latinoamericano de Arquitectura Sostenible (2024).
+* Mención de Honor, Bienal de Arquitectura de Colombia (2022).
+* Premio FAD de Arquitectura Internacional (2019).
+4. Hoja de Ruta para la Evolución Digital
+El estudio ha identificado 100 referencias clave para transformar su presencia digital, divididas en fases estratégicas de implementación.
+Referencias de Clase Mundial
+CARQUIDEC busca emular elementos de los estudios más prestigiosos:
+* Zaha Hadid:  Storytelling mediante scroll y partículas 3D.
+* Foster + Partners:  Grids minimalistas y galerías filtrables.
+* Tadao Ando:  El concepto de "Zen digital", priorizando el espacio en blanco y la serenidad visual.
+* Herzog & de Meuron:  Minimalismo absoluto y transiciones limpias.
+Estrategia de Implementación (Fases)
+1. Estética:  Adoptar el minimalismo extremo y narrativas visuales.
+2. Interactividad:  Implementación de  GSAP ScrollTrigger  para parallax y  Lenis  para scroll suave.
+3. Funcionalidad:  Uso de plantillas de filtrado de proyectos, validación de formularios y PWA (Progressive Web Apps).
+4. Tecnología Web Avanzada:  Integración de  Three.js  para visualización de proyectos en 3D y  Barba.js  para transiciones fluidas entre páginas.
+5. Contenido:  Documentar procesos de diseño y presentar la arquitectura como una narrativa.
+5. Análisis Visual y Estético
+Basado en el contexto visual proporcionado, la estética de CARQUIDEC y sus referencias se caracteriza por:
+* Interiores Conceptuales:  Espacios que utilizan iluminación cenital (claraboyas circulares), mobiliario de madera con líneas limpias y suelos de mármol o granito. Se observa una integración de simbología institucional en proyectos específicos (como salas de reuniones o cines).
+* Arquitectura Exterior:  Uso de hormigón visto, grandes superficies acristaladas y voladizos pronunciados. La integración del paisajismo es evidente, con palmeras y vegetación tropical que suavizan las estructuras modernas.
+* Identidad Visual:  El logotipo de CARQUIDEC utiliza una combinación de tonos dorados y negros, con tipografía serif y una "A" estilizada que evoca precisión y elegancia.
+Datos de Referencia Técnicos
+Categoría,Recursos Destacados
+Bibliotecas de Animación,"GSAP, Locomotive Scroll, Lottie, Anime.js."
+Renderizado y 3D,"Three.js, Pixi.js, Vanilla-tilt.js."
+Repositorios de Código,"Lantern (Portfolio GSAP), Awesome-Architecture."
+Portales de Tendencia,"ArchDaily, Dezeen, Awwwards."
+Este análisis concluye que CARQUIDEC se encuentra en una fase de consolidación como un referente en la  arquitectura paramétrica y bioclimática , apalancándose en décadas de experiencia internacional para liderar el mercado residencial y comercial de lujo con un enfoque altamente tecnológico.

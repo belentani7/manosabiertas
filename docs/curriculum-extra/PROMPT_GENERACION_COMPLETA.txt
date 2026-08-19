@@ -1,0 +1,275 @@
+PROMPT MAESTRO PARA GENERAR TODO EL CONTENIDO DE "MANOS ABIERTAS"
+==================================================================
+
+INSTRUCCIONES PARA LA IA QUE EJECUTARÁ ESTE PROMPT:
+----------------------------------------------------
+Eres el generador principal del ecosistema educativo "Manos Abiertas". Tu misión es crear TODOS los archivos de contenido didáctico siguiendo al pie de la letra la plantilla, el curriculum maestro y las reglas establecidas. No debes resumir, no debes mostrar ejemplos por consola: debes ESCRIBIR ARCHIVOS REALES en disco usando la herramienta Write.
+
+Lee primero estos archivos de referencia (ya existen en el workspace):
+1. `C:\Users\USER\Desktop\manos-abiertas-curriculum\_docs\CURRICULUM_MAESTRO_ES.md` — curriculum completo
+2. `C:\Users\USER\Desktop\manos-abiertas-curriculum\_docs\PLANTILLA_NIVEL.md` — plantilla obligatoria de cada archivo
+3. `C:\Users\USER\Desktop\manos-abiertas-curriculum\MANOS_ABIERTAS_DESCRIPCION.txt` — descripción del proyecto
+
+ESTRUCTURA DE CARPETAS YA CREADA:
+---------------------------------
+Base: `C:\Users\USER\Desktop\manos-abiertas-curriculum\`
+
+Módulos troncales (8 módulos × 26 niveles = 208 carpetas de nivel):
+- m01-introduccion-ia\nivel-00\ ... nivel-25\
+- m02-herramientas-sin-codigo\nivel-00\ ... nivel-25\
+- m03-ia-datos\nivel-00\ ... nivel-25\
+- m04-generacion-contenido\nivel-00\ ... nivel-25\
+- m05-automatizacion\nivel-00\ ... nivel-25\
+- m06-educacion-ia\nivel-00\ ... nivel-25\
+- m07-proyectos-comunitarios\nivel-00\ ... nivel-25\
+- m08-etica-futuro\nivel-00\ ... nivel-25\
+
+Cursos de idiomas (6 pares × 26 niveles = 156 carpetas de nivel):
+- idiomas\pt-en\nivel-00\ ... nivel-25\
+- idiomas\en-pt\nivel-00\ ... nivel-25\
+- idiomas\es-en\nivel-00\ ... nivel-25\
+- idiomas\en-es\nivel-00\ ... nivel-25\
+- idiomas\ca-en\nivel-00\ ... nivel-25\
+- idiomas\en-ca\nivel-00\ ... nivel-25\
+
+CONVENCIÓN DE NOMBRES DE ARCHIVO (OBLIGATORIA):
+-----------------------------------------------
+Cada carpeta de nivel contiene EXACTAMENTE 4 archivos (uno por idioma):
+- nivel-XX-ES.md
+- nivel-XX-PT.md
+- nivel-XX-CA.md
+- nivel-XX-EN.md
+
+Total de archivos a generar: 364 carpetas × 4 idiomas = 1.456 archivos .md
+
+PLANTILLA DE CADA ARCHIVO (COPIA EXACTA):
+-----------------------------------------
+```
+# [Título del Módulo] — Nivel [XX]
+## Idioma: [ES|PT|CA|EN] · Dificultad: [Semilla|Raíz|Tallo|Rama|Copa|Fruto]
+## Tiempo estimado: [X] horas
+
+## 🎯 Objetivo del nivel
+- [3-5 viñetas: qué sabrá HACER el alumno al terminar, lenguaje simple, persona 40+ sin informática]
+
+## 📖 Vocabulario esencial
+| Término | Explicación en palabras simples |
+|---------|--------------------------------|
+| [término 1] | [explicación sin jerga] |
+| [término 2] | [explicación sin jerga] |
+| [término 3] | [explicación sin jerga] |
+| [término 4] | [explicación sin jerga] |
+| [término 5] | [explicación sin jerga] |
+
+## 📚 Lección principal
+[Texto didáctico EXTENSO, mínimo 15-20 párrafos o equivalentes. Ejemplos de la vida cotidiana: banco, teléfono, compras, salud, familia, trabajo. Sin jerga técnica sin explicar. Metáforas del mundo físico: cocina, jardín, costura, casa, bricolaje. Público: 40+ años, pocos conocimientos informáticos. Lenguaje cálido, paciente.]
+
+## 💡 Ejemplos prácticos
+### Ejemplo 1: [Título]
+[Descripción de caso real aplicado]
+
+### Ejemplo 2: [Título]
+[Descripción de caso real aplicado]
+
+### Ejemplo 3: [Título]
+[Descripción de caso real aplicado]
+
+## 🛠️ Actividad guiada
+1. **Paso 1:** [Acción concreta: qué botón pulsar, qué escribir, dónde ir]
+2. **Paso 2:** [Acción concreta]
+3. **Paso 3:** [Acción concreta]
+4. **Paso 4:** [Acción concreta]
+5. **Paso 5:** [Acción concreta]
+[Resultado esperado al finalizar]
+
+## ✍️ Ejercicios de autoevaluación
+**Pregunta 1:** [Pregunta]
+**Respuesta:** [Respuesta completa]
+
+**Pregunta 2:** [Pregunta]
+**Respuesta:** [Respuesta completa]
+
+**Pregunta 3:** [Pregunta]
+**Respuesta:** [Respuesta completa]
+
+**Pregunta 4:** [Pregunta]
+**Respuesta:** [Respuesta completa]
+
+**Pregunta 5:** [Pregunta]
+**Respuesta:** [Respuesta completa]
+
+## ⚖️ Dimensión ética
+[Riesgos, privacidad, sesgos, responsabilidad adaptados al tema del nivel. Lenguaje claro.]
+
+## 🔓 Herramientas abiertas
+| Herramienta | Qué hace | Enlace | Gratuita |
+|-------------|----------|--------|----------|
+| [Nombre] | [Descripción] | [URL] | Sí |
+| [Nombre] | [Descripción] | [URL] | Sí |
+| [Nombre] | [Descripción] | [URL] | Sí |
+
+## 🧠 Resumen y puente
+- [Frase clave 1]
+- [Frase clave 2]
+- [Frase clave 3]
+- [Frase clave 4]
+- [Frase clave 5]
+
+**En el siguiente nivel aprenderás:** [Qué se verá en el nivel XX+1]
+```
+
+REGLAS DE REDACCIÓN INQUEBRANTABLES:
+------------------------------------
+1. **Público:** 40+ años, pocos conocimientos informáticos. Lenguaje cálido, paciente, sin tecnicismos.
+2. **Nunca asumir** que sabe qué es un archivo, una app, una cuenta, un navegador, un prompt, un modelo, una API, la nube, un servidor, un algoritmo. Explicarlo con metáforas.
+3. **Metáforas obligatorias:** cocina (recetas, ingredientes), jardín (semillas, riego, cosecha), costura (patrones, hilos, tela), casa (habitaciones, llaves, cimientos), bricolaje (herramientas, tornillos, planos).
+4. **Extensión por archivo:** MÍNIMO 80 líneas, MÁXIMO 200 líneas (contando todo el markdown).
+3. **NO emojis** salvo los que ya están en los encabezados de sección (🎯 📖 💡 🛠️ ✍️ ⚖️ 🔓 🧠).
+4. **Idioma del archivo = idioma del contenido.** Nunca mezclar. ES 100% español, PT 100% portugués, CA 100% catalán, EN 100% inglés.
+5. **Ejercicios de autoevaluación:** las 5 preguntas y respuestas son IDÉNTICAS en los 4 idiomas (traducidas fielmente).
+5. **Herramientas abiertas:** solo software gratuito, open source o con capa gratuita generosa. Nada de "prueba 14 días". Enlaces reales y verificables.
+6. **Dificultad por banda:**
+   - 00-04: Semilla
+   - 05-09: Raíz
+   - 10-14: Tallo
+   - 15-19: Rama
+   - 20-22: Copa
+   - 23-25: Fruto
+7. **Tiempo estimado:** 1-2h (Semilla), 2-3h (Raíz), 3-4h (Tallo), 4-5h (Rama), 5-6h (Copa), 6-8h (Fruto).
+
+DISTRIBUCIÓN TEMÁTICA POR MÓDULO (RESUMEN PARA GENERACIÓN):
+------------------------------------------------------------
+
+### M01 — Introducción a la IA
+- 00-04 Semilla: qué es IA (y qué no), IA en casa (voz, recomendaciones, fotos), miedo/realidades, ordenador como herramienta, datos como materia prima.
+- 05-09 Raíz: historia (Turing→ChatGPT), tipos IA (estrecha/general/super), aprendizaje automático, redes neuronales (metáforas), datos de entrenamiento.
+- 10-14 Tallo: cómo aprenden (supervisado/no supervisado/refuerzo), sesgos/errores, LLMs, IA generativa.
+- 15-19 Rama: arquitectura IA, evaluación modelos, prompting avanzado, IA multimodal, sistemas recomendación.
+- 20-22 Copa: diseñar soluciones IA, evaluar noticias IA, gestión proyectos IA, enseñar IA a otros.
+- 23-25 Fruto: agentes autónomos, IA científica, alineación, investigación, gobernanza, futuro humanidad+IA.
+
+### M02 — Herramientas sin Código
+- 00-04 Semilla: qué es una app, navegador, cuentas/contraseñas, chatbots (ChatGPT, Gemini), preguntar bien.
+- 05-09 Raíz: ChatGPT profundo, asistentes escritura, traductores IA, generadores imágenes (Bing, Canva), prompts buenos.
+- 10-14 Tallo: Google Colab sin programar, hojas cálculo con IA, NotebookLM, presentaciones con IA.
+- 15-19 Rama: Hugging Face Spaces, Power Automate/Make, BD sencillas con IA, voz (Piper, Whisper).
+- 20-22 Copa: asistentes propios, integrar herramientas, automatizaciones personales, publicar web con IA.
+- 23-25 Fruto: evaluar/escoger herramientas para organizaciones, desplegar soluciones IA abiertas, contribuir open source.
+
+### M03 — IA Aplicada a los Datos
+- 00-04 Semilla: qué son datos, ejemplos (recibos, listas, contactos), ordenar/clasificar, hoja cálculo básica, gráficos simples.
+- 05-09 Raíz: fórmulas, tablas dinámicas, visualización (barras/líneas/sectores), estadística básica (media/mediana/moda).
+- 10-14 Tallo: correlación vs causalidad, limpieza datos, Power BI / Looker básico, dashboards.
+- 15-19 Rama: análisis predictivo IA, regresión/clasificación (conceptos), AutoML (Teachable Machine, Vertex), ética datos.
+- 20-22 Copa: proyecto análisis completo, presentación hallazgos, narrativa con datos.
+- 23-25 Fruto: ciencia datos aplicada, ML en práctica, gobernanza dato, innovación basada en datos.
+
+### M04 — Generación de Contenido
+- 00-04 Semilla: contenido digital, texto IA, imágenes IA, derechos autor básicos.
+- 05-09 Raíz: prompting texto (artículos, cartas, resúmenes), imágenes (estilos/refinado), presentaciones auto.
+- 10-14 Tallo: audio (voz Piper, transcripción Whisper), vídeo (montaje básico IA), subtitulado auto.
+- 15-19 Rama: narrativa IA (historias, guiones), branding visual IA, vídeo educativo completo (pipeline FFmpeg+Piper), locución/doblaje.
+- 20-22 Copa: pipeline producción contenido, ética (deepfakes, atribución), editoriales con IA.
+- 23-25 Fruto: producción profesional, contenido multilingüe masivo, verificación/antidesinformación.
+
+### M05 — Automatización e Integración
+- 00-04 Semilla: qué es automatizar, tareas repetitivas casa/oficina, recordatorios, filtros email, alarmas/reglas.
+- 05-09 Raíz: Zapier/Make principiantes, conectar apps, notificaciones auto, plantillas listas.
+- 10-14 Tallo: lógica automatización (si-entonces), variables, IA en flujos, control errores.
+- 15-19 Rama: asistentes voz (Alexa/Google/Home Assistant), automatización hogar, bots chat sencillos.
+- 20-22 Copa: agentes con IA, automatización procesos negocio, RPA básico.
+- 23-25 Fruto: arquitectura automatización empresarial, orquestación agentes, optimización/mantenimiento.
+
+### M06 — Educación con IA
+- 00-04 Semilla: cómo aprender mejor, aprendizaje como hábito, herramientas estudio con IA.
+- 05-09 Raíz: IA tutor personal, resumir/explicar conceptos, ejercicios personalizados.
+- 10-14 Tallo: diseño planes estudio con IA, evaluación asistida, detección brechas conocimiento.
+- 15-19 Rama: creación materiales didácticos IA, vídeos educativos (pipeline open source), gamificación.
+- 20-22 Copa: docencia con IA (aula aumentada), accesibilidad/inclusión, evaluación ética con IA.
+- 23-25 Fruto: diseño curricular completo (como este proyecto), políticas educativas IA, investigación.
+
+### M07 — Proyectos Comunitarios
+- 00-04 Semilla: qué es un proyecto, trabajo en equipo, comunicación (WhatsApp, Meet), objetivos sencillos.
+- 05-09 Raíz: planificación básica, roles equipo, colaborativas (Drive, Canva, Trello).
+- 10-14 Tallo: kickoff proyecto, presupuesto simple, redes sociales difundir, voluntariado digital.
+- 15-19 Rama: proyectos impacto social, captación fondos (crowdfunding, subvenciones), medición impacto.
+- 20-22 Copa: gestión equipos/conflictos, marketing proyectos, sostenibilidad.
+- 23-25 Fruto: emprendimiento social, cooperativas tecnológicas, escalado proyectos, liderazgo.
+
+### M08 — Ética, Futuro y Gobernanza
+- 00-04 Semilla: ética básica, privacidad, contraseñas/seguridad, qué comparte la IA.
+- 05-09 Raíz: sesgos IA, discriminación algorítmica, desinformación, proteger datos.
+- 10-14 Tallo: regulación (GDPR, AI Act), responsabilidad, transparencia, explicabilidad.
+- 15-19 Rama: impacto laboral IA, derechos digitales, identidad/reputación, ciberseguridad personal.
+- 20-22 Copa: gobernanza IA organizaciones, comités ética, auditoría algoritmos, deontología profesional.
+- 23-25 Fruto: futuro humanidad (AGI, alineación, riesgos existenciales), política global IA, ciudadanía, legado.
+
+### CURSOS DE IDIOMAS (6 pares, misma distribución temática):
+- 00-02: Alfabeto/sonidos, pronunciación, saludos, presentarse, números 0-100
+- 03-05: Primeras frases: familia, trabajo, tiempo, comida, direcciones
+- 06-08: Verbo/tiempo presente: ser/estar/haber, presente simple, preguntas básicas
+- 09-11: Pasado/futuro: pasado simple/compuesto, futuro, rutinas
+- 12-14: Conversación real: compras, viajes, salud, banco, emergencias
+- 15-17: Intermedio: condicional, subjuntivo básico, conectores, opinión
+- 18-20: Vocabulario técnico: términos informática/IA en idioma meta
+- 21-23: Avanzado: lectura técnica, redacción, debates, idiomas formales
+- 24-25: Experto: fluidez, matices, cultura, enseñanza del idioma
+
+Cada lección de idioma incluye: vocabulario, gramática, diálogo modelo, ejercicio escucha (Piper), ejercicio escritura, ejercicio traducción, sección "Inglés para tecnología".
+
+METODOLOGÍA DE TRABAJO RECOMENDADA:
+-----------------------------------
+1. Genera por MÓDULO completo (los 26 niveles × 4 idiomas = 104 archivos).
+2. Dentro del módulo, genera por NIVEL (escribe los 4 idiomas de ese nivel antes de pasar al siguiente).
+3. Usa la plantilla como checklist: cada sección debe existir y tener contenido.
+3. Para los idiomas PT, CA, EN: traduce fielmente el contenido ES, adaptando matices culturales (ej. "banco" → "banco" en ES/PT, "banc" en CA, "bank" en EN; "whatsapp" se usa en todos).
+4. Verifica que cada archivo tiene entre 80-200 líneas.
+5. Al terminar un módulo, reporta: "Módulo X completado: 104 archivos escritos. Primer archivo: [ruta], último: [ruta]".
+
+ORDEN DE PRIORIDAD SUGERIDO:
+----------------------------
+1. M01 (base conceptual)
+2. M02 (herramientas inmediatas)
+3. M04 (generación contenido + pipeline vídeo)
+4. M03 (datos)
+5. M05 (automatización)
+6. M06 (educación)
+7. M07 (comunidad)
+8. M08 (ética)
+9. Cursos de idiomas (pueden generarse en paralelo al final)
+
+ARCHIVOS DE REFERENCIA YA EN DISCO:
+-----------------------------------
+- `C:\Users\USER\Desktop\manos-abiertas-curriculum\_docs\CURRICULUM_MAESTRO_ES.md`
+- `C:\Users\USER\Desktop\manos-abiertas-curriculum\_docs\PLANTILLA_NIVEL.md`
+- `C:\Users\USER\Desktop\manos-abiertas-curriculum\MANOS_ABIERTAS_DESCRIPCION.txt`
+
+EJEMPLO DE INICIO DE ARCHIVO (Nivel 00, M01, ES):
+-------------------------------------------------
+```
+# Módulo 1: Introducción a la Inteligencia Artificial — Nivel 00
+## Idioma: ES · Dificultad: Semilla
+## Tiempo estimado: 2 horas
+
+## 🎯 Objetivo del nivel
+- Entender qué es la inteligencia artificial usando un ejemplo de la vida real: una receta de cocina que se mejora cada vez que la cocinas.
+- Identificar tres lugares de tu casa donde ya hay IA trabajando sin que te des cuenta.
+- Perder el miedo a la palabra "inteligencia artificial" y verla como una herramienta más, como el cuchillo o el teléfono.
+- Saber la diferencia entre un programa tradicional (sigue instrucciones fijas) y una IA (aprende de ejemplos).
+
+## 📖 Vocabulario esencial
+| Término | Explicación en palabras simples |
+|---------|--------------------------------|
+| Inteligencia Artificial | Un programa que aprende de ejemplos en lugar de seguir solo instrucciones fijas. Como un aprendiz de cocina que prueba recetas y mejora solo. |
+| Algoritmo | Una receta paso a paso que el ordenador sigue. |
+| Dato | Cualquier información: una foto, un mensaje, un número, un sonido. La materia prima con la que aprende la IA. |
+| Modelo | El resultado final del aprendizaje: la "receta maestra" que la IA usa para hacer predicciones. |
+| Prompt | La instrucción que le das a la IA en lenguaje natural, como si se la dieras a una persona. |
+
+## 📚 Lección principal
+Imagina que quieres enseñar a alguien a distinguir manzanas de naranjas...
+[continúa 15-20 párrafos con metáforas de cocina, frutas, mercado, etc.]
+```
+
+¡A TRABAJAR! GENERA LOS 1.456 ARCHIVOS.
+========================================

@@ -1,0 +1,93 @@
+MANOS ABIERTAS — DESCRIPCIÓN DEL PROYECTO
+==============================================
+
+¿Qué es Manos Abiertas?
+-----------------------
+Manos Abiertas es un ecosistema educativo abierto, gratuito y multilingüe diseñado para que personas de 40 años o más, con pocos o ningún conocimiento previo de informática, puedan comprender, usar y dirigir la Inteligencia Artificial en su vida cotidiana, su trabajo y su comunidad.
+
+No enseña a programar. Enseña a pensar con la IA, a usarla como herramienta y a no quedar fuera del mundo digital.
+
+Filosofía central
+-----------------
+- "Ninguna mano quede cerrada": la tecnología no debe excluir por edad, idioma o formación.
+- Accesibilidad radical: lenguaje llano, metáforas de la vida real (cocina, jardín, costura, bricolaje), cero jerga sin explicar.
+- Multilingüe nativo: todo el contenido existe en Español, Portugués, Catalán e Inglés, con la misma calidad.
+- Herramientas 100% abiertas y gratuitas: solo software libre, sin cuotas, sin registros obligatorios, sin dependencia de proveedores propietarios.
+- Ética transversal: cada lección incluye su dimensión de privacidad, sesgos, responsabilidad y derechos digitales.
+- Práctica inmediata: cada nivel termina con una acción real que el alumno puede hacer ese mismo día.
+
+Estructura del currículum
+-------------------------
+8 MÓDULOS TRONCALES (niveles 0–25 cada uno):
+1. M01 — Introducción a la Inteligencia Artificial
+2. M02 — Herramientas sin Código (chatbots, generadores, automatizaciones)
+3. M03 — IA Aplicada a los Datos (hojas de cálculo, dashboards, análisis predictivo)
+4. M04 — Generación de Contenido (texto, imagen, audio, vídeo con IA)
+5. M05 — Automatización e Integración (Make, n8n, asistentes de voz, agentes)
+6. M06 — Educación con IA (tutor personal, creación de materiales, accesibilidad)
+7. M07 — Proyectos Comunitarios (colaboración, impacto social, emprendimiento)
+8. M08 — Ética, Futuro y Gobernanza (riesgos, regulación, derechos, legado)
+
+6 CURSOS DE IDIOMAS TÉCNICOS (niveles 0–25):
+- Portugués → Inglés | Inglés → Portugués
+- Español → Inglés | Inglés → Español
+- Catalán → Inglés | Inglés → Catalán
+Enfocados a vocabulario técnico de IA e informática, con audios generados por Piper TTS.
+
+NIVELES 0–25 (6 bandas de progresión):
+- 0–4  Semilla   (nunca tocó tecnología, miedo inicial)
+- 5–9  Raíz      (usa teléfono/PC básico, curiosidad despierta)
+- 10–14 Tallo    (comprende conceptos, experimenta)
+- 15–19 Rama     (maneja herramientas, crea contenido)
+- 20–22 Copa     (diseña proyectos, enseña a otros)
+- 23–25 Fruto    (innovador, líder, referente comunitario)
+
+Metodología de entrega
+----------------------
+- Texto completo en Markdown por nivel e idioma (archivos .md).
+- Audios narrados con Piper TTS (voces neurales gratuitas, offline).
+- Vídeos educativos generados con pipeline open source: Chrome headless + FFmpeg + Piper (sin APIs de pago).
+- Ejercicios con soluciones, glosarios, plantillas descargables.
+- Certificación por bandas (Semilla, Raíz, Tallo, Rama, Copa, Fruto).
+
+Público objetivo
+----------------
+Personas de 40+ años que:
+- Usan WhatsApp, email, banca online, pero no saben qué es un "prompt" ni un "modelo".
+- Tienen oficios, comercios, cuidados, tareas domésticas, voluntariado.
+- Quieren ahorrar tiempo, comunicarse mejor, no depender de otros para trámites digitales.
+- Hablan español, portugués o catalán como lengua materna.
+
+Ejemplos de impacto real
+------------------------
+- Una masajista a domicilio (60 años) aprende a usar un chatbot para gestionar citas, recordatorios y cobros por WhatsApp sin programar (M02, Nivel 8).
+- Un jubilado (68 años) crea un álbum de fotos narrado con voz sintética para sus nietos usando el pipeline de vídeo (M04, Nivel 12).
+- Una ama de casa (52 años) automatiza el control de gastos del hogar en una hoja de cálculo con IA que le avisa si se pasa de presupuesto (M03, Nivel 10).
+- Un voluntario de comedor social (55 años) usa IA para redactar solicitudes de subvención y traducirlas a inglés/catalán (M04 + Curso ES-EN, Nivel 15).
+
+Tecnología base (todo gratuito y local)
+---------------------------------------
+- Generación de texto: modelos abiertos vía APIs gratuitas (Cerebras, SambaNova, Groq, Google AI Studio, Mistral) orquestados con LiteLLM.
+- TTS (voz): Piper TTS (offline, 50+ idiomas, calidad neural).
+- Vídeo: Chrome headless + FFmpeg (renderizado local).
+- Automatización: n8n / Make (nivel gratuito) + webhooks.
+- Despliegue: estático (GitHub Pages, Netlify) o contenedor Docker local.
+
+Estado actual (agosto 2026)
+---------------------------
+- Curriculum maestro definido (8 módulos × 26 niveles + 6 idiomas × 26 niveles = 364 unidades didácticas).
+- Plantilla de nivel estandarizada (9 secciones obligatorias).
+- Pipeline de vídeo TTS+FFmpeg validado y funcional.
+- Directorio de trabajo: `C:\Users\USER\Desktop\manos-abiertas-curriculum\`
+- Próximo hito: generación masiva de los 364 archivos de contenido (en curso).
+
+Contacto y participación
+------------------------
+Proyecto abierto a contribuciones: traducción, revisión, testeo con usuarios reales, difusión.
+Licencia: CC BY-SA 4.0 (contenido) / MIT (código de pipelines).
+Repositorio: (por definir)
+Comunidad: (por definir)
+
+---
+"La tecnología no es para los jóvenes. Es para quien la necesita."
+— Manos Abiertas, 2026

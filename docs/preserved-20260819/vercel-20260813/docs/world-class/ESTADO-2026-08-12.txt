@@ -1,0 +1,80 @@
+MANOS ABIERTAS - ESTADO VERIFICADO - 2026-08-12
+
+CHECKOUT CANONICO
+Checkout canonico local privado, fuera del repositorio publico.
+
+RAMA
+recovery/claude-feature-integration-20260808
+
+ARQUITECTURA
+- Manos Abiertas: escuela social publica.
+- NOIACORE School OS: plano de control privado separado.
+- Referencia NOIACORE original preservada sin cambios en carpeta local privada fuera del repositorio publico.
+
+IMPLEMENTADO EN ESTE LOTE
+- Build desbloqueado excluyendo node_modules.broken* de TypeScript y ESLint.
+- HTML anidado corregido en layout por idioma.
+- Cobertura i18n honesta y visible: 39 idiomas registrados, 2 completos, 24 parciales, 13 beta.
+- RTL centralizado para ar, fa y ur.
+- Selector de idioma y panel de accesibilidad reforzados para teclado, foco y Escape.
+- Confianza de recursos derivada de fuente y fecha valida.
+- 39/3686 recursos verificados; 3647 marcados pendientes de revision.
+- Afirmaciones publicas falsas de miles de recursos verificados eliminadas.
+- APIs con limites de cuerpo, JSON obligatorio, rate limit, errores seguros y no-store.
+- IA remota requiere consentToRemoteAI=true; sin consentimiento usa fallback local.
+- Comunidad bloquea publicacion automatica de PII, enlaces, markup activo y riesgo directo.
+- 20 pruebas offline con node:test.
+- Navegacion responsive corregida: cero solapes a 1440 px.
+- Directorio responsive verificado: 390 px sin overflow horizontal.
+
+ARTEFACTOS
+- 3000 casos de cobertura estrategica, no 3000 implementaciones independientes.
+- 200 repositorios GitHub candidatos.
+- 52 fuentes de datos autoritativas candidatas.
+- 5000 guias HTML separadas: Windows 2000, Android 1500, Linux 1500.
+- 6 guias A4 de una pagina: Office, WhatsApp, Gemini, Copilot, DeepSeek y Qwen.
+- docs/world-class/NOIACORE-SCHOOL-OS.md define el plano de control privado.
+
+GATES APROBADOS
+- npm run build: 441 paginas estaticas y 8 rutas API.
+- npm run lint: exit 0.
+- npm run typecheck: exit 0 antes del ultimo cambio responsive; el build final repitio TypeScript y paso.
+- npm run test:core: 20/20.
+- npm run i18n:verify: exit 0.
+- npm run trust:verify: exit 0.
+- npm run strategy:verify: 3000 + 200 + 52 verificados estructuralmente.
+- npm run tools:verify: 5000 guias verificadas.
+- npm run guides:verify: 6 guias verificadas.
+- npm audit --omit=dev: 0 vulnerabilidades conocidas.
+- Secret scan Git: 0 archivos sensibles y 0 patrones de claves.
+- HTTP: rutas es/ar, recursos, cursos, CV, sitemap y health devuelven 200.
+- Cabeceras: CSP y nosniff presentes.
+- API sin consentimiento: chat y study-tools usan proveedor local/offline.
+- Content-Type text/plain en chat: 415.
+- Visual: 1440 px sin solapes; 390 px sin overflow.
+
+NO PUBLICADO
+- Sin commit nuevo.
+- Sin push.
+- Sin deploy.
+- Sin cuentas externas ni gasto.
+
+POR QUE NO ES AUN LA MEJOR DEL MUNDO
+- Solo es/en estan completos; 24 idiomas son parciales y 13 beta.
+- 3647 recursos carecen de fecha de revision.
+- Falta pipeline humano de verificacion, caducidad y rollback de datos.
+- Falta mapa real con coordenadas, distancia, fuente y fallback accesible.
+- Rate limit es local por instancia, no distribuido.
+- Falta control UI explicito para consentimiento de IA remota.
+- Falta moderacion humana o cola de revision comunitaria.
+- Falta bateria E2E completa, auditoria WCAG externa, rendimiento y seguridad dinamica.
+- Falta observabilidad respetuosa con privacidad y gobierno editorial.
+
+SIGUIENTE ORDEN
+1. Consentimiento IA en UI y pruebas HTTP de las cinco herramientas.
+2. Pipeline de confianza: verifiedAt, expiresAt, evidencia, responsable y revision.
+3. Mapas/localizacion con lista accesible y geolocalizacion opcional.
+4. Completar idiomas prioritarios con revision humana.
+5. E2E responsive, teclado, screen reader y red lenta.
+6. NOIACORE School OS privado con matriz de gates y cola editorial.
+7. Commit/push solo tras revisar diff completo y cerrar los gates pendientes.

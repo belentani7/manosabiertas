@@ -1,0 +1,90 @@
+MANOS ABIERTAS - ESTADO VERIFICADO - 2026-08-13
+
+PUBLICACION
+- Repositorio: belentani7/manosabiertas-vercel, rama main.
+- Produccion publica: https://manosabiertas-vercel.vercel.app
+- Vercel completo el deployment del lote de seguridad 851b813.
+
+BASELINE ANTES DEL NUEVO LOTE
+- 54 mejoras reales registradas: 34 verified y 20 applied.
+- 37/37 pruebas core.
+- Build: 441 paginas estaticas y 8 rutas API.
+- npm audit --omit=dev: 0 vulnerabilidades conocidas.
+- Secret scan del diff publicado: 0 coincidencias.
+
+LOTE PUBLICADO Y VALIDADO
+- Escape HTML para impresion y exportacion.
+- CSP en documentos HTML descargables.
+- URLs HTTP(S) sin credenciales en sugerencias y exportaciones.
+- Nombres de descarga normalizados.
+- Lectura local acotada y validada por esquema.
+- Progreso, favoritos, cursos, accesibilidad, borradores, recordatorios y recientes endurecidos.
+- 41/41 pruebas core tras el lote.
+- Build exacto con VERCEL=1: 441 paginas estaticas, 8 rutas API, exit 0.
+- Runtime: 11 valores locales manipulados; cinco rutas sin crash ni desbordamiento horizontal.
+- Produccion: cinco rutas criticas con HTTP 200, CSP, nosniff, HSTS y proteccion de framing.
+
+SEGUNDO LOTE PUBLICADO Y VALIDADO - acbc691
+- 89 mejoras reales registradas: 61 verified y 28 applied.
+- CV, carta, chat y ruta personal restauran solo datos acotados y tipados.
+- Backups versionados con limites y rollback si falla una escritura.
+- Entrada y salida ATS validadas antes de alcanzar React.
+- Chat limitado a 20 mensajes y 12.000 caracteres por entrada.
+- 48/48 pruebas core, lint y typecheck aprobados.
+- Build exacto con VERCEL=1: 441 paginas estaticas, 8 rutas API, exit 0.
+- Runtime: 15 valores manipulados mas onboarding; 8 rutas sin crash ni overflow.
+- Produccion: CV y rutas criticas con HTTP 200 y cabeceras de seguridad completas.
+
+TERCER LOTE PUBLICADO Y VALIDADO - 8dce99c
+- 115 mejoras reales registradas: 87 verified y 28 applied.
+- Ocho consumidores remotos comparten timeout, cancelacion, MIME y limite de respuesta.
+- Playground, estudio, comunidad y health validan estructura antes de renderizar.
+- Proveedores IA restringen HTTPS, credenciales, modelo, tokens, JSON y salida.
+- Prompts y contextos se recortan antes de estado y red.
+- 59/59 pruebas core, lint y typecheck aprobados.
+- Build exacto con VERCEL=1: 441 paginas estaticas, 8 rutas API, exit 0.
+- Runtime local: seis APIs con contrato JSON; IA, CV y Comunidad sin crash ni overflow.
+- Produccion: IA, CV y Comunidad HTTP 200; health y chat HTTP 200 con JSON contractual.
+- Cabeceras: CSP, HSTS, nosniff y framing DENY presentes en produccion.
+
+CUARTO LOTE PUBLICADO Y VALIDADO - d752890
+- 135 mejoras reales registradas: 107 verified y 28 applied.
+- Lectura JSON de entrada corta y cancela streams al superar el limite.
+- Content-Length, limites, ventanas e IP de cliente se normalizan antes de usarse.
+- Rate-limit identifica Vercel primero y publica Retry-After y metadatos de cuota.
+- Todas las respuestas API comparten cache privada, CSP, referrer y framing restrictivos.
+- API raiz declara producto, version, privacidad y endpoints en vez del placeholder.
+- Proxy conserva tanto /api como sus subrutas sin localizarlas.
+- Configuracion desplegada mantiene CSP no ejecutable y referrer nulo en JSON API.
+- Comunidad sin backend responde feed local degradado como contrato util, no como fallo GET.
+- 63/63 pruebas core, lint y typecheck aprobados.
+- Build exacto con VERCEL=1: 441 paginas estaticas, 8 rutas API, exit 0.
+- Runtime local: /api, health y comunidad HTTP 200 con CSP/referrer especificos.
+- Runtime defensivo: 260 KB devuelve 413 y cuota agotada devuelve 429 con metadatos.
+- Comunidad cliente renderiza el fallback local sin crash ni overflow horizontal.
+- Produccion: /api, health, comunidad, chat y paginas criticas HTTP 200.
+- Produccion defensiva: 260 KB devuelve 413 y MIME incorrecto devuelve 415.
+- Produccion API: CSP sin ejecucion, referrer nulo y nosniff presentes.
+
+QUINTO LOTE VALIDADO EN PRUEBAS
+- 155 mejoras reales registradas: 127 verified y 28 applied.
+- Chat, carta, CV, ATS, estudio y comunidad usan contratos centrales estrictos.
+- Idiomas API se limitan exactamente a los 39 codigos registrados.
+- Prompts IA reciben instruccion explicita para cada idioma registrado.
+- Chat exige turno final de usuario y maximo agregado de 48.000 caracteres.
+- CV y ATS aplican presupuestos agregados de 32.000 y 48.000 caracteres.
+- Payload CV excluye identificadores locales antes de red o servidor.
+- Consentimiento remoto string, claves extra y objetos anidados ambiguos se rechazan.
+- 69/69 pruebas core y typecheck aprobados.
+
+LIMITES ABIERTOS
+- 13 idiomas siguen en fallback espanol; solo es/en estan completos.
+- 3.647 recursos siguen pendientes de fecha de revision.
+- 16 señales de dialogo requieren runtime manual.
+- Falta matriz completa de teclado, contraste, reflow y lectores de pantalla.
+- Rate limit sigue siendo local por instancia.
+- Lectura comunitaria usa fallback local HTTP 200; publicacion compartida sigue 503 sin backend persistente.
+- El objetivo de 1.000 mejoras no esta completo.
+
+REGLA DE PUBLICACION
+No hacer push del lote hasta pasar build, seguridad, privacidad, accesibilidad, i18n, datos, pruebas, secretos y revision de cambios ajenos.
