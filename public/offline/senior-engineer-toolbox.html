@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caja de Herramientas Senior Tech — Ingenieros y Arquitectos</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #e11d48;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+        }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1.5rem;
+        }
+        h1 {
+            color: var(--accent);
+            font-size: 2.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            font-size: 1.25rem;
+            margin-top: 0;
+            color: #38bdf8;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        textarea, input {
+            width: 100%;
+            background-color: #0f172a;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .output {
+            background-color: #0b0f19;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Manos Abiertas · Senior Tech</h1>
+            <p class="subtitle">Herramientas de apoyo operativo para ingenieros y arquitectos (40-60 años)</p>
+        </header>
+
+        <!-- Herramienta 1: Generador de Minutas y Actas -->
+        <div class="card">
+            <h2>📝 Generador de Actas de Reunión de Obra</h2>
+            <label for="obraNombre">Nombre de la Obra / Proyecto:</label>
+            <input type="text" id="obraNombre" placeholder="Ej. Reforma Estructural Edificio Hospitalet">
+            
+            <label for="asuntosTratados">Puntos Clave Tratados:</label>
+            <textarea id="asuntosTratados" rows="3" placeholder="Ej. Retraso en suministro de perfilería metálica, revisión de cimentación sector B..."></textarea>
+            
+            <button onclick="generarActa()">Generar Acta Profesional</button>
+            <div id="outputActa" class="output" style="display:none;"></div>
+        </div>
+
+        <!-- Herramienta 2: Prompt Asistente Técnico para IA -->
+        <div class="card">
+            <h2>💡 Constructor de Prompts Técnicos para IA Gratuita</h2>
+            <label for="tareaTecnica">¿Qué documento o tarea necesitas redactar?</label>
+            <input type="text" id="tareaTecnica" placeholder="Ej. Pliego de condiciones para instalación eléctrica en baja tensión">
+            
+            <label for="tonoDeseado">Tono y Nivel Técnico:</label>
+            <input type="text" id="tonoDeseado" value="Formal, riguroso, adaptado a normativa española LOE / CTE">
+            
+            <button onclick="generarPrompt()">Crear Prompt Profesional</button>
+            <div id="outputPrompt" class="output" style="display:none;"></div>
+        </div>
+
+        <footer>
+            Manos Abiertas · Hospitalet · Herramientas locales operativas sin dependencia externa.
+        </footer>
+    </div>
+
+    <script>
+        function generarActa() {
+            const obra = document.getElementById('obraNombre').value || 'Obra General';
+            const puntos = document.getElementById('asuntosTratados').value || 'Sin incidentes reseñables.';
+            const fecha = new Date().toLocaleDateString('es-ES');
+            
+            const texto = `ACTA DE REUNIÓN DE OBRA Y COORDINACIÓN\n` +
+                          `-----------------------------------------\n` +
+                          `Proyecto: ${obra}\n` +
+                          `Fecha: ${fecha}\n` +
+                          `Lugar: Hospitalet de Llobregat / Oficina Técnica\n\n` +
+                          `ASUNTOS TRATADOS Y ACUERDOS:\n` +
+                          `${puntos}\n\n` +
+                          `PRÓXIMA REVISIÓN:\n` +
+                          `Se convoca seguimiento para el próximo martes a las 10:00 h.\n` +
+                          `--- Documento generado con Manos Abiertas Senior Tech ---`;
+            
+            const out = document.getElementById('outputActa');
+            out.style.display = 'block';
+            out.textContent = texto;
+        }
+
+        function generarPrompt() {
+            const tarea = document.getElementById('tareaTecnica').value || 'informe técnico';
+            const tono = document.getElementById('tonoDeseado').value || 'formal';
+            
+            const prompt = `Actúa como un ingeniero consultor experto con más de 25 años de experiencia en el sector. ` +
+                           `Necesito que redactes un documento técnico profesional sobre: "${tarea}". ` +
+                           `Utiliza un tono ${tono}, estructurado en apartados claros (Introducción, Normativa aplicable, Metodología, Conclusiones y Salvedades profesionales). ` +
+                           `Evita lenguaje impreciso y asegúrate de que sea directamente útil para la dirección facultativa.`;
+            
+            const out = document.getElementById('outputPrompt');
+            out.style.display = 'block';
+            out.textContent = prompt;
+        }
+    </script>
+</body>
+</html>
