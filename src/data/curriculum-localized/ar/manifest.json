@@ -1,0 +1,17 @@
+{
+  "language": "ar",
+  "areas": [
+    "A1",
+    "A10",
+    "A2",
+    "A3",
+    "A4",
+    "A5",
+    "A6",
+    "A7",
+    "A8",
+    "A9"
+  ],
+  "lessons": 1000,
+  "status": "machine-generated-pending-human-review"
+}
