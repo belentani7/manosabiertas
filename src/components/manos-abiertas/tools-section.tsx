@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Wrench, FolderOpen, Calculator, Trophy, MapPin, Bell, FileText, HardDrive } from 'lucide-react';
+import { Wrench, FolderOpen, Calculator, Trophy, MapPin, Bell, FileText, HardDrive, Box } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -16,8 +16,9 @@ import { GAMIFICATION_BADGES } from '@/data/tools-data';
 import { useProgress } from '@/hooks/use-progress';
 import { cn } from '@/lib/utils';
 import { LocalDataPanel } from './local-data-panel';
+import { OpenModelViewer } from './open-model-viewer';
 
-type ToolTab = 'documents' | 'processes' | 'templates' | 'cost' | 'reminders' | 'badges' | 'data';
+type ToolTab = 'documents' | 'processes' | 'templates' | 'cost' | 'reminders' | 'badges' | 'data' | 'model3d';
 
 const TOOLS: { id: ToolTab; emoji: string; icon: typeof FolderOpen; title: string; desc: string; color: string }[] = [
   { id: 'documents', emoji: '📋', icon: FolderOpen, title: 'Checklist de documentos', desc: 'Trámites esenciales para regularizarte', color: 'from-amber-400 to-orange-500' },
@@ -27,6 +28,7 @@ const TOOLS: { id: ToolTab; emoji: string; icon: typeof FolderOpen; title: strin
   { id: 'reminders', emoji: '🔔', icon: Bell, title: 'Recordatorios', desc: 'No pierdas plazos importantes', color: 'from-rose-400 to-pink-500' },
   { id: 'badges', emoji: '🏆', icon: Trophy, title: 'Tus logros', desc: 'Insignias desbloqueadas', color: 'from-indigo-400 to-purple-500' },
   { id: 'data', emoji: '💾', icon: HardDrive, title: 'Tu progreso', desc: 'Guarda, lleva y comparte tu plan', color: 'from-slate-400 to-slate-600' },
+  { id: 'model3d', emoji: '🧱', icon: Box, title: 'Maquetas 3D', desc: 'Abre copias locales GLB, OBJ y STL', color: 'from-sky-500 to-blue-600' },
 ];
 
 export function ToolsSection() {
@@ -57,6 +59,7 @@ export function ToolsSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
               onClick={() => setActiveTool(tool.id)}
+              aria-pressed={active}
               className="group text-left"
             >
               <Card className={cn(
@@ -98,6 +101,7 @@ export function ToolsSection() {
         {activeTool === 'reminders' && <SmartReminders />}
         {activeTool === 'badges' && <BadgesDisplay />}
         {activeTool === 'data' && <LocalDataPanel />}
+        {activeTool === 'model3d' && <OpenModelViewer />}
       </motion.div>
     </div>
   );

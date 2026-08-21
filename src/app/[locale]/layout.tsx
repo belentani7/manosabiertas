@@ -69,11 +69,14 @@ export default async function LocaleLayout({
   const t = translations[locale] || translations.es;
   const isRTL = language?.rtl ?? false;
 
+  // El documento <html> pertenece exclusivamente al RootLayout. Usar otro
+  // <html> dentro de una ruta localizada genera hidratación inválida y rompe
+  // el prerenderizado; este contenedor conserva idioma y dirección por región.
   return (
-    <html lang={locale} dir={isRTL ? 'rtl' : 'ltr'} suppressHydrationWarning>
+    <div lang={locale} dir={isRTL ? 'rtl' : 'ltr'} className="contents">
       <ManoAbiertoLocaleProvider locale={locale} translations={t}>
         {children}
       </ManoAbiertoLocaleProvider>
-    </html>
+    </div>
   );
 }

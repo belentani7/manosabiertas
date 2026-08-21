@@ -43,6 +43,7 @@ export const MASTER_CURRICULUM: MasterArea[] = AREAS;
 export const MASTER_LESSONS: MasterLesson[] = AREAS.flatMap((area) => area.lessons);
 export const MASTER_LESSON_COUNT = MASTER_LESSONS.length;
 export const MASTER_AREA_COUNT = MASTER_CURRICULUM.length;
+export const LOCALIZED_DRAFT_LANGUAGES = ['ar', 'en', 'fr', 'ro', 'zh'] as const;
 
 export const CURRICULUM_LANGUAGE_STATUS: Record<LanguageCode, 'master-available' | 'translation-pending-human-review'> =
   Object.fromEntries(
@@ -62,6 +63,8 @@ export function getMasterCurriculumStats() {
     areas: MASTER_AREA_COUNT,
     lessons: MASTER_LESSON_COUNT,
     languages: LANGUAGES.length,
+    localizedDraftLanguages: LOCALIZED_DRAFT_LANGUAGES.length,
+    humanReviewedCurriculumLanguages: 1,
     byLevel,
     publicationStatus: 'machine-generated-pending-human-review' as const,
   };

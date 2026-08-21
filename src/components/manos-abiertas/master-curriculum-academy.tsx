@@ -51,7 +51,7 @@ export function MasterCurriculumAcademy() {
             <div className="grid grid-cols-2 gap-2 text-center text-sm sm:grid-cols-4">
               <Stat label="Puntos" value={stats.lessons} />
               <Stat label="Áreas" value={stats.areas} />
-              <Stat label="Idiomas" value={stats.languages} />
+              <Stat label="Interfaz" value={stats.languages} />
               <Stat label="Completados" value={completed.length} />
             </div>
           </div>
@@ -59,6 +59,9 @@ export function MasterCurriculumAcademy() {
             <ShieldCheck className="h-4 w-4 shrink-0" />
             <span>Estado editorial: generación asistida por máquina pendiente de revisión pedagógica, factual, lingüística y de accesibilidad. No es una certificación profesional ni asesoramiento jurídico o médico.</span>
           </div>
+          <p className="mt-3 text-xs text-muted-foreground">
+            Cobertura lingüística honesta: interfaz disponible en {stats.languages} idiomas; currículo maestro revisable en español; {stats.localizedDraftLanguages} borradores localizados con control de estructura, todavía pendientes de revisión pedagógica y lingüística humana.
+          </p>
         </CardContent>
       </Card>
 
