@@ -19,7 +19,10 @@ export interface GitHubRepo {
 export type RepoCategory =
   | 'ai-ml' | 'web-dev' | 'python' | 'javascript'
   | 'data-science' | 'devops' | 'mobile' | 'game-dev'
-  | 'security' | 'design' | 'education' | 'tools';
+  | 'security' | 'design' | 'education' | 'tools'
+  | 'voice-tts' | 'voice-clone' | 'speech-recognition'
+  | 'image-gen' | 'image-edit' | 'video-gen' | 'video-edit'
+  | 'audio-music' | 'llm-local' | 'oss-software';
 
 export interface FreeAPI {
   id: string;
@@ -45,6 +48,16 @@ export const REPO_CATEGORIES: { value: RepoCategory; label: string; emoji: strin
   { value: 'design', label: 'Diseño', emoji: '🎨', color: 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300' },
   { value: 'education', label: 'Educación', emoji: '🎓', color: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300' },
   { value: 'tools', label: 'Herramientas', emoji: '🔧', color: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-950 dark:text-cyan-300' },
+  { value: 'voice-tts', label: 'Voz: texto a voz', emoji: '🗣️', color: 'bg-lime-100 text-lime-700 dark:bg-lime-950 dark:text-lime-300' },
+  { value: 'voice-clone', label: 'Voz: clonación', emoji: '🎙️', color: 'bg-pink-100 text-pink-700 dark:bg-pink-950 dark:text-pink-300' },
+  { value: 'speech-recognition', label: 'Voz: reconocimiento', emoji: '👂', color: 'bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-300' },
+  { value: 'image-gen', label: 'Imagen: generación', emoji: '🖼️', color: 'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300' },
+  { value: 'image-edit', label: 'Imagen: edición', emoji: '✂️', color: 'bg-fuchsia-100 text-fuchsia-700 dark:bg-fuchsia-950 dark:text-fuchsia-300' },
+  { value: 'video-gen', label: 'Video: generación', emoji: '🎬', color: 'bg-orange-100 text-orange-700 dark:bg-orange-950 dark:text-orange-300' },
+  { value: 'video-edit', label: 'Video: edición', emoji: '🎞️', color: 'bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300' },
+  { value: 'audio-music', label: 'Audio y música', emoji: '🎵', color: 'bg-teal-100 text-teal-700 dark:bg-teal-950 dark:text-teal-300' },
+  { value: 'llm-local', label: 'LLM locales', emoji: '🧠', color: 'bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-300' },
+  { value: 'oss-software', label: 'Software libre esencial', emoji: '💿', color: 'bg-slate-100 text-slate-700 dark:bg-slate-950 dark:text-slate-300' },
 ];
 
 export const GITHUB_REPOS: GitHubRepo[] = [
@@ -142,10 +155,17 @@ export const FREE_APIS: FreeAPI[] = [
   { id: 'api-30', name: 'Dog API', url: 'https://dog.ceo/dog-api/', description: 'Fotos de perros por raza. Sin auth.', category: 'Imágenes', auth: 'none', free: true },
 ];
 
+// Repos de voz, imagen, video y software libre (102 repos curados)
+// Se fusionan aquí para que aparezcan en el mismo buscador/filtro que el resto.
+import { MEDIA_REPOS } from './open-source-media-hub';
+
+export const ALL_REPOS: GitHubRepo[] = [
+  ...GITHUB_REPOS,
+  ...MEDIA_REPOS.map(({ languages_supported, license, ...rest }) => rest as GitHubRepo),
+];
+
 export function getRepoStats() {
   const byCategory: Record<string, number> = {};
-  GITHUB_REPOS.forEach((r) => { byCategory[r.category] = (byCategory[r.category] || 0) + 1; });
-  return { total: GITHUB_REPOS.length, byCategory, apis: FREE_APIS.length };
+  ALL_REPOS.forEach((r) => { byCategory[r.category] = (byCategory[r.category] || 0) + 1; });
+  return { total: ALL_REPOS.length, byCategory, apis: FREE_APIS.length };
 }
-
-console.log('GitHub repos:', GITHUB_REPOS.length, 'Free APIs:', FREE_APIS.length);

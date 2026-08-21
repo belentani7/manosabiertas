@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { GITHUB_REPOS, FREE_APIS, REPO_CATEGORIES, getRepoStats, type GitHubRepo, type RepoCategory } from '@/data/open-source-hub';
+import { ALL_REPOS, FREE_APIS, REPO_CATEGORIES, getRepoStats, type GitHubRepo, type RepoCategory } from '@/data/open-source-hub';
 import { cn } from '@/lib/utils';
 
 const DIFFICULTY_LABELS = {
@@ -31,7 +31,7 @@ export function OpenSourceHub() {
   const stats = useMemo(() => getRepoStats(), []);
 
   const filteredRepos = useMemo(() => {
-    return GITHUB_REPOS.filter((r) => {
+    return ALL_REPOS.filter((r) => {
       const matchesQuery = !query ||
         r.name.toLowerCase().includes(query.toLowerCase()) ||
         r.description.toLowerCase().includes(query.toLowerCase()) ||
@@ -59,7 +59,7 @@ export function OpenSourceHub() {
           Hub de Código Abierto
         </h2>
         <p className="text-sm text-muted-foreground mt-1">
-          {GITHUB_REPOS.length} repositorios GitHub + {FREE_APIS.length} APIs gratuitas para aprender
+          {ALL_REPOS.length} repositorios GitHub + {FREE_APIS.length} APIs gratuitas para aprender
         </p>
       </div>
 
@@ -77,7 +77,7 @@ export function OpenSourceHub() {
         </CardContent></Card>
         <Card><CardContent className="p-3 text-center">
           <BookOpen className="h-4 w-4 mx-auto mb-1 text-emerald-500" />
-          <div className="text-lg font-bold">{GITHUB_REPOS.filter(r => r.hasTutorial).length}</div>
+          <div className="text-lg font-bold">{ALL_REPOS.filter(r => r.hasTutorial).length}</div>
           <div className="text-[10px] text-muted-foreground">Con Tutorial</div>
         </CardContent></Card>
       </div>
@@ -90,7 +90,7 @@ export function OpenSourceHub() {
             activeTab === 'repos' ? 'bg-card shadow-sm text-primary' : 'text-muted-foreground')}
         >
           <Github className="h-3.5 w-3.5" />
-          Repositorios ({GITHUB_REPOS.length})
+          Repositorios ({ALL_REPOS.length})
         </button>
         <button
           onClick={() => setActiveTab('apis')}
@@ -122,7 +122,7 @@ export function OpenSourceHub() {
           <div className="flex flex-wrap gap-1.5">
             <button onClick={() => setCategory('all')}
               className={cn('text-xs px-2.5 py-1 rounded-full border', category === 'all' ? 'bg-primary text-primary-foreground border-primary' : 'border-border')}>
-              Todos ({GITHUB_REPOS.length})
+              Todos ({ALL_REPOS.length})
             </button>
             {REPO_CATEGORIES.map((c) => {
               const count = stats.byCategory[c.value] || 0;

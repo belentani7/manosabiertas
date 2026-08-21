@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FileText, Plus, Trash2, Sparkles, Download, Printer, Eye, User, Briefcase, GraduationCap, Award, Languages, Palette, Loader2, Check, Lightbulb, Save, RotateCcw, Mail, Target, Camera, ArrowLeft, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -64,6 +64,51 @@ const QUICK_PROFILES = [
     skills: ['HTML', 'CSS', 'JavaScript', 'Git', 'Accesibilidad web'],
     templateId: 'two-column-tech',
   },
+  {
+    id: 'hostelry',
+    label: 'Hosteleria y restauracion',
+    profession: 'Camarero/a de sala y barra',
+    summary: 'Profesional de hosteleria con orientacion al cliente, agilidad bajo presion y buena presencia. Acostumbrado a trabajar en equipo en turnos rotativos y temporada alta.',
+    experience: { id: '1', position: 'Camarero/a', company: 'Restaurante / bar', startDate: '2023', endDate: 'Actual', description: '• Atencion en sala y barra durante servicios de alta demanda\n• Manejo de bandeja, TPV y cobro\n• Coordinacion con cocina para tiempos de servicio' },
+    skills: ['Atencion al cliente', 'Trabajo bajo presion', 'Manejo de TPV', 'Idiomas basicos'],
+    templateId: 'creative-vibrant',
+  },
+  {
+    id: 'construction',
+    label: 'Construccion y oficios',
+    profession: 'Peon de construccion / oficios varios',
+    summary: 'Trabajador responsable con experiencia en obra, manejo de herramientas y cumplimiento de normas de seguridad. Puntual, resistente y con disposicion para aprender oficios especificos.',
+    experience: { id: '1', position: 'Peon de obra', company: 'Empresa de construccion', startDate: '2021', endDate: 'Actual', description: '• Apoyo en tareas de albanileria, pintura y limpieza de obra\n• Cumplimiento estricto de normas de prevencion de riesgos\n• Manejo de herramientas manuales y electricas basicas' },
+    skills: ['Prevencion de riesgos laborales', 'Trabajo en equipo', 'Resistencia fisica', 'Puntualidad'],
+    templateId: 'professional-execute',
+  },
+  {
+    id: 'logistics',
+    label: 'Logistica y reparto',
+    profession: 'Repartidor/a y mozo de almacen',
+    summary: 'Profesional organizado con carnet de conducir y conocimiento de la ciudad. Experiencia en gestion de pedidos, carga y descarga, y cumplimiento de rutas y horarios.',
+    experience: { id: '1', position: 'Repartidor/a', company: 'Empresa de logistica', startDate: '2022', endDate: 'Actual', description: '• Reparto de pedidos en tiempo y forma usando app de rutas\n• Carga y descarga de mercancia\n• Atencion cordial en la entrega y gestion de incidencias' },
+    skills: ['Carnet de conducir B', 'Orientacion espacial', 'Gestion del tiempo', 'Apps de reparto'],
+    templateId: 'modern-clean',
+  },
+  {
+    id: 'admin',
+    label: 'Administracion y oficina',
+    profession: 'Auxiliar administrativo/a',
+    summary: 'Perfil administrativo organizado, con manejo de Office (Word, Excel), atencion telefonica y archivo documental. Discreto, resolutivo y con buena redaccion.',
+    experience: { id: '1', position: 'Auxiliar administrativo/a', company: 'Oficina / gestoria', startDate: '2022', endDate: 'Actual', description: '• Gestion de correo, archivo y agenda\n• Elaboracion de documentos con Word y Excel\n• Atencion telefonica y presencial a clientes' },
+    skills: ['Microsoft Office', 'Atencion telefonica', 'Redaccion', 'Organizacion documental'],
+    templateId: 'minimal-elegant',
+  },
+  {
+    id: 'commerce',
+    label: 'Comercio y ventas',
+    profession: 'Dependiente/a y vendedor/a',
+    summary: 'Profesional de ventas con habilidad para el trato con el publico, gestion de caja y reposicion de producto. Orientado a resultados y con buena imagen personal.',
+    experience: { id: '1', position: 'Dependiente/a', company: 'Tienda / comercio', startDate: '2023', endDate: 'Actual', description: '• Atencion y asesoramiento a clientes\n• Manejo de caja registradora y TPV\n• Reposicion y organizacion de producto en tienda' },
+    skills: ['Ventas', 'Atencion al cliente', 'Manejo de caja', 'Trabajo en equipo'],
+    templateId: 'sidebar-photo',
+  },
 ] as const;
 
 export function CVSection() {
@@ -88,6 +133,31 @@ export function CVSection() {
   const [savedAt, setSavedAt] = useState<Date | null>(null);
   const [activeTool, setActiveTool] = useState<'cv' | 'letter' | 'ats'>('cv');
   const [guidedStep, setGuidedStep] = useState<number | null>(null);
+  const previewRef = useRef<HTMLDivElement>(null);
+  const [pageOverflow, setPageOverflow] = useState<{ overflowPx: number; percent: number } | null>(null);
+
+  // A4 útil aprox a 96dpi con márgenes de impresión: ~1050px de alto de contenido
+  const PAGE_HEIGHT_PX = 1050;
+
+  useEffect(() => {
+    const node = previewRef.current;
+    if (!node) return;
+    const measure = () => {
+      const contentHeight = node.scrollHeight;
+      if (contentHeight > PAGE_HEIGHT_PX) {
+        setPageOverflow({
+          overflowPx: contentHeight - PAGE_HEIGHT_PX,
+          percent: Math.round((contentHeight / PAGE_HEIGHT_PX) * 100),
+        });
+      } else {
+        setPageOverflow(null);
+      }
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(node);
+    return () => observer.disconnect();
+  });
 
   // Autosave to localStorage (debounced via effect)
   useEffect(() => {
@@ -701,6 +771,16 @@ export function CVSection() {
 
           {/* Action bar */}
           <div className="sticky bottom-4 space-y-2">
+            {/* Page limit warning */}
+            {pageOverflow && (
+              <div className="flex items-start gap-2 text-[11px] bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 px-3 py-2 rounded-lg border border-amber-300/60 dark:border-amber-800/60">
+                <Target className="h-3.5 w-3.5 shrink-0 mt-0.5" />
+                <span>
+                  Tu CV ocupa aprox. <strong>{pageOverflow.percent}%</strong> de una página A4. Recorta descripciones,
+                  quita una experiencia antigua o reduce el resumen para que quepa en 1 página (recomendado en España).
+                </span>
+              </div>
+            )}
             {/* Saved indicator */}
             {savedAt && (
               <div className="flex items-center justify-center gap-2 text-[11px] text-muted-foreground bg-card/80 backdrop-blur px-3 py-1.5 rounded-lg border border-border">
@@ -749,6 +829,7 @@ export function CVSection() {
         {/* PREVIEW */}
         <div className={cn(showPreview ? 'block' : 'hidden lg:block', 'print:block')}>
           <CVPreview
+            previewRef={previewRef}
             template={template}
             fullName={fullName}
             profession={profession}
@@ -770,132 +851,309 @@ export function CVSection() {
   );
 }
 
+/**
+ * Diseños premium por plantilla.
+ * Cada layout tiene una composición visual distinta (no solo color):
+ * - classic: cabecera centrada, una columna, estilo Europass
+ * - modern: barra lateral oscura con contacto/skills, columna principal clara
+ * - minimal: una columna estrecha, tipografía sobria, sin color de acento
+ * - creative: cabecera con degradado de color y foto circular
+ * - professional: cabecera ejecutiva con franja de color y grid de logros
+ */
 function CVPreview({
-  template, fullName, profession, email, phone, address, photo, summary, experiences, education, skills, languages, hasContent,
+  previewRef, template, fullName, profession, email, phone, address, photo, summary, experiences, education, skills, languages, hasContent,
 }: {
+  previewRef: React.RefObject<HTMLDivElement | null>;
   template: typeof CV_TEMPLATES[0];
   fullName: string; profession: string; email: string; phone: string; address: string;
   photo: string | null;
   summary: string; experiences: Experience[]; education: Education[]; skills: string[]; languages: string[];
   hasContent: boolean;
 }) {
-  return (
-    <div className="bg-white text-black shadow-xl rounded-lg overflow-hidden print:shadow-none print:rounded-none min-h-[600px]">
-      <div className="p-8" style={{ fontFamily: 'Georgia, serif' }}>
-        {/* Header */}
-        <div className="mb-4 flex items-start justify-between gap-4 border-b-2 pb-4" style={{ borderColor: template.layout === 'modern' ? '#0f766e' : '#334155' }}>
-          <div className="min-w-0">
-            <h2 className="text-3xl font-bold tracking-tight">
-              {fullName || <span className="text-gray-400">Tu Nombre</span>}
-            </h2>
-            <p className="text-lg text-gray-700 mt-0.5">{profession || <span className="text-gray-400">Tu Profesión</span>}</p>
-            <div className="flex flex-wrap gap-3 mt-2 text-xs text-gray-600">
-              {email && <span>✉ {email}</span>}
-              {phone && <span>☎ {phone}</span>}
-              {address && <span>📍 {address}</span>}
+  if (!hasContent) {
+    return (
+      <div className="bg-white text-black shadow-xl rounded-lg overflow-hidden print:shadow-none print:rounded-none min-h-[600px]">
+        <div className="p-8 text-center py-16 text-gray-400">
+          <div className="relative inline-block mb-4">
+            <FileText className="h-16 w-16 mx-auto opacity-30" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-4xl animate-pulse">📝</span>
             </div>
           </div>
-          {photo && (
-            <div
-              className="h-24 w-24 shrink-0 rounded-md border bg-cover bg-center"
-              style={{ backgroundImage: `url(${photo})` }}
-              role="img"
-              aria-label="Foto del curriculum"
-            />
-          )}
+          <p className="text-sm font-medium text-gray-500 mb-1">Tu CV aparecerá aquí</p>
+          <p className="text-xs text-gray-400 max-w-xs mx-auto">
+            Empieza a rellenar el formulario de la izquierda. Verás los cambios en tiempo real.
+          </p>
+          <div className="mt-6 max-w-md mx-auto space-y-2 opacity-40">
+            <div className="h-3 bg-gray-200 rounded w-3/4 mx-auto" />
+            <div className="h-3 bg-gray-200 rounded w-1/2 mx-auto" />
+            <div className="h-3 bg-gray-200 rounded w-2/3 mx-auto mt-4" />
+            <div className="h-3 bg-gray-200 rounded w-1/3 mx-auto" />
+          </div>
         </div>
+      </div>
+    );
+  }
 
-        {/* Summary */}
-        {summary && (
-          <div className="mb-4">
-            <h2 className="text-sm font-bold uppercase tracking-wider mb-1.5 text-gray-700">Perfil Profesional</h2>
-            <p className="text-sm leading-relaxed text-gray-800">{summary}</p>
-          </div>
-        )}
+  const accent = ACCENT_BY_LAYOUT[template.layout] || ACCENT_BY_LAYOUT.classic;
+  const Body = LAYOUT_COMPONENTS[template.layout] || LAYOUT_COMPONENTS.classic;
 
-        {/* Experience */}
-        {experiences.length > 0 && (
-          <div className="mb-4">
-            <h2 className="text-sm font-bold uppercase tracking-wider mb-2 text-gray-700">Experiencia</h2>
-            <div className="space-y-3">
-              {experiences.map((exp) => (
-                <div key={exp.id}>
-                  <div className="flex justify-between items-baseline">
-                    <h3 className="font-semibold text-sm">{exp.position || 'Puesto'}</h3>
-                    <span className="text-xs text-gray-500">{exp.startDate} - {exp.endDate || 'Actual'}</span>
-                  </div>
-                  <div className="text-xs text-gray-600 italic mb-1">{exp.company}</div>
-                  <p className="text-sm text-gray-700 whitespace-pre-line">{exp.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Education */}
-        {education.length > 0 && (
-          <div className="mb-4">
-            <h2 className="text-sm font-bold uppercase tracking-wider mb-2 text-gray-700">Educación</h2>
-            <div className="space-y-2">
-              {education.map((ed) => (
-                <div key={ed.id}>
-                  <div className="flex justify-between items-baseline">
-                    <h3 className="font-semibold text-sm">{ed.title || 'Título'}</h3>
-                    <span className="text-xs text-gray-500">{ed.year}</span>
-                  </div>
-                  <div className="text-xs text-gray-600 italic">{ed.institution}</div>
-                  {ed.description && <p className="text-xs text-gray-700 mt-0.5">{ed.description}</p>}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Skills */}
-        {skills.length > 0 && (
-          <div className="mb-4">
-            <h2 className="text-sm font-bold uppercase tracking-wider mb-2 text-gray-700">Habilidades</h2>
-            <div className="flex flex-wrap gap-1.5">
-              {skills.map((s) => (
-                <span key={s} className="text-xs px-2 py-0.5 rounded border border-gray-300 bg-gray-50">{s}</span>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Languages */}
-        {languages.length > 0 && (
-          <div>
-            <h2 className="text-sm font-bold uppercase tracking-wider mb-2 text-gray-700">Idiomas</h2>
-            <div className="flex flex-wrap gap-2">
-              {languages.map((l) => (
-                <span key={l} className="text-xs">• {l}</span>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {!hasContent && (
-          <div className="text-center py-16 text-gray-400">
-            <div className="relative inline-block mb-4">
-              <FileText className="h-16 w-16 mx-auto opacity-30" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-4xl animate-pulse">📝</span>
-              </div>
-            </div>
-            <p className="text-sm font-medium text-gray-500 mb-1">Tu CV aparecerá aquí</p>
-            <p className="text-xs text-gray-400 max-w-xs mx-auto">
-              Empieza a rellenar el formulario de la izquierda. Verás los cambios en tiempo real.
-            </p>
-            <div className="mt-6 max-w-md mx-auto space-y-2 opacity-40">
-              <div className="h-3 bg-gray-200 rounded w-3/4 mx-auto" />
-              <div className="h-3 bg-gray-200 rounded w-1/2 mx-auto" />
-              <div className="h-3 bg-gray-200 rounded w-2/3 mx-auto mt-4" />
-              <div className="h-3 bg-gray-200 rounded w-1/3 mx-auto" />
-            </div>
-          </div>
-        )}
+  return (
+    <div className="bg-white text-black shadow-xl rounded-lg overflow-hidden print:shadow-none print:rounded-none">
+      <div ref={previewRef} data-cv-page style={{ fontFamily: template.layout === 'minimal' ? 'Georgia, serif' : 'system-ui, -apple-system, sans-serif' }}>
+        <Body
+          accent={accent}
+          fullName={fullName} profession={profession} email={email} phone={phone} address={address}
+          photo={photo} summary={summary} experiences={experiences} education={education}
+          skills={skills} languages={languages}
+        />
       </div>
     </div>
   );
 }
+
+type LayoutProps = {
+  accent: { primary: string; secondary: string; text: string; soft: string };
+  fullName: string; profession: string; email: string; phone: string; address: string;
+  photo: string | null; summary: string; experiences: Experience[]; education: Education[];
+  skills: string[]; languages: string[];
+};
+
+const ACCENT_BY_LAYOUT: Record<string, { primary: string; secondary: string; text: string; soft: string }> = {
+  classic: { primary: '#1e3a8a', secondary: '#3b82f6', text: '#1e293b', soft: '#eff6ff' },
+  modern: { primary: '#0f766e', secondary: '#14b8a6', text: '#134e4a', soft: '#f0fdfa' },
+  minimal: { primary: '#334155', secondary: '#64748b', text: '#1e293b', soft: '#f8fafc' },
+  creative: { primary: '#db2777', secondary: '#f97316', text: '#831843', soft: '#fdf2f8' },
+  professional: { primary: '#4338ca', secondary: '#7c3aed', text: '#312e81', soft: '#eef2ff' },
+};
+
+function ContactLine({ email, phone, address }: { email: string; phone: string; address: string }) {
+  return (
+    <>
+      {email && <span>✉ {email}</span>}
+      {phone && <span>☎ {phone}</span>}
+      {address && <span>📍 {address}</span>}
+    </>
+  );
+}
+
+function ExperienceBlock({ experiences, accent }: { experiences: LayoutProps['experiences']; accent: LayoutProps['accent'] }) {
+  if (!experiences.length) return null;
+  return (
+    <div className="mb-4">
+      <h2 className="text-sm font-bold uppercase tracking-wider mb-2" style={{ color: accent.primary }}>Experiencia</h2>
+      <div className="space-y-3">
+        {experiences.map((exp) => (
+          <div key={exp.id}>
+            <div className="flex justify-between items-baseline gap-2">
+              <h3 className="font-semibold text-sm">{exp.position || 'Puesto'}</h3>
+              <span className="text-xs text-gray-500 shrink-0">{exp.startDate} - {exp.endDate || 'Actual'}</span>
+            </div>
+            <div className="text-xs text-gray-600 italic mb-1">{exp.company}</div>
+            <p className="text-sm text-gray-700 whitespace-pre-line">{exp.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function EducationBlock({ education, accent }: { education: LayoutProps['education']; accent: LayoutProps['accent'] }) {
+  if (!education.length) return null;
+  return (
+    <div className="mb-4">
+      <h2 className="text-sm font-bold uppercase tracking-wider mb-2" style={{ color: accent.primary }}>Educación</h2>
+      <div className="space-y-2">
+        {education.map((ed) => (
+          <div key={ed.id}>
+            <div className="flex justify-between items-baseline gap-2">
+              <h3 className="font-semibold text-sm">{ed.title || 'Título'}</h3>
+              <span className="text-xs text-gray-500 shrink-0">{ed.year}</span>
+            </div>
+            <div className="text-xs text-gray-600 italic">{ed.institution}</div>
+            {ed.description && <p className="text-xs text-gray-700 mt-0.5">{ed.description}</p>}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ---- Layout: Classic (Europass) — una columna, cabecera centrada ----
+function ClassicLayout({ accent, fullName, profession, email, phone, address, photo, summary, experiences, education, skills, languages }: LayoutProps) {
+  return (
+    <div className="p-8">
+      <div className="mb-4 flex items-start justify-between gap-4 border-b-2 pb-4" style={{ borderColor: accent.primary }}>
+        <div className="min-w-0">
+          <h2 className="text-3xl font-bold tracking-tight">{fullName || <span className="text-gray-400">Tu Nombre</span>}</h2>
+          <p className="text-lg text-gray-700 mt-0.5">{profession || <span className="text-gray-400">Tu Profesión</span>}</p>
+          <div className="flex flex-wrap gap-3 mt-2 text-xs text-gray-600">
+            <ContactLine email={email} phone={phone} address={address} />
+          </div>
+        </div>
+        {photo && <div className="h-24 w-24 shrink-0 rounded-md border bg-cover bg-center" style={{ backgroundImage: `url(${photo})` }} role="img" aria-label="Foto del curriculum" />}
+      </div>
+      {summary && (
+        <div className="mb-4">
+          <h2 className="text-sm font-bold uppercase tracking-wider mb-1.5" style={{ color: accent.primary }}>Perfil Profesional</h2>
+          <p className="text-sm leading-relaxed text-gray-800">{summary}</p>
+        </div>
+      )}
+      <ExperienceBlock experiences={experiences} accent={accent} />
+      <EducationBlock education={education} accent={accent} />
+      {skills.length > 0 && (
+        <div className="mb-4">
+          <h2 className="text-sm font-bold uppercase tracking-wider mb-2" style={{ color: accent.primary }}>Habilidades</h2>
+          <div className="flex flex-wrap gap-1.5">
+            {skills.map((s) => <span key={s} className="text-xs px-2 py-0.5 rounded border" style={{ borderColor: accent.secondary, background: accent.soft }}>{s}</span>)}
+          </div>
+        </div>
+      )}
+      {languages.length > 0 && (
+        <div>
+          <h2 className="text-sm font-bold uppercase tracking-wider mb-2" style={{ color: accent.primary }}>Idiomas</h2>
+          <div className="flex flex-wrap gap-2">{languages.map((l) => <span key={l} className="text-xs">• {l}</span>)}</div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ---- Layout: Modern — barra lateral oscura con contacto y skills ----
+function ModernLayout({ accent, fullName, profession, email, phone, address, photo, summary, experiences, education, skills, languages }: LayoutProps) {
+  return (
+    <div className="flex min-h-[600px]">
+      <aside className="w-[34%] shrink-0 p-6 text-white" style={{ background: accent.primary }}>
+        {photo && <div className="h-24 w-24 rounded-full border-4 border-white/30 bg-cover bg-center mb-4" style={{ backgroundImage: `url(${photo})` }} role="img" aria-label="Foto del curriculum" />}
+        <h2 className="text-xl font-bold leading-tight">{fullName || 'Tu Nombre'}</h2>
+        <p className="text-sm opacity-90 mt-1">{profession || 'Tu Profesión'}</p>
+        <div className="mt-4 space-y-1 text-xs opacity-90">
+          {email && <div>✉ {email}</div>}
+          {phone && <div>☎ {phone}</div>}
+          {address && <div>📍 {address}</div>}
+        </div>
+        {skills.length > 0 && (
+          <div className="mt-6">
+            <h3 className="text-xs font-bold uppercase tracking-wider mb-2 opacity-80">Habilidades</h3>
+            <div className="flex flex-wrap gap-1">{skills.map((s) => <span key={s} className="text-[10px] px-2 py-0.5 rounded-full bg-white/15">{s}</span>)}</div>
+          </div>
+        )}
+        {languages.length > 0 && (
+          <div className="mt-6">
+            <h3 className="text-xs font-bold uppercase tracking-wider mb-2 opacity-80">Idiomas</h3>
+            <div className="space-y-1 text-xs opacity-90">{languages.map((l) => <div key={l}>{l}</div>)}</div>
+          </div>
+        )}
+      </aside>
+      <div className="flex-1 p-6">
+        {summary && (
+          <div className="mb-4">
+            <h2 className="text-sm font-bold uppercase tracking-wider mb-1.5" style={{ color: accent.primary }}>Perfil</h2>
+            <p className="text-sm leading-relaxed text-gray-800">{summary}</p>
+          </div>
+        )}
+        <ExperienceBlock experiences={experiences} accent={accent} />
+        <EducationBlock education={education} accent={accent} />
+      </div>
+    </div>
+  );
+}
+
+// ---- Layout: Minimal — una columna estrecha, sin color de acento fuerte ----
+function MinimalLayout({ fullName, profession, email, phone, address, photo, summary, experiences, education, skills, languages }: LayoutProps) {
+  const accent = ACCENT_BY_LAYOUT.minimal;
+  return (
+    <div className="p-10 max-w-xl mx-auto">
+      <div className="mb-6 flex items-center gap-4">
+        {photo && <div className="h-16 w-16 shrink-0 rounded-full border bg-cover bg-center grayscale" style={{ backgroundImage: `url(${photo})` }} role="img" aria-label="Foto del curriculum" />}
+        <div>
+          <h2 className="text-2xl font-light tracking-wide">{fullName || 'Tu Nombre'}</h2>
+          <p className="text-sm text-gray-600">{profession || 'Tu Profesión'}</p>
+        </div>
+      </div>
+      <div className="text-xs text-gray-500 mb-6 flex flex-wrap gap-3"><ContactLine email={email} phone={phone} address={address} /></div>
+      {summary && <p className="text-sm leading-relaxed text-gray-800 mb-6 border-l-2 pl-3 border-gray-300">{summary}</p>}
+      <ExperienceBlock experiences={experiences} accent={accent} />
+      <EducationBlock education={education} accent={accent} />
+      {skills.length > 0 && <p className="text-xs text-gray-600 mb-3"><strong>Habilidades:</strong> {skills.join(' · ')}</p>}
+      {languages.length > 0 && <p className="text-xs text-gray-600"><strong>Idiomas:</strong> {languages.join(' · ')}</p>}
+    </div>
+  );
+}
+
+// ---- Layout: Creative — cabecera con degradado y foto circular ----
+function CreativeLayout({ accent, fullName, profession, email, phone, address, photo, summary, experiences, education, skills, languages }: LayoutProps) {
+  return (
+    <div>
+      <div className="p-8 text-white" style={{ background: `linear-gradient(135deg, ${accent.primary}, ${accent.secondary})` }}>
+        <div className="flex items-center gap-4">
+          {photo && <div className="h-20 w-20 shrink-0 rounded-full border-4 border-white/50 bg-cover bg-center" style={{ backgroundImage: `url(${photo})` }} role="img" aria-label="Foto del curriculum" />}
+          <div>
+            <h2 className="text-2xl font-bold">{fullName || 'Tu Nombre'}</h2>
+            <p className="text-sm opacity-90">{profession || 'Tu Profesión'}</p>
+            <div className="flex flex-wrap gap-3 mt-1 text-xs opacity-90"><ContactLine email={email} phone={phone} address={address} /></div>
+          </div>
+        </div>
+      </div>
+      <div className="p-8">
+        {summary && <p className="text-sm leading-relaxed text-gray-800 mb-4">{summary}</p>}
+        <ExperienceBlock experiences={experiences} accent={accent} />
+        <EducationBlock education={education} accent={accent} />
+        {skills.length > 0 && (
+          <div className="mb-4">
+            <div className="flex flex-wrap gap-1.5">{skills.map((s) => <span key={s} className="text-xs px-2.5 py-1 rounded-full text-white" style={{ background: accent.secondary }}>{s}</span>)}</div>
+          </div>
+        )}
+        {languages.length > 0 && <div className="flex flex-wrap gap-2 text-xs">{languages.map((l) => <span key={l}>• {l}</span>)}</div>}
+      </div>
+    </div>
+  );
+}
+
+// ---- Layout: Professional — cabecera ejecutiva con franja de color ----
+function ProfessionalLayout({ accent, fullName, profession, email, phone, address, photo, summary, experiences, education, skills, languages }: LayoutProps) {
+  return (
+    <div>
+      <div className="h-2" style={{ background: `linear-gradient(90deg, ${accent.primary}, ${accent.secondary})` }} />
+      <div className="p-8">
+        <div className="flex items-start justify-between gap-4 mb-6">
+          <div>
+            <h2 className="text-3xl font-bold" style={{ color: accent.text }}>{fullName || 'Tu Nombre'}</h2>
+            <p className="text-lg text-gray-600 mt-0.5">{profession || 'Tu Profesión'}</p>
+            <div className="flex flex-wrap gap-3 mt-2 text-xs text-gray-600"><ContactLine email={email} phone={phone} address={address} /></div>
+          </div>
+          {photo && <div className="h-24 w-24 shrink-0 rounded-lg border-2 bg-cover bg-center" style={{ backgroundImage: `url(${photo})`, borderColor: accent.primary }} role="img" aria-label="Foto del curriculum" />}
+        </div>
+        {summary && (
+          <div className="mb-5 p-3 rounded-lg" style={{ background: accent.soft }}>
+            <p className="text-sm leading-relaxed" style={{ color: accent.text }}>{summary}</p>
+          </div>
+        )}
+        <ExperienceBlock experiences={experiences} accent={accent} />
+        <EducationBlock education={education} accent={accent} />
+        <div className="grid grid-cols-2 gap-4">
+          {skills.length > 0 && (
+            <div>
+              <h2 className="text-sm font-bold uppercase tracking-wider mb-2" style={{ color: accent.primary }}>Habilidades</h2>
+              <div className="flex flex-wrap gap-1.5">{skills.map((s) => <span key={s} className="text-xs px-2 py-0.5 rounded border" style={{ borderColor: accent.secondary }}>{s}</span>)}</div>
+            </div>
+          )}
+          {languages.length > 0 && (
+            <div>
+              <h2 className="text-sm font-bold uppercase tracking-wider mb-2" style={{ color: accent.primary }}>Idiomas</h2>
+              <div className="space-y-1 text-xs text-gray-700">{languages.map((l) => <div key={l}>{l}</div>)}</div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const LAYOUT_COMPONENTS: Record<string, React.ComponentType<LayoutProps>> = {
+  classic: ClassicLayout,
+  modern: ModernLayout,
+  minimal: MinimalLayout,
+  creative: CreativeLayout,
+  professional: ProfessionalLayout,
+};
