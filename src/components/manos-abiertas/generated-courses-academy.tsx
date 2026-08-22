@@ -11,8 +11,9 @@ import espanolDiario from '@/data/generated-courses/espanol-diario';
 import portuguesVida from '@/data/generated-courses/portugues-vida';
 import primeros30Dias from '@/data/generated-courses/primeros-30-dias';
 import seniorTech from '@/data/generated-courses/senior-tech-arq';
+import windowsSeguroBasico from '@/data/generated-courses/windows-seguro-basico';
 
-const COURSES = [primeros30Dias, espanolDiario, portuguesVida, ciberseguridad, emprende, seniorTech];
+const COURSES = [primeros30Dias, espanolDiario, portuguesVida, ciberseguridad, emprende, seniorTech, windowsSeguroBasico];
 
 export function GeneratedCoursesAcademy() {
   const [courseId, setCourseId] = useState<string | null>(null);

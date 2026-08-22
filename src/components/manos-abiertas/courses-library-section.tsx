@@ -136,7 +136,7 @@ export function CoursesLibrarySection() {
             )}
           >
             <BookOpen className="h-3.5 w-3.5" />
-            Cursos propios (6)
+            Cursos propios (7)
           </button>
           <button
             onClick={() => setActiveTab('level0')}
