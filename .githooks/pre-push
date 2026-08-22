@@ -1,3 +1,21 @@
 #!/usr/bin/env sh
-echo "Push bloqueado: publica solo desde el canon publico revisado." >&2
-exit 1
+# Publica solo con confirmacion explicita hacia el repo publico.
+# Backups y otros remotos pasan sin friccion.
+
+remote_url="$2"
+
+case "$remote_url" in
+  *belentani7/manosabiertas*)
+    if [ "$MANOS_ALLOW_PUSH" = "1" ]; then
+      echo "Push publico autorizado (MANOS_ALLOW_PUSH=1)." >&2
+      exit 0
+    fi
+    echo "Bloqueado: push al repo PUBLICO de manos abiertas." >&2
+    echo "Si es intencional, confirma asi:" >&2
+    echo "  MANOS_ALLOW_PUSH=1 git push <remoto> <rama>" >&2
+    exit 1
+    ;;
+  *)
+    exit 0
+    ;;
+esac
