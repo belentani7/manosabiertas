@@ -23,6 +23,7 @@ const ContactsSection = dynamic(() => import('./contacts-section').then((m) => m
 const ToolsSection = dynamic(() => import('./tools-section').then((m) => m.ToolsSection));
 const EventsSection = dynamic(() => import('./events-section').then((m) => m.EventsSection));
 const CoursesLibrarySection = dynamic(() => import('./courses-library-section').then((m) => m.CoursesLibrarySection));
+const DownloadsVaultSection = dynamic(() => import('./downloads-vault-section').then((m) => m.DownloadsVaultSection));
 const CommunitySection = dynamic(() => import('./community-section').then((m) => m.CommunitySection));
 
 export function ManosAbiertasApp() {
@@ -89,6 +90,7 @@ export function ManosAbiertasApp() {
             {activeSection === 'tools' && <ToolsSection />}
             {activeSection === 'events' && <EventsSection />}
             {activeSection === 'courses' && <CoursesLibrarySection />}
+            {activeSection === 'downloads' && <DownloadsVaultSection />}
             {activeSection === 'community' && <CommunitySection />}
             {activeSection === 'contacts' && <ContactsSection />}
           </motion.div>

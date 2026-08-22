@@ -15,6 +15,7 @@ export type SectionId =
   | 'tools'
   | 'events'
   | 'courses'
+  | 'downloads'
   | 'community';
 
 interface AppState {
@@ -48,7 +49,7 @@ export function sectionFromHash(hash: string): SectionId | undefined {
   const clean = hash.replace(/^#\/?/, '');
   const valid: SectionId[] = [
     'home', 'learn-ai', 'cv', 'office', 'resources', 'rights',
-    'contacts', 'tools', 'events', 'courses', 'community',
+    'contacts', 'tools', 'events', 'courses', 'downloads', 'community',
   ];
   return (valid as string[]).includes(clean) ? (clean as SectionId) : undefined;
 }

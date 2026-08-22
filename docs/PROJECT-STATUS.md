@@ -33,7 +33,7 @@ La capa de diagnóstico informa del proveedor configurado sin exponer claves, co
 - `bunx tsc --noEmit --skipLibCheck`: correcto.
 - `bun run build`: correcto.
 - `/api/health` local: HTTP 200 y proveedor Groq detectado con las variables del perfil de Windows.
-- La API directa de Groq respondió con el modelo ligero `llama-3.1-8b-instant`.
+- La comprobación histórica de Groq usó `llama-3.1-8b-instant`. El valor por defecto se migró el 13 de agosto de 2026 a `openai/gpt-oss-20b`, reemplazo oficial antes del cierre del modelo anterior el 16 de agosto. La nueva llamada remota queda pendiente de validación con una clave y presupuesto autorizados.
 
 ## Pendiente de producto
 

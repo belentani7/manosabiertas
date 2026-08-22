@@ -66,3 +66,12 @@ prompt
 server.log
 # Skills directory
 /skills/
+# Generated during build from scripts/generate-platform-tools.mjs
+/public/tool-guides/
+
+# Inventarios locales generados: contienen nombres y rutas del equipo
+/src/data/downloads-zip-index.ts
+/docs/from-downloads/zip-index.md
+
+# Local Netlify folder
+.netlify

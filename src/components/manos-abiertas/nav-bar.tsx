@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { Menu, X, Heart, Sparkles, FileText, BookOpen, Database, Shield, Phone, Home as HomeIcon, Moon, Sun, Wrench, Calendar, GraduationCap, Users } from 'lucide-react';
+import { Menu, X, Heart, Sparkles, FileText, BookOpen, Database, Shield, Phone, Home as HomeIcon, Moon, Sun, Wrench, Calendar, GraduationCap, Users, Archive } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useAppStore, type SectionId } from '@/stores/app-store';
@@ -22,6 +22,7 @@ const NAV_ITEMS: { id: SectionId; icon: typeof HomeIcon; emoji: string }[] = [
   { id: 'tools', icon: Wrench, emoji: '🛠️' },
   { id: 'events', icon: Calendar, emoji: '📅' },
   { id: 'courses', icon: GraduationCap, emoji: '🎓' },
+  { id: 'downloads', icon: Archive, emoji: '📦' },
   { id: 'community', icon: Users, emoji: '👥' },
   { id: 'contacts', icon: Phone, emoji: '📞' },
 ];
@@ -66,6 +67,7 @@ export function NavBar() {
     tools: 'Herramientas',
     events: 'Eventos',
     courses: 'Cursos',
+    downloads: 'Biblioteca',
     contacts: t.nav_contacts,
     community: 'Comunidad',
   };
