@@ -263,7 +263,7 @@
     {
       "path": "src/data/external-courses.ts",
       "bytes": 38220,
-      "sha256": "009ff306a95c0f213e34a6d301fba71e8b9d365c50217b410b6e12a82a1c4b3f"
+      "sha256": "56a2bb9d23a04d59dd19b3284cc9e2baa29729dbb7783faeaf804b6292de146e"
     },
     {
       "path": "src/data/generated-courses/ciberseguridad.ts",
@@ -313,7 +313,7 @@
     {
       "path": "src/data/master-curriculum.ts",
       "bytes": 2520,
-      "sha256": "1bc078f9608754b3edf53c0ca96b1a63422e6fee44529ef9b109a99c8735fd74"
+      "sha256": "c5b6b134565ebdacca495856b9e83133138ef45176e04fccf88faae92c792c63"
     },
     {
       "path": "src/data/noia-courses.ts",
@@ -328,7 +328,7 @@
     {
       "path": "src/data/open-source-hub.ts",
       "bytes": 26678,
-      "sha256": "a56523d7078f7f9ff06cebc49b05f866ec1f7484a495b2a7d39b8f107de6d06c"
+      "sha256": "584ab8317649f2f3a8ab28512996602e3d06d4a1ca7f8f96b1f39af43c96c998"
     },
     {
       "path": "src/data/process-guides.ts",
@@ -338,12 +338,12 @@
     {
       "path": "src/data/resources.ts",
       "bytes": 217379,
-      "sha256": "9d28f0e9e51581aff8f5385e47d57ad597d92218970dc81f7ec6744cbd52a2b8"
+      "sha256": "5192025c47063579199ffdbd014a8d8a9d65dde7202b92920a5071f8a3f22db4"
     },
     {
       "path": "src/data/rights-guide.ts",
       "bytes": 193521,
-      "sha256": "619b9b16d346169b5e1381022934bb2991b4a3133fea8fe8d71c2119ba2a4336"
+      "sha256": "de3caa4db1ceab08259e4cb5c07a7a890601c9e7e79efefed2a0cf1094a95ad1"
     },
     {
       "path": "src/data/sovereign/manifest.json",
