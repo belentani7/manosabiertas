@@ -5,7 +5,7 @@
 remote_url="$2"
 
 case "$remote_url" in
-  *belentani7/manosabiertas*)
+  *belentani7/manosabiertas.git|*belentani7/manosabiertas,*)
     if [ "$MANOS_ALLOW_PUSH" = "1" ]; then
       echo "Push publico autorizado (MANOS_ALLOW_PUSH=1)." >&2
       exit 0
